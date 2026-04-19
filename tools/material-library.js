@@ -5,6 +5,8 @@ const path = require('node:path');
 const Ajv2020 = require('ajv/dist/2020');
 
 const DEFAULT_MANIFEST_PATH = path.join(__dirname, '..', 'SBRA+interactive material', 'content', 'manifest.json');
+const MATERIAL_TOPICS = ['limits', 'continuity', 'differentiation', 'integration', 'shared'];
+const MATERIAL_TYPES = ['pdf', 'md', 'html', 'image', 'video', 'link', 'note'];
 
 const CLUSTER_TOPIC_MAP = {
   UNIT1: ['limits', 'continuity'],
@@ -117,6 +119,8 @@ if (require.main === module) {
 module.exports = {
   CLUSTER_TOPIC_MAP,
   DEFAULT_MANIFEST_PATH,
+  MATERIAL_TOPICS,
+  MATERIAL_TYPES,
   inferMaterialTopicsForWeek,
   loadManifest,
   resolveWeeklyMaterials,
