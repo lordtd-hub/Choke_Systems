@@ -1,0 +1,354 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/weekly_plan.schema.json",
+  "title": "Weekly Plan Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "weekly_plan"
+  ],
+  "properties": {
+    "weekly_plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "course_ref",
+        "plan_metadata",
+        "weekly_units",
+        "plan_level_maps",
+        "implementation_notes",
+        "optional_extensions"
+      ],
+      "properties": {
+        "schema_version": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "course_ref": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "schema_version",
+            "course_id",
+            "course_code",
+            "course_title_en",
+            "source_file"
+          ],
+          "properties": {
+            "schema_version": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "course_id": {
+              "$ref": "#/$defs/idString"
+            },
+            "course_code": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "course_title_en": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "source_file": {
+              "$ref": "#/$defs/nonEmptyString"
+            }
+          }
+        },
+        "plan_metadata": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "semester",
+            "total_weeks",
+            "instructional_weeks",
+            "assessment_weeks",
+            "planning_emphasis"
+          ],
+          "properties": {
+            "semester": {
+              "$ref": "#/$defs/semester"
+            },
+            "total_weeks": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "instructional_weeks": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "assessment_weeks": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "midterm_week",
+                "final_week"
+              ],
+              "properties": {
+                "midterm_week": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "final_week": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            },
+            "planning_emphasis": {
+              "$ref": "#/$defs/stringArray"
+            }
+          }
+        },
+        "weekly_units": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "week",
+              "title",
+              "content_cluster_id",
+              "topics",
+              "clo_mapping",
+              "strategy_mapping",
+              "activities",
+              "weekly_assessment_focus",
+              "expected_evidence"
+            ],
+            "properties": {
+              "week": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "title": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "content_cluster_id": {
+                "$ref": "#/$defs/idString"
+              },
+              "topics": {
+                "$ref": "#/$defs/stringArray"
+              },
+              "clo_mapping": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "primary_clo",
+                  "secondary_clos"
+                ],
+                "properties": {
+                  "primary_clo": {
+                    "$ref": "#/$defs/idString"
+                  },
+                  "secondary_clos": {
+                    "$ref": "#/$defs/idArray"
+                  }
+                }
+              },
+              "strategy_mapping": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "primary_strategies",
+                  "secondary_strategies"
+                ],
+                "properties": {
+                  "primary_strategies": {
+                    "$ref": "#/$defs/idArrayMinOne"
+                  },
+                  "secondary_strategies": {
+                    "$ref": "#/$defs/idArray"
+                  }
+                }
+              },
+              "activities": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "activity_id",
+                    "activity_type_id",
+                    "name",
+                    "primary_clo",
+                    "secondary_clos",
+                    "description",
+                    "deliverable",
+                    "assessment_links",
+                    "evidence_tags"
+                  ],
+                  "properties": {
+                    "activity_id": {
+                      "$ref": "#/$defs/idString"
+                    },
+                    "activity_type_id": {
+                      "$ref": "#/$defs/idString"
+                    },
+                    "name": {
+                      "$ref": "#/$defs/nonEmptyString"
+                    },
+                    "primary_clo": {
+                      "$ref": "#/$defs/idString"
+                    },
+                    "secondary_clos": {
+                      "$ref": "#/$defs/idArray"
+                    },
+                    "description": {
+                      "$ref": "#/$defs/nonEmptyString"
+                    },
+                    "deliverable": {
+                      "$ref": "#/$defs/nonEmptyString"
+                    },
+                    "assessment_links": {
+                      "$ref": "#/$defs/idArrayMinOne"
+                    },
+                    "rubric_id": {
+                      "$ref": "#/$defs/idString"
+                    },
+                    "evidence_tags": {
+                      "$ref": "#/$defs/stringArray"
+                    }
+                  }
+                }
+              },
+              "weekly_assessment_focus": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "direct_clos",
+                  "assessment_ids"
+                ],
+                "properties": {
+                  "direct_clos": {
+                    "$ref": "#/$defs/idArrayMinOne"
+                  },
+                  "assessment_ids": {
+                    "$ref": "#/$defs/idArrayMinOne"
+                  }
+                }
+              },
+              "expected_evidence": {
+                "$ref": "#/$defs/stringArray"
+              }
+            }
+          }
+        },
+        "plan_level_maps": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "clo_to_weeks",
+            "activity_type_to_weeks",
+            "assessment_to_weeks"
+          ],
+          "properties": {
+            "clo_to_weeks": {
+              "$ref": "#/$defs/idToWeekMap"
+            },
+            "activity_type_to_weeks": {
+              "$ref": "#/$defs/idToWeekMap"
+            },
+            "assessment_to_weeks": {
+              "$ref": "#/$defs/idToWeekMap"
+            }
+          }
+        },
+        "implementation_notes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "design_rules",
+            "evidence_collection_rules",
+            "analytics_ready_fields"
+          ],
+          "properties": {
+            "design_rules": {
+              "$ref": "#/$defs/stringArray"
+            },
+            "evidence_collection_rules": {
+              "$ref": "#/$defs/stringArray"
+            },
+            "analytics_ready_fields": {
+              "$ref": "#/$defs/stringArray"
+            }
+          }
+        },
+        "optional_extensions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "suggested_future_fields"
+          ],
+          "properties": {
+            "suggested_future_fields": {
+              "$ref": "#/$defs/stringArray"
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "idString": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "stringArray": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "idArray": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/idString"
+      }
+    },
+    "idArrayMinOne": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/idString"
+      }
+    },
+    "semester": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "term",
+        "academic_year"
+      ],
+      "properties": {
+        "term": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "academic_year": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "weekArray": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "integer",
+        "minimum": 1
+      }
+    },
+    "idToWeekMap": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "$ref": "#/$defs/weekArray"
+      }
+    }
+  }
+}

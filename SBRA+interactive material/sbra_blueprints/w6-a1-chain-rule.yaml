@@ -1,0 +1,114 @@
+sbra_blueprint:
+  blueprint_id: "sbra_chain_rule_w6"
+  problem: "Find the derivative of y = (3x^2 - 5)^4."
+
+  classification:
+    topic: "differentiation"
+    type: "chain_rule"
+    difficulty: "intermediate"
+
+  strategy:
+    summary: "Identify the outer power function and the inner polynomial, then apply the chain rule in layers."
+    methods:
+      - "outer_inner_decomposition"
+      - "chain_rule"
+      - "polynomial_derivative"
+
+  steps:
+    - step_no: 1
+      goal: "Recognize the structure before differentiating."
+      prompt: "How should we view y = (3x^2 - 5)^4?"
+      options:
+        - option_id: "opt_outer_inner"
+          value: "As an outer power function applied to the inner function 3x^2 - 5."
+          is_correct: true
+          error_type: "correct_structure"
+        - option_id: "opt_product"
+          value: "As a product of (3x^2 - 5) and 4."
+          is_correct: false
+          error_type: "misreads_power_as_product"
+        - option_id: "opt_sum"
+          value: "As a sum of two terms because the inside contains subtraction."
+          is_correct: false
+          error_type: "misreads_expression_type"
+        - option_id: "opt_expand_first_required"
+          value: "It must always be expanded completely before any derivative rule can be used."
+          is_correct: false
+          error_type: "unnecessary_expansion"
+      correct_option_id: "opt_outer_inner"
+      explanation: "The main structure is a composition: an outer fourth power applied to an inner quadratic expression."
+
+    - step_no: 2
+      goal: "Write the chain rule setup correctly."
+      prompt: "Which derivative setup matches the chain rule here?"
+      options:
+        - option_id: "opt_four_inner_cubed_inner_prime"
+          value: "y' = 4(3x^2 - 5)^3 · (3x^2 - 5)'"
+          is_correct: true
+          error_type: "correct_chain_setup"
+        - option_id: "opt_four_inner_fourth"
+          value: "y' = 4(3x^2 - 5)^4"
+          is_correct: false
+          error_type: "forgets_reduce_power"
+        - option_id: "opt_inner_cubed_only"
+          value: "y' = (3x^2 - 5)^3"
+          is_correct: false
+          error_type: "drops_constants_and_inner_derivative"
+        - option_id: "opt_four_times_inner_prime_only"
+          value: "y' = 4(6x)"
+          is_correct: false
+          error_type: "drops_outer_power_factor"
+      correct_option_id: "opt_four_inner_cubed_inner_prime"
+      explanation: "Differentiate the outer power first, keep the inner expression, then multiply by the derivative of the inner function."
+
+    - step_no: 3
+      goal: "Differentiate the inner function accurately."
+      prompt: "What is (3x^2 - 5)'?"
+      options:
+        - option_id: "opt_6x"
+          value: "6x"
+          is_correct: true
+          error_type: "correct_inner_derivative"
+        - option_id: "opt_3x"
+          value: "3x"
+          is_correct: false
+          error_type: "coefficient_power_error"
+        - option_id: "opt_6x_minus_5"
+          value: "6x - 5"
+          is_correct: false
+          error_type: "differentiates_constant_incorrectly"
+        - option_id: "opt_3x2_minus5"
+          value: "3x^2 - 5"
+          is_correct: false
+          error_type: "fails_to_differentiate_inner"
+      correct_option_id: "opt_6x"
+      explanation: "The derivative of 3x^2 is 6x and the derivative of the constant -5 is 0."
+
+  full_solution:
+    - "Let u = 3x^2 - 5 so that y = u^4."
+    - "Then y' = 4u^3 · u' by the chain rule."
+    - "Since u' = 6x, substitute back to get y' = 4(3x^2 - 5)^3(6x)."
+    - "Therefore y' = 24x(3x^2 - 5)^3."
+
+  misconception_map:
+    - error_type: "misreads_power_as_product"
+      description: "Student treats the exponent as a separate factor instead of recognizing function composition."
+    - error_type: "misreads_expression_type"
+      description: "Student focuses on the subtraction sign and ignores the outer structure."
+    - error_type: "unnecessary_expansion"
+      description: "Student assumes expansion is required before differentiation."
+    - error_type: "forgets_reduce_power"
+      description: "Student multiplies by the exponent but keeps the original power unchanged."
+    - error_type: "drops_constants_and_inner_derivative"
+      description: "Student keeps only part of the chain rule expression."
+    - error_type: "drops_outer_power_factor"
+      description: "Student differentiates only the inner function."
+    - error_type: "coefficient_power_error"
+      description: "Student makes a basic power-rule mistake on the inner function."
+    - error_type: "differentiates_constant_incorrectly"
+      description: "Student keeps the constant term in the derivative."
+    - error_type: "fails_to_differentiate_inner"
+      description: "Student copies the inner function instead of differentiating it."
+
+  scoring:
+    step_based: true

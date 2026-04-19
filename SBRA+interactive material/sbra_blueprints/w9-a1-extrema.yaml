@@ -1,0 +1,115 @@
+sbra_blueprint:
+  blueprint_id: "sbra_extrema_w9"
+  problem: "Find the local extrema of f(x) = x^3 - 6x^2 + 9x + 1."
+
+  classification:
+    topic: "applications_of_derivatives"
+    type: "extrema_analysis"
+    difficulty: "intermediate"
+
+  strategy:
+    summary: "Differentiate, solve for critical points, and classify them using a sign test or derivative-based reasoning."
+    methods:
+      - "critical_point_analysis"
+      - "first_derivative_test"
+      - "extrema_classification"
+
+  steps:
+    - step_no: 1
+      goal: "Start the extrema workflow correctly."
+      prompt: "What should be done first when looking for local extrema?"
+      options:
+        - option_id: "opt_find_derivative"
+          value: "Find f'(x) and identify where it is zero or undefined."
+          is_correct: true
+          error_type: "correct_strategy"
+        - option_id: "opt_set_function_zero"
+          value: "Set f(x) = 0 because the x-intercepts are the extrema."
+          is_correct: false
+          error_type: "confuses_roots_with_extrema"
+        - option_id: "opt_second_derivative_only"
+          value: "Find f''(x) first because extrema are where the second derivative is zero."
+          is_correct: false
+          error_type: "misuses_second_derivative"
+        - option_id: "opt_compare_endpoints"
+          value: "Compare only endpoint values, because extrema always occur at the ends."
+          is_correct: false
+          error_type: "uses_closed_interval_logic_without_interval"
+      correct_option_id: "opt_find_derivative"
+      explanation: "Local extrema are located by first finding critical points, which come from the first derivative."
+
+    - step_no: 2
+      goal: "Compute the critical points accurately."
+      prompt: "What are the critical points of f(x) = x^3 - 6x^2 + 9x + 1?"
+      options:
+        - option_id: "opt_x1_x3"
+          value: "f'(x) = 3x^2 - 12x + 9 = 3(x - 1)(x - 3), so the critical points are x = 1 and x = 3."
+          is_correct: true
+          error_type: "correct_critical_points"
+        - option_id: "opt_xneg1_x3"
+          value: "f'(x) = 3(x + 1)(x - 3), so the critical points are x = -1 and x = 3."
+          is_correct: false
+          error_type: "incorrect_factoring"
+        - option_id: "opt_x2_only"
+          value: "f'(x) = 3x - 12 + 9, so the only critical point is x = 1."
+          is_correct: false
+          error_type: "power_rule_error"
+        - option_id: "opt_x1_only"
+          value: "The only critical point is x = 1 because 3 is too large to matter."
+          is_correct: false
+          error_type: "ignores_factor"
+      correct_option_id: "opt_x1_x3"
+      explanation: "Differentiate carefully, then factor 3x^2 - 12x + 9 as 3(x - 1)(x - 3)."
+
+    - step_no: 3
+      goal: "Classify the critical points correctly."
+      prompt: "Which classification is correct?"
+      options:
+        - option_id: "opt_max_at1_min_at3"
+          value: "Local maximum at x = 1 and local minimum at x = 3."
+          is_correct: true
+          error_type: "correct_classification"
+        - option_id: "opt_min_at1_max_at3"
+          value: "Local minimum at x = 1 and local maximum at x = 3."
+          is_correct: false
+          error_type: "reverses_classification"
+        - option_id: "opt_both_max"
+          value: "Both x = 1 and x = 3 are local maxima."
+          is_correct: false
+          error_type: "ignores_sign_change_pattern"
+        - option_id: "opt_no_extrema"
+          value: "There are no local extrema because the function is cubic."
+          is_correct: false
+          error_type: "overgeneralizes_cubic_behavior"
+      correct_option_id: "opt_max_at1_min_at3"
+      explanation: "The derivative changes from positive to negative at x = 1 and from negative to positive at x = 3."
+
+  full_solution:
+    - "Compute f'(x) = 3x^2 - 12x + 9 = 3(x - 1)(x - 3)."
+    - "Critical points are x = 1 and x = 3."
+    - "For x < 1, f'(x) > 0; for 1 < x < 3, f'(x) < 0; for x > 3, f'(x) > 0."
+    - "So f has a local maximum at x = 1 and a local minimum at x = 3."
+    - "Evaluating gives f(1) = 5 and f(3) = 1."
+
+  misconception_map:
+    - error_type: "confuses_roots_with_extrema"
+      description: "Student sets the original function equal to zero instead of using the derivative."
+    - error_type: "misuses_second_derivative"
+      description: "Student assumes extrema are found only where the second derivative is zero."
+    - error_type: "uses_closed_interval_logic_without_interval"
+      description: "Student applies endpoint reasoning when no closed interval is specified."
+    - error_type: "incorrect_factoring"
+      description: "Student factors the derivative incorrectly."
+    - error_type: "power_rule_error"
+      description: "Student differentiates the cubic term incorrectly."
+    - error_type: "ignores_factor"
+      description: "Student omits one factor and misses a critical point."
+    - error_type: "reverses_classification"
+      description: "Student finds the critical points but classifies max/min in the wrong order."
+    - error_type: "ignores_sign_change_pattern"
+      description: "Student does not track how the derivative changes across intervals."
+    - error_type: "overgeneralizes_cubic_behavior"
+      description: "Student assumes all cubic functions lack local extrema."
+
+  scoring:
+    step_based: true

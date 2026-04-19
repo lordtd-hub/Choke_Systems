@@ -1,0 +1,115 @@
+sbra_blueprint:
+  blueprint_id: "sbra_monotonicity_w7"
+  problem: "Analyze the monotonicity of f(x) = x^3 - 3x on the real line."
+
+  classification:
+    topic: "applications_of_derivatives"
+    type: "monotonicity_analysis"
+    difficulty: "intermediate"
+
+  strategy:
+    summary: "Use the first derivative to find critical points and test the sign of f'(x) on each interval."
+    methods:
+      - "first_derivative_test"
+      - "critical_point_analysis"
+      - "sign_chart"
+
+  steps:
+    - step_no: 1
+      goal: "Choose the correct tool for monotonicity."
+      prompt: "What is the best first step to determine where f(x) increases or decreases?"
+      options:
+        - option_id: "opt_first_derivative"
+          value: "Find f'(x) and study its sign on intervals determined by critical points."
+          is_correct: true
+          error_type: "correct_strategy"
+        - option_id: "opt_second_derivative_only"
+          value: "Find f''(x) only, because concavity directly gives increasing and decreasing intervals."
+          is_correct: false
+          error_type: "confuses_concavity_with_monotonicity"
+        - option_id: "opt_table_values_only"
+          value: "Substitute a few x-values and guess the monotonicity from the outputs alone."
+          is_correct: false
+          error_type: "uses_unsystematic_sampling"
+        - option_id: "opt_factor_original"
+          value: "Factor f(x) itself and use its zeros as increasing/decreasing intervals."
+          is_correct: false
+          error_type: "uses_function_zeros_instead_of_derivative"
+      correct_option_id: "opt_first_derivative"
+      explanation: "Monotonicity is determined by the sign of the first derivative, not directly by the sign of the function or only by concavity."
+
+    - step_no: 2
+      goal: "Compute the derivative and critical points correctly."
+      prompt: "What are f'(x) and the critical points?"
+      options:
+        - option_id: "opt_3x2_minus3_pm1"
+          value: "f'(x) = 3x^2 - 3, so the critical points are x = -1 and x = 1."
+          is_correct: true
+          error_type: "correct_derivative_and_critical_points"
+        - option_id: "opt_3x2_pm_sqrt3"
+          value: "f'(x) = 3x^2, so the critical points are x = ±√3."
+          is_correct: false
+          error_type: "drops_constant_term"
+        - option_id: "opt_3x_minus3_one"
+          value: "f'(x) = 3x - 3, so the only critical point is x = 1."
+          is_correct: false
+          error_type: "power_rule_error"
+        - option_id: "opt_x2_minus1_no3"
+          value: "f'(x) = x^2 - 1, so the critical points are x = -1 and x = 1."
+          is_correct: false
+          error_type: "loses_nonzero_constant_factor"
+      correct_option_id: "opt_3x2_minus3_pm1"
+      explanation: "Differentiate term by term: (x^3)' = 3x^2 and (-3x)' = -3; then solve 3x^2 - 3 = 0."
+
+    - step_no: 3
+      goal: "Interpret the derivative sign correctly."
+      prompt: "Which monotonicity conclusion is correct?"
+      options:
+        - option_id: "opt_inc_outside_dec_middle"
+          value: "Increasing on (-∞, -1) and (1, ∞), decreasing on (-1, 1)."
+          is_correct: true
+          error_type: "correct_sign_analysis"
+        - option_id: "opt_dec_outside_inc_middle"
+          value: "Decreasing on (-∞, -1) and (1, ∞), increasing on (-1, 1)."
+          is_correct: false
+          error_type: "reverses_sign_chart"
+        - option_id: "opt_increasing_all"
+          value: "Increasing everywhere because the leading term is x^3."
+          is_correct: false
+          error_type: "uses_end_behavior_only"
+        - option_id: "opt_decreasing_all"
+          value: "Decreasing everywhere because f'(0) is negative."
+          is_correct: false
+          error_type: "uses_single_test_point_globally"
+      correct_option_id: "opt_inc_outside_dec_middle"
+      explanation: "Since f'(x) = 3(x - 1)(x + 1), the derivative is positive outside the roots and negative between them."
+
+  full_solution:
+    - "Compute the derivative: f'(x) = 3x^2 - 3 = 3(x - 1)(x + 1)."
+    - "Critical points occur where f'(x) = 0, namely x = -1 and x = 1."
+    - "Test the sign of f'(x): positive on (-∞, -1), negative on (-1, 1), positive on (1, ∞)."
+    - "Therefore f is increasing on (-∞, -1) and (1, ∞)."
+    - "Therefore f is decreasing on (-1, 1)."
+
+  misconception_map:
+    - error_type: "confuses_concavity_with_monotonicity"
+      description: "Student tries to use only the second derivative to infer increasing and decreasing behavior."
+    - error_type: "uses_unsystematic_sampling"
+      description: "Student relies on a few function values without a derivative-based interval analysis."
+    - error_type: "uses_function_zeros_instead_of_derivative"
+      description: "Student analyzes zeros of f instead of zeros of f'."
+    - error_type: "drops_constant_term"
+      description: "Student omits the derivative of -3x."
+    - error_type: "power_rule_error"
+      description: "Student differentiates x^3 incorrectly."
+    - error_type: "loses_nonzero_constant_factor"
+      description: "Student removes a nonzero factor and then treats that as a derivative mistake."
+    - error_type: "reverses_sign_chart"
+      description: "Student gets the derivative sign pattern backwards."
+    - error_type: "uses_end_behavior_only"
+      description: "Student assumes global monotonicity from the leading term alone."
+    - error_type: "uses_single_test_point_globally"
+      description: "Student checks one interval point and applies it to the whole domain."
+
+  scoring:
+    step_based: true

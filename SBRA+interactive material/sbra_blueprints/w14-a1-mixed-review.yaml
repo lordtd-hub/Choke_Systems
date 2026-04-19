@@ -1,0 +1,115 @@
+sbra_blueprint:
+  blueprint_id: "sbra_mixed_review_w14"
+  problem: "Choose the most suitable method to solve the mixed problem: find the local extrema of f(x) = x^3 - 3x and justify the method."
+
+  classification:
+    topic: "mixed_calculus_review"
+    type: "method_selection_and_reasoning"
+    difficulty: "integrative"
+
+  strategy:
+    summary: "Select a derivative-based method, justify why it fits, and then sequence the derivative analysis steps clearly."
+    methods:
+      - "method_selection"
+      - "first_derivative_test"
+      - "reasoned_solution_planning"
+
+  steps:
+    - step_no: 1
+      goal: "Choose the right overall method."
+      prompt: "What is the most appropriate method for this problem?"
+      options:
+        - option_id: "opt_derivative_extrema_method"
+          value: "Use derivative analysis: find critical points from f'(x) and classify them."
+          is_correct: true
+          error_type: "correct_method_choice"
+        - option_id: "opt_basic_integration"
+          value: "Use indefinite integration because extrema come from antiderivatives."
+          is_correct: false
+          error_type: "chooses_wrong_domain_method"
+        - option_id: "opt_limit_method"
+          value: "Use limit laws because local extrema are determined by limits only."
+          is_correct: false
+          error_type: "chooses_incomplete_method"
+        - option_id: "opt_graph_guess_only"
+          value: "Sketch roughly and guess the extrema without derivative work."
+          is_correct: false
+          error_type: "uses_guess_instead_of_justification"
+      correct_option_id: "opt_derivative_extrema_method"
+      explanation: "Local extrema are most directly found by derivative analysis, which matches the goal and gives a justified procedure."
+
+    - step_no: 2
+      goal: "Choose the next reasoning step after method selection."
+      prompt: "After choosing derivative analysis, what should happen next?"
+      options:
+        - option_id: "opt_find_fprime"
+          value: "Compute f'(x) and solve f'(x) = 0 to locate critical points."
+          is_correct: true
+          error_type: "correct_next_step"
+        - option_id: "opt_find_integral"
+          value: "Compute ∫f(x) dx before any derivative work."
+          is_correct: false
+          error_type: "switches_to_irrelevant_operation"
+        - option_id: "opt_jump_to_answer"
+          value: "State the extrema immediately because cubic graphs usually have one max and one min."
+          is_correct: false
+          error_type: "jumps_without_evidence"
+        - option_id: "opt_use_endpoint_values"
+          value: "Compare endpoint values even though no closed interval is given."
+          is_correct: false
+          error_type: "uses_wrong_extrema_context"
+      correct_option_id: "opt_find_fprime"
+      explanation: "Method selection should lead into a concrete derivative workflow: derivative, critical points, and classification."
+
+    - step_no: 3
+      goal: "State the reasoning standard expected in a mixed review problem."
+      prompt: "What makes a complete final response in this type of mixed SBRA task?"
+      options:
+        - option_id: "opt_method_and_justification"
+          value: "Name the method, justify why it fits, show the key steps, and conclude clearly."
+          is_correct: true
+          error_type: "correct_communication_standard"
+        - option_id: "opt_answer_only"
+          value: "Only the final numerical or symbolic answer matters."
+          is_correct: false
+          error_type: "ignores_reasoning_requirement"
+        - option_id: "opt_formula_list_only"
+          value: "Listing formulas is enough even if the connection to the problem is not explained."
+          is_correct: false
+          error_type: "lists_without_application"
+        - option_id: "opt_any_valid_math_topic"
+          value: "Any correct calculus fact counts, even if it does not match the problem."
+          is_correct: false
+          error_type: "irrelevant_knowledge_dump"
+      correct_option_id: "opt_method_and_justification"
+      explanation: "This review activity is designed to assess method choice, structured reasoning, and communication, not only the final answer."
+
+  full_solution:
+    - "Identify that the problem asks for local extrema, so derivative analysis is the appropriate method."
+    - "Compute f'(x) = 3x^2 - 3 = 3(x - 1)(x + 1)."
+    - "Critical points are x = -1 and x = 1."
+    - "Use a sign test on f'(x) to classify the critical points."
+    - "Conclude with both the extrema and a justification of why the derivative method fits the problem."
+
+  misconception_map:
+    - error_type: "chooses_wrong_domain_method"
+      description: "Student selects integration even though the task is about extrema."
+    - error_type: "chooses_incomplete_method"
+      description: "Student invokes a partially relevant idea without a full solution path."
+    - error_type: "uses_guess_instead_of_justification"
+      description: "Student relies on intuition or graph shape alone."
+    - error_type: "switches_to_irrelevant_operation"
+      description: "Student moves to a procedure that does not advance the stated problem."
+    - error_type: "jumps_without_evidence"
+      description: "Student states a plausible answer without showing supporting reasoning."
+    - error_type: "uses_wrong_extrema_context"
+      description: "Student confuses local-extrema analysis with closed-interval optimization."
+    - error_type: "ignores_reasoning_requirement"
+      description: "Student gives only the final answer and omits explanation."
+    - error_type: "lists_without_application"
+      description: "Student cites formulas but does not apply them to the given problem."
+    - error_type: "irrelevant_knowledge_dump"
+      description: "Student writes mathematically true statements that are not connected to the task."
+
+  scoring:
+    step_based: true

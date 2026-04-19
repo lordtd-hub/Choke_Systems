@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/sbra_blueprint.schema.json",
+  "title": "SBRA Blueprint Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "sbra_blueprint"
+  ],
+  "properties": {
+    "sbra_blueprint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "blueprint_id",
+        "problem",
+        "classification",
+        "strategy",
+        "steps",
+        "full_solution",
+        "misconception_map",
+        "scoring"
+      ],
+      "properties": {
+        "blueprint_id": {
+          "$ref": "#/$defs/idString"
+        },
+        "problem": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "classification": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "topic",
+            "type",
+            "difficulty"
+          ],
+          "properties": {
+            "topic": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "type": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "difficulty": {
+              "$ref": "#/$defs/nonEmptyString"
+            }
+          }
+        },
+        "strategy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "summary",
+            "methods"
+          ],
+          "properties": {
+            "summary": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "methods": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "step_no",
+              "goal",
+              "prompt",
+              "options",
+              "correct_option_id",
+              "explanation"
+            ],
+            "properties": {
+              "step_no": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "goal": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "prompt": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "options": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "option_id",
+                    "value",
+                    "is_correct",
+                    "error_type"
+                  ],
+                  "properties": {
+                    "option_id": {
+                      "$ref": "#/$defs/idString"
+                    },
+                    "value": {
+                      "$ref": "#/$defs/nonEmptyString"
+                    },
+                    "is_correct": {
+                      "type": "boolean"
+                    },
+                    "error_type": {
+                      "$ref": "#/$defs/nonEmptyString"
+                    }
+                  }
+                }
+              },
+              "correct_option_id": {
+                "$ref": "#/$defs/idString"
+              },
+              "explanation": {
+                "$ref": "#/$defs/nonEmptyString"
+              }
+            }
+          }
+        },
+        "full_solution": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "misconception_map": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "error_type",
+              "description"
+            ],
+            "properties": {
+              "error_type": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "description": {
+                "$ref": "#/$defs/nonEmptyString"
+              }
+            }
+          }
+        },
+        "scoring": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "step_based"
+          ],
+          "properties": {
+            "step_based": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "idString": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    }
+  }
+}

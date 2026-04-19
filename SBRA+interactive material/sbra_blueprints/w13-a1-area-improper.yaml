@@ -1,0 +1,115 @@
+sbra_blueprint:
+  blueprint_id: "sbra_area_improper_w13"
+  problem: "Set up the area between y = x and y = x^2 on the interval [0, 1]."
+
+  classification:
+    topic: "integration"
+    type: "area_setup"
+    difficulty: "intermediate"
+
+  strategy:
+    summary: "Identify which curve is on top over the interval, then integrate top minus bottom over the correct bounds."
+    methods:
+      - "curve_comparison"
+      - "area_setup"
+      - "definite_integral_evaluation"
+
+  steps:
+    - step_no: 1
+      goal: "Identify the upper and lower functions."
+      prompt: "On 0 ≤ x ≤ 1, which function lies above the other?"
+      options:
+        - option_id: "opt_x_above_x2"
+          value: "y = x lies above y = x^2."
+          is_correct: true
+          error_type: "correct_curve_order"
+        - option_id: "opt_x2_above_x"
+          value: "y = x^2 lies above y = x."
+          is_correct: false
+          error_type: "reverses_curve_order"
+        - option_id: "opt_same_everywhere"
+          value: "They are equal everywhere on the interval."
+          is_correct: false
+          error_type: "overgeneralizes_intersections"
+        - option_id: "opt_cannot_compare"
+          value: "The curves cannot be compared without finding derivatives first."
+          is_correct: false
+          error_type: "uses_unnecessary_derivative_test"
+      correct_option_id: "opt_x_above_x2"
+      explanation: "For x between 0 and 1, x is greater than x^2 except at the endpoints."
+
+    - step_no: 2
+      goal: "Set up the correct definite integral."
+      prompt: "Which integral represents the area?"
+      options:
+        - option_id: "opt_int_x_minus_x2"
+          value: "∫ from 0 to 1 of (x - x^2) dx"
+          is_correct: true
+          error_type: "correct_setup"
+        - option_id: "opt_int_x2_minus_x"
+          value: "∫ from 0 to 1 of (x^2 - x) dx"
+          is_correct: false
+          error_type: "subtracts_in_wrong_order"
+        - option_id: "opt_int_abs_difference_without_need"
+          value: "∫ from 0 to 1 of |x - x^2| dx because area must always use absolute value first."
+          is_correct: false
+          error_type: "uses_unnecessary_absolute_value"
+        - option_id: "opt_int_wrong_bounds"
+          value: "∫ from -1 to 1 of (x - x^2) dx"
+          is_correct: false
+          error_type: "uses_wrong_interval"
+      correct_option_id: "opt_int_x_minus_x2"
+      explanation: "Area between curves over a known interval is found by integrating upper minus lower over the given bounds."
+
+    - step_no: 3
+      goal: "Evaluate the area correctly."
+      prompt: "What is the value of the area?"
+      options:
+        - option_id: "opt_one_sixth"
+          value: "1/6"
+          is_correct: true
+          error_type: "correct_evaluation"
+        - option_id: "opt_negative_one_sixth"
+          value: "-1/6"
+          is_correct: false
+          error_type: "keeps_negative_area"
+        - option_id: "opt_one_third"
+          value: "1/3"
+          is_correct: false
+          error_type: "integrates_one_term_only"
+        - option_id: "opt_one_half"
+          value: "1/2"
+          is_correct: false
+          error_type: "evaluation_arithmetic_error"
+      correct_option_id: "opt_one_sixth"
+      explanation: "∫0^1 (x - x^2) dx = [x^2/2 - x^3/3]0^1 = 1/2 - 1/3 = 1/6."
+
+  full_solution:
+    - "Compare the curves on [0, 1]: y = x is above y = x^2."
+    - "Set up the area as ∫0^1 (x - x^2) dx."
+    - "Integrate to get [x^2/2 - x^3/3]0^1."
+    - "Evaluate: 1/2 - 1/3 = 1/6."
+    - "So the enclosed area is 1/6."
+
+  misconception_map:
+    - error_type: "reverses_curve_order"
+      description: "Student identifies the top and bottom functions in the wrong order."
+    - error_type: "overgeneralizes_intersections"
+      description: "Student thinks intersecting at endpoints means the curves are equal everywhere."
+    - error_type: "uses_unnecessary_derivative_test"
+      description: "Student adds unnecessary derivative analysis before comparing simple curves."
+    - error_type: "subtracts_in_wrong_order"
+      description: "Student integrates lower minus upper and obtains a negative value."
+    - error_type: "uses_unnecessary_absolute_value"
+      description: "Student inserts absolute value without first reasoning about which function is on top."
+    - error_type: "uses_wrong_interval"
+      description: "Student ignores the given interval and substitutes different bounds."
+    - error_type: "keeps_negative_area"
+      description: "Student accepts a negative result as an area."
+    - error_type: "integrates_one_term_only"
+      description: "Student forgets one part of the difference when integrating."
+    - error_type: "evaluation_arithmetic_error"
+      description: "Student sets up the integral correctly but evaluates the arithmetic incorrectly."
+
+  scoring:
+    step_based: true

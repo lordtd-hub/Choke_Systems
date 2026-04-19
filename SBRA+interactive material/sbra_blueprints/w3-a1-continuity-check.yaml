@@ -1,0 +1,114 @@
+sbra_blueprint:
+  blueprint_id: "sbra_continuity_check_w3"
+  problem: "Determine whether f(x) = (x^2 - 1) / (x - 1) is continuous at x = 1."
+
+  classification:
+    topic: "continuity"
+    type: "continuity_check"
+    difficulty: "foundational"
+
+  strategy:
+    summary: "Simplify the function first, then compare the limit at x = 1 with the defined value."
+    methods:
+      - "factor_and_cancel"
+      - "limit_value_comparison"
+
+  steps:
+    - step_no: 1
+      goal: "Choose the correct first move for the continuity check."
+      prompt: "What should we do first to examine continuity at x = 1?"
+      options:
+        - option_id: "opt_factor"
+          value: "Factor the numerator and simplify the expression before checking the limit."
+          is_correct: true
+          error_type: "correct_strategy"
+        - option_id: "opt_substitute_only"
+          value: "Substitute x = 1 immediately and conclude the function is continuous if the result is undefined."
+          is_correct: false
+          error_type: "undefined_equals_discontinuous_without_analysis"
+        - option_id: "opt_derivative"
+          value: "Differentiate the function first because continuity is determined from the derivative."
+          is_correct: false
+          error_type: "confuses_continuity_with_differentiability"
+        - option_id: "opt_ignore_denominator"
+          value: "Check only the numerator because the denominator does not affect continuity."
+          is_correct: false
+          error_type: "ignores_domain_restriction"
+      correct_option_id: "opt_factor"
+      explanation: "At x = 1 the original form gives 0/0, so we must simplify or analyze the limit before deciding continuity."
+
+    - step_no: 2
+      goal: "Identify the simplified equivalent form."
+      prompt: "After factoring x^2 - 1, what equivalent expression applies for x ≠ 1?"
+      options:
+        - option_id: "opt_x_plus_1"
+          value: "x + 1"
+          is_correct: true
+          error_type: "correct_algebra"
+        - option_id: "opt_x_minus_1"
+          value: "x - 1"
+          is_correct: false
+          error_type: "incorrect_factor_cancellation"
+        - option_id: "opt_one"
+          value: "1"
+          is_correct: false
+          error_type: "over_cancellation"
+        - option_id: "opt_x_squared_plus_1"
+          value: "x^2 + 1"
+          is_correct: false
+          error_type: "incorrect_factoring"
+      correct_option_id: "opt_x_plus_1"
+      explanation: "Because x^2 - 1 = (x - 1)(x + 1), canceling x - 1 leaves x + 1 when x ≠ 1."
+
+    - step_no: 3
+      goal: "Apply the continuity condition correctly."
+      prompt: "Which statement correctly determines continuity at x = 1?"
+      options:
+        - option_id: "opt_limit_vs_value"
+          value: "The function is continuous only if the limit at x = 1 exists and equals the defined value f(1)."
+          is_correct: true
+          error_type: "correct_definition"
+        - option_id: "opt_limit_only"
+          value: "The function is continuous if the two-sided limit exists, even if f(1) is not defined."
+          is_correct: false
+          error_type: "forgets_value_requirement"
+        - option_id: "opt_value_only"
+          value: "The function is continuous if f(1) is defined, even if the limit does not exist."
+          is_correct: false
+          error_type: "forgets_limit_requirement"
+        - option_id: "opt_graph_only"
+          value: "The function is continuous if the graph looks smooth after simplification."
+          is_correct: false
+          error_type: "uses_visual_guess_only"
+      correct_option_id: "opt_limit_vs_value"
+      explanation: "Continuity at a point requires existence of the limit, existence of the function value, and equality between them."
+
+  full_solution:
+    - "Factor x^2 - 1 = (x - 1)(x + 1)."
+    - "For x ≠ 1, f(x) = x + 1."
+    - "Therefore lim(x→1) f(x) = lim(x→1) (x + 1) = 2."
+    - "In the original expression f(1) is undefined, so the function value does not exist at x = 1."
+    - "Since f(1) does not exist, the function is not continuous at x = 1."
+
+  misconception_map:
+    - error_type: "undefined_equals_discontinuous_without_analysis"
+      description: "Student notices the denominator is zero and stops before analyzing the limit."
+    - error_type: "confuses_continuity_with_differentiability"
+      description: "Student thinks continuity must be checked using derivatives first."
+    - error_type: "ignores_domain_restriction"
+      description: "Student forgets that the denominator controls whether the point is in the domain."
+    - error_type: "incorrect_factor_cancellation"
+      description: "Student cancels factors incorrectly and keeps the wrong remaining term."
+    - error_type: "over_cancellation"
+      description: "Student cancels too aggressively and loses the remaining factor."
+    - error_type: "incorrect_factoring"
+      description: "Student factors x^2 - 1 incorrectly."
+    - error_type: "forgets_value_requirement"
+      description: "Student remembers the limit but forgets that the function value must also exist."
+    - error_type: "forgets_limit_requirement"
+      description: "Student checks only the function value and ignores the limit."
+    - error_type: "uses_visual_guess_only"
+      description: "Student uses an intuitive graph-based judgement without the formal continuity definition."
+
+  scoring:
+    step_based: true

@@ -1,0 +1,50 @@
+{
+  "registry_version": "sbra-blueprint-registry-v1",
+  "items": [
+    {
+      "activity_id": "W3-A1",
+      "blueprint_id": "sbra_continuity_check_w3",
+      "file": "w3-a1-continuity-check.yaml"
+    },
+    {
+      "activity_id": "W5-A1",
+      "blueprint_id": "sbra_derivative_rules_w5",
+      "file": "w5-a1-derivative-rules.yaml"
+    },
+    {
+      "activity_id": "W6-A1",
+      "blueprint_id": "sbra_chain_rule_w6",
+      "file": "w6-a1-chain-rule.yaml"
+    },
+    {
+      "activity_id": "W7-A1",
+      "blueprint_id": "sbra_monotonicity_w7",
+      "file": "w7-a1-monotonicity.yaml"
+    },
+    {
+      "activity_id": "W9-A1",
+      "blueprint_id": "sbra_extrema_w9",
+      "file": "w9-a1-extrema.yaml"
+    },
+    {
+      "activity_id": "W10-A2",
+      "blueprint_id": "sbra_integration_formulas_w10",
+      "file": "w10-a2-integration-formulas.yaml"
+    },
+    {
+      "activity_id": "W11-A1",
+      "blueprint_id": "sbra_substitution_w11",
+      "file": "w11-a1-substitution.yaml"
+    },
+    {
+      "activity_id": "W13-A1",
+      "blueprint_id": "sbra_area_improper_w13",
+      "file": "w13-a1-area-improper.yaml"
+    },
+    {
+      "activity_id": "W14-A1",
+      "blueprint_id": "sbra_mixed_review_w14",
+      "file": "w14-a1-mixed-review.yaml"
+    }
+  ]
+}

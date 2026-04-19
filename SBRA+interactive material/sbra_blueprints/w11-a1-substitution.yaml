@@ -1,0 +1,115 @@
+sbra_blueprint:
+  blueprint_id: "sbra_substitution_w11"
+  problem: "Evaluate ∫ 2x(x^2 + 1)^5 dx using substitution."
+
+  classification:
+    topic: "integration"
+    type: "u_substitution"
+    difficulty: "intermediate"
+
+  strategy:
+    summary: "Choose an inner expression whose derivative is present, substitute, integrate the simpler power, then substitute back."
+    methods:
+      - "u_substitution"
+      - "structure_matching"
+      - "back_substitution"
+
+  steps:
+    - step_no: 1
+      goal: "Identify the most useful substitution."
+      prompt: "Which substitution is most appropriate?"
+      options:
+        - option_id: "opt_u_equals_x2_plus1"
+          value: "Let u = x^2 + 1."
+          is_correct: true
+          error_type: "correct_substitution"
+        - option_id: "opt_u_equals_2x"
+          value: "Let u = 2x."
+          is_correct: false
+          error_type: "chooses_factor_not_structure"
+        - option_id: "opt_u_equals_power5"
+          value: "Let u = (x^2 + 1)^5."
+          is_correct: false
+          error_type: "chooses_expression_too_late"
+        - option_id: "opt_no_sub_needed"
+          value: "No substitution is needed because the power rule applies directly."
+          is_correct: false
+          error_type: "ignores_composite_structure"
+      correct_option_id: "opt_u_equals_x2_plus1"
+      explanation: "The inner expression x^2 + 1 has derivative 2x, which is already present in the integrand."
+
+    - step_no: 2
+      goal: "Translate the differential correctly."
+      prompt: "If u = x^2 + 1, what is du?"
+      options:
+        - option_id: "opt_du_equals_2x_dx"
+          value: "du = 2x dx"
+          is_correct: true
+          error_type: "correct_differential"
+        - option_id: "opt_du_equals_2_dx"
+          value: "du = 2 dx"
+          is_correct: false
+          error_type: "drops_variable"
+        - option_id: "opt_du_equals_x2_dx"
+          value: "du = x^2 dx"
+          is_correct: false
+          error_type: "incorrect_derivative"
+        - option_id: "opt_du_equals_10x"
+          value: "du = 10x(x^2 + 1)^4 dx"
+          is_correct: false
+          error_type: "differentiates_wrong_expression"
+      correct_option_id: "opt_du_equals_2x_dx"
+      explanation: "Differentiating x^2 + 1 gives 2x, so du = 2x dx."
+
+    - step_no: 3
+      goal: "Finish the substitution correctly."
+      prompt: "After substitution, which antiderivative is correct?"
+      options:
+        - option_id: "opt_u6_over6_backsub"
+          value: "∫u^5 du = u^6/6 + C, so the result is (x^2 + 1)^6/6 + C."
+          is_correct: true
+          error_type: "correct_completion"
+        - option_id: "opt_u5_over5"
+          value: "∫u^5 du = u^5/5 + C, so the result is (x^2 + 1)^5/5 + C."
+          is_correct: false
+          error_type: "power_rule_error"
+        - option_id: "opt_ln_u"
+          value: "∫u^5 du = ln|u| + C, so the result is ln(x^2 + 1) + C."
+          is_correct: false
+          error_type: "wrong_integral_formula"
+        - option_id: "opt_leave_in_u"
+          value: "The answer is u^6/6 + C and does not need to be rewritten in x."
+          is_correct: false
+          error_type: "forgets_back_substitution"
+      correct_option_id: "opt_u6_over6_backsub"
+      explanation: "Once the integral becomes ∫u^5 du, apply the power rule and then replace u with x^2 + 1."
+
+  full_solution:
+    - "Let u = x^2 + 1."
+    - "Then du = 2x dx."
+    - "The integral becomes ∫u^5 du."
+    - "Integrate: ∫u^5 du = u^6/6 + C."
+    - "Substitute back: (x^2 + 1)^6/6 + C."
+
+  misconception_map:
+    - error_type: "chooses_factor_not_structure"
+      description: "Student selects a simple factor instead of the inner composite structure."
+    - error_type: "chooses_expression_too_late"
+      description: "Student chooses a substituted expression that is already too transformed to simplify the integral cleanly."
+    - error_type: "ignores_composite_structure"
+      description: "Student tries to use the direct power rule on a composite expression."
+    - error_type: "drops_variable"
+      description: "Student differentiates the inner function incompletely and loses x."
+    - error_type: "incorrect_derivative"
+      description: "Student computes the derivative of x^2 + 1 incorrectly."
+    - error_type: "differentiates_wrong_expression"
+      description: "Student differentiates the whole powered expression instead of the chosen substitution."
+    - error_type: "power_rule_error"
+      description: "Student applies the antiderivative power rule incorrectly."
+    - error_type: "wrong_integral_formula"
+      description: "Student uses the logarithm rule when it does not apply."
+    - error_type: "forgets_back_substitution"
+      description: "Student leaves the final answer in terms of u instead of x."
+
+  scoring:
+    step_based: true

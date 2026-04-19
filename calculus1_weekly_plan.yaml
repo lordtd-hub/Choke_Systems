@@ -1,0 +1,1029 @@
+weekly_plan:
+  schema_version: "math-weekly-plan-v1"
+  course_ref:
+    schema_version: "math-course-v1"
+    course_id: "SMAC001"
+    course_code: "SMAC001"
+    course_title_en: "Calculus 1"
+    source_file: "calculus1_course.yaml"
+
+  plan_metadata:
+    semester:
+      term: 1
+      academic_year: 2569
+    total_weeks: 15
+    instructional_weeks: 14
+    assessment_weeks:
+      midterm_week: 8
+      final_week: 15
+    planning_emphasis:
+      - "CLO mapping"
+      - "activity-centered design"
+      - "weekly evidence collection"
+      - "alignment with OBE"
+
+  weekly_units:
+
+    - week: 1
+      title: "Introduction, Functions, and Readiness Check"
+      content_cluster_id: "UNIT1"
+      topics:
+        - "บทนำรายวิชาและแนวทางการเรียน"
+        - "ทบทวนฟังก์ชันพื้นฐานและชนิดของฟังก์ชัน"
+        - "โดเมนและเรนจ์"
+        - "การอ่านกราฟและการแทนฟังก์ชัน"
+      clo_mapping:
+        primary_clo: "CLO1"
+        secondary_clos:
+          - "CLO5"
+      strategy_mapping:
+        primary_strategies:
+          - "STRAT-LECTURE"
+          - "STRAT-PAIR"
+        secondary_strategies:
+          - "STRAT-REFLECTION"
+      activities:
+        - activity_id: "W1-A1"
+          activity_type_id: "ACT-DIAG"
+          name: "Diagnostic Check: Function Readiness"
+          primary_clo: "CLO1"
+          secondary_clos: ["CLO5"]
+          description: >
+            ตรวจพื้นฐานเรื่องฟังก์ชัน การอ่านกราฟ และการแทนค่าก่อนเริ่มลิมิต
+          deliverable: "diagnostic_response_sheet"
+          assessment_links: ["ASM-CLASSWORK"]
+          evidence_tags:
+            - "readiness"
+            - "baseline"
+            - "function_foundation"
+
+        - activity_id: "W1-A2"
+          activity_type_id: "ACT-PAIR"
+          name: "Pair Discussion: Interpreting Graphs"
+          primary_clo: "CLO1"
+          secondary_clos: ["CLO5"]
+          description: >
+            จับคู่แปลความหมายกราฟ ฟังก์ชัน และพฤติกรรมเบื้องต้น
+          deliverable: "pair_discussion_notes"
+          assessment_links: ["ASM-CLASSWORK"]
+          evidence_tags:
+            - "graph_interpretation"
+            - "communication"
+
+        - activity_id: "W1-A3"
+          activity_type_id: "ACT-REFLECT"
+          name: "Reflection: จุดแข็งและจุดที่ต้องทบทวน"
+          primary_clo: "CLO5"
+          secondary_clos: ["CLO1"]
+          description: >
+            นักศึกษาสะท้อนว่าตนเองพร้อมด้านใดและควรทบทวนเรื่องใด
+          deliverable: "reflection_note"
+          assessment_links: ["ASM-CLASSWORK"]
+          evidence_tags:
+            - "self_reflection"
+            - "learning_responsibility"
+
+      weekly_assessment_focus:
+        direct_clos: ["CLO1", "CLO5"]
+        assessment_ids: ["ASM-CLASSWORK"]
+      expected_evidence:
+        - "attendance_or_participation"
+        - "activity_artifact"
+        - "teaching_reflection"
+
+    - week: 2
+      title: "Limits: Intuition and Basic Computation"
+      content_cluster_id: "UNIT1"
+      topics:
+        - "แนวคิดของลิมิต"
+        - "ลิมิตจากตาราง ค่าเชิงตัวเลข และกราฟ"
+        - "กฎพื้นฐานของลิมิต"
+        - "การหาลิมิตแบบแทนค่าโดยตรง"
+      clo_mapping:
+        primary_clo: "CLO1"
+        secondary_clos:
+          - "CLO5"
+      strategy_mapping:
+        primary_strategies:
+          - "STRAT-LECTURE"
+          - "STRAT-WORKED-EXAMPLE"
+        secondary_strategies:
+          - "STRAT-PAIR"
+      activities:
+        - activity_id: "W2-A1"
+          activity_type_id: "ACT-WE"
+          name: "Worked Example Note: Basic Limit Laws"
+          primary_clo: "CLO1"
+          secondary_clos: ["CLO5"]
+          description: >
+            เติมคำอธิบายจากตัวอย่างการหาลิมิตด้วยกฎพื้นฐาน
+          deliverable: "worked_example_note"
+          assessment_links: ["ASM-CLASSWORK"]
+          evidence_tags:
+            - "limit_laws"
+            - "concept_to_procedure"
+
+        - activity_id: "W2-A2"
+          activity_type_id: "ACT-PAIR"
+          name: "Pair Task: Limit from Graph and Table"
+          primary_clo: "CLO1"
+          secondary_clos: ["CLO5"]
+          description: >
+            วิเคราะห์ว่าลิมิตมีหรือไม่ และให้เหตุผลจากตารางกับกราฟ
+          deliverable: "pair_task_sheet"
+          assessment_links: ["ASM-CLASSWORK"]
+          evidence_tags:
+            - "multiple_representations"
+            - "reasoning"
+
+        - activity_id: "W2-A3"
+          activity_type_id: "ACT-HW"
+          name: "Homework: Basic Limit Practice"
+          primary_clo: "CLO1"
+          secondary_clos: ["CLO5"]
+          description: >
+            ฝึกหาลิมิตพื้นฐานจากนิพจน์และจากกราฟ
+          deliverable: "homework_set_1"
+          assessment_links: ["ASM-HW"]
+          evidence_tags:
+            - "limit_practice"
+            - "written_solution"
+
+      weekly_assessment_focus:
+        direct_clos: ["CLO1"]
+        assessment_ids: ["ASM-CLASSWORK", "ASM-HW"]
+      expected_evidence:
+        - "activity_artifact"
+        - "quiz_or_exercise_result"
+        - "teaching_reflection"
+
+    - week: 3
+      title: "Continuity and Algebraic Techniques for Limits"
+      content_cluster_id: "UNIT1"
+      topics:
+        - "ความต่อเนื่องของฟังก์ชัน"
+        - "ตรวจสอบความต่อเนื่อง"
+        - "การแยกตัวประกอบและการจัดรูป"
+        - "ลิมิตด้านเดียว"
+      clo_mapping:
+        primary_clo: "CLO1"
+        secondary_clos:
+          - "CLO5"
+      strategy_mapping:
+        primary_strategies:
+          - "STRAT-WORKED-EXAMPLE"
+          - "STRAT-SBRA"
+        secondary_strategies:
+          - "STRAT-REFLECTION"
+      activities:
+        - activity_id: "W3-A1"
+          activity_type_id: "ACT-SBRA"
+          name: "SBRA Worksheet: Continuity Check"
+          primary_clo: "CLO1"
+          secondary_clos: ["CLO5"]
+          description: >
+            วิเคราะห์ความต่อเนื่องทีละขั้น รวมถึงการพิจารณาค่าฟังก์ชัน ลิมิต และความเท่ากัน
+          deliverable: "sbra_continuity_sheet"
+          assessment_links: ["ASM-CLASSWORK"]
+          rubric_id: "RUBRIC-SBRA"
+          evidence_tags:
+            - "continuity"
+            - "step_reasoning"
+
+        - activity_id: "W3-A2"
+          activity_type_id: "ACT-QUIZ"
+          name: "Quiz: Limits and Continuity"
+          primary_clo: "CLO1"
+          secondary_clos: []
+          description: >
+            แบบทดสอบสั้นเรื่องลิมิตพื้นฐาน ลิมิตด้านเดียว และความต่อเนื่อง
+          deliverable: "quiz_1"
+          assessment_links: ["ASM-QUIZ"]
+          evidence_tags:
+            - "quiz"
+            - "direct_measure"
+
+        - activity_id: "W3-A3"
+          activity_type_id: "ACT-REFLECT"
+          name: "Reflection: จุดที่ยังสับสนในเรื่องลิมิต"
+          primary_clo: "CLO5"
+          secondary_clos: ["CLO1"]
+          description: >
+            สะท้อนข้อผิดพลาดที่พบบ่อยและแผนการแก้ไข
+          deliverable: "reflection_note"
+          assessment_links: ["ASM-CLASSWORK"]
+          evidence_tags:
+            - "metacognition"
+            - "error_awareness"
+
+      weekly_assessment_focus:
+        direct_clos: ["CLO1", "CLO5"]
+        assessment_ids: ["ASM-CLASSWORK", "ASM-QUIZ"]
+      expected_evidence:
+        - "activity_artifact"
+        - "quiz_or_exercise_result"
+        - "teaching_reflection"
+
+    - week: 4
+      title: "Derivative as Rate of Change"
+      content_cluster_id: "UNIT2"
+      topics:
+        - "ความหมายของอนุพันธ์"
+        - "อนุพันธ์ในฐานะความชันเส้นสัมผัส"
+        - "อนุพันธ์ในฐานะอัตราการเปลี่ยนแปลง"
+        - "นิยามของอนุพันธ์"
+      clo_mapping:
+        primary_clo: "CLO2"
+        secondary_clos:
+          - "CLO5"
+      strategy_mapping:
+        primary_strategies:
+          - "STRAT-LECTURE"
+          - "STRAT-WORKED-EXAMPLE"
+        secondary_strategies:
+          - "STRAT-PAIR"
+      activities:
+        - activity_id: "W4-A1"
+          activity_type_id: "ACT-WE"
+          name: "Worked Example Note: Derivative from Definition"
+          primary_clo: "CLO2"
+          secondary_clos: ["CLO5"]
+          description: >
+            ตัวอย่างหาค่าอนุพันธ์จากนิยาม พร้อมอธิบายความหมายเชิงเรขาคณิต
+          deliverable: "worked_example_note"
+          assessment_links: ["ASM-CLASSWORK"]
+          evidence_tags:
+            - "derivative_definition"
+            - "rate_of_change"
+
+        - activity_id: "W4-A2"
+          activity_type_id: "ACT-PAIR"
+          name: "Pair Discussion: Average vs Instantaneous Rate"
+          primary_clo: "CLO2"
+          secondary_clos: ["CLO5"]
+          description: >
+            เปรียบเทียบอัตราการเปลี่ยนแปลงเฉลี่ยกับฉับพลันจากสถานการณ์จริง
+          deliverable: "pair_discussion_notes"
+          assessment_links: ["ASM-CLASSWORK"]
+          evidence_tags:
+            - "conceptual_understanding"
+            - "communication"
+
+        - activity_id: "W4-A3"
+          activity_type_id: "ACT-HW"
+          name: "Homework: Derivative from Definition"
+          primary_clo: "CLO2"
+          secondary_clos: ["CLO5"]
+          description: >
+            ฝึกหาอนุพันธ์จากนิยามในกรณีพื้นฐาน
+          deliverable: "homework_set_2"
+          assessment_links: ["ASM-HW"]
+          evidence_tags:
+            - "derivative_skill"
+            - "written_solution"
+
+      weekly_assessment_focus:
+        direct_clos: ["CLO2"]
+        assessment_ids: ["ASM-CLASSWORK", "ASM-HW"]
+      expected_evidence:
+        - "activity_artifact"
+        - "quiz_or_exercise_result"
+        - "teaching_reflection"
+
+    - week: 5
+      title: "Derivative Rules for Algebraic Functions"
+      content_cluster_id: "UNIT2"
+      topics:
+        - "power rule"
+        - "sum and difference rules"
+        - "product rule"
+        - "quotient rule"
+        - "higher derivatives"
+      clo_mapping:
+        primary_clo: "CLO2"
+        secondary_clos:
+          - "CLO5"
+      strategy_mapping:
+        primary_strategies:
+          - "STRAT-WORKED-EXAMPLE"
+          - "STRAT-SBRA"
+        secondary_strategies:
+          - "STRAT-PROBLEM"
+      activities:
+        - activity_id: "W5-A1"
+          activity_type_id: "ACT-SBRA"
+          name: "SBRA Worksheet: Choosing Derivative Rules"
+          primary_clo: "CLO2"
+          secondary_clos: ["CLO5"]
+          description: >
+            ให้นักศึกษาแยกโครงสร้างฟังก์ชันและเลือกกฎอนุพันธ์ที่เหมาะสมทีละขั้น
+          deliverable: "sbra_derivative_rules"
+          assessment_links: ["ASM-CLASSWORK"]
+          rubric_id: "RUBRIC-SBRA"
+          evidence_tags:
+            - "derivative_rules"
+            - "structural_reasoning"
+
+        - activity_id: "W5-A2"
+          activity_type_id: "ACT-QUIZ"
+          name: "Quiz: Algebraic Derivatives"
+          primary_clo: "CLO2"
+          secondary_clos: []
+          description: >
+            แบบทดสอบสั้นเรื่องกฎการหาอนุพันธ์ของฟังก์ชันพีชคณิต
+          deliverable: "quiz_2"
+          assessment_links: ["ASM-QUIZ"]
+          evidence_tags:
+            - "speed_accuracy"
+            - "direct_measure"
+
+        - activity_id: "W5-A3"
+          activity_type_id: "ACT-HW"
+          name: "Homework: Mixed Derivative Exercises"
+          primary_clo: "CLO2"
+          secondary_clos: ["CLO5"]
+          description: >
+            ฝึกโจทย์ผสมหลายกฎพร้อมจัดรูปคำตอบ
+          deliverable: "homework_set_3"
+          assessment_links: ["ASM-HW"]
+          evidence_tags:
+            - "procedural_fluency"
+            - "written_solution"
+
+      weekly_assessment_focus:
+        direct_clos: ["CLO2", "CLO5"]
+        assessment_ids: ["ASM-CLASSWORK", "ASM-QUIZ", "ASM-HW"]
+      expected_evidence:
+        - "activity_artifact"
+        - "quiz_or_exercise_result"
+        - "teaching_reflection"
+
+    - week: 6
+      title: "Chain Rule and Derivatives of Transcendental Functions"
+      content_cluster_id: "UNIT2"
+      topics:
+        - "chain rule"
+        - "exponential functions"
+        - "logarithmic functions"
+        - "trigonometric functions"
+        - "implicit flavor in structured reasoning"
+      clo_mapping:
+        primary_clo: "CLO2"
+        secondary_clos:
+          - "CLO5"
+      strategy_mapping:
+        primary_strategies:
+          - "STRAT-WORKED-EXAMPLE"
+          - "STRAT-SBRA"
+        secondary_strategies:
+          - "STRAT-PAIR"
+      activities:
+        - activity_id: "W6-A1"
+          activity_type_id: "ACT-SBRA"
+          name: "SBRA Worksheet: Chain Rule Decomposition"
+          primary_clo: "CLO2"
+          secondary_clos: ["CLO5"]
+          description: >
+            แตกฟังก์ชันเป็นชั้น ๆ แล้วระบุ outer-inner structure ก่อนหาอนุพันธ์
+          deliverable: "sbra_chain_rule"
+          assessment_links: ["ASM-CLASSWORK"]
+          rubric_id: "RUBRIC-SBRA"
+          evidence_tags:
+            - "chain_rule"
+            - "step_decomposition"
+
+        - activity_id: "W6-A2"
+          activity_type_id: "ACT-PAIR"
+          name: "Pair Error Analysis: Common Derivative Mistakes"
+          primary_clo: "CLO2"
+          secondary_clos: ["CLO5"]
+          description: >
+            วิเคราะห์ข้อผิดพลาดที่พบได้บ่อยในการใช้ chain rule และ trig/log derivatives
+          deliverable: "error_analysis_sheet"
+          assessment_links: ["ASM-CLASSWORK"]
+          evidence_tags:
+            - "error_analysis"
+            - "peer_learning"
+
+        - activity_id: "W6-A3"
+          activity_type_id: "ACT-HW"
+          name: "Homework: Transcendental Derivatives"
+          primary_clo: "CLO2"
+          secondary_clos: ["CLO5"]
+          description: >
+            การบ้านเรื่องอนุพันธ์ของฟังก์ชันอดิศัยและฟังก์ชันประกอบ
+          deliverable: "homework_set_4"
+          assessment_links: ["ASM-HW"]
+          evidence_tags:
+            - "transcendental_functions"
+            - "written_solution"
+
+      weekly_assessment_focus:
+        direct_clos: ["CLO2", "CLO5"]
+        assessment_ids: ["ASM-CLASSWORK", "ASM-HW"]
+      expected_evidence:
+        - "activity_artifact"
+        - "quiz_or_exercise_result"
+        - "teaching_reflection"
+
+    - week: 7
+      title: "Applications of Derivatives I"
+      content_cluster_id: "UNIT3"
+      topics:
+        - "critical points"
+        - "increasing and decreasing intervals"
+        - "first derivative test"
+        - "curve behavior"
+      clo_mapping:
+        primary_clo: "CLO3"
+        secondary_clos:
+          - "CLO2"
+          - "CLO5"
+      strategy_mapping:
+        primary_strategies:
+          - "STRAT-SBRA"
+          - "STRAT-PROBLEM"
+        secondary_strategies:
+          - "STRAT-REFLECTION"
+      activities:
+        - activity_id: "W7-A1"
+          activity_type_id: "ACT-SBRA"
+          name: "SBRA Worksheet: Monotonicity Analysis"
+          primary_clo: "CLO3"
+          secondary_clos: ["CLO2", "CLO5"]
+          description: >
+            วิเคราะห์ฟังก์ชันทีละขั้น ตั้งแต่หาอนุพันธ์ หา critical points และสรุปช่วงเพิ่มลด
+          deliverable: "sbra_monotonicity"
+          assessment_links: ["ASM-CLASSWORK"]
+          rubric_id: "RUBRIC-SBRA"
+          evidence_tags:
+            - "application_of_derivative"
+            - "monotonicity"
+
+        - activity_id: "W7-A2"
+          activity_type_id: "ACT-QUIZ"
+          name: "Quiz: Critical Points and Increasing/Decreasing"
+          primary_clo: "CLO3"
+          secondary_clos: ["CLO2"]
+          description: >
+            แบบทดสอบสั้นวิเคราะห์พฤติกรรมของฟังก์ชันจากอนุพันธ์
+          deliverable: "quiz_3"
+          assessment_links: ["ASM-QUIZ", "ASM-CLASSWORK"]
+          evidence_tags:
+            - "application_quiz"
+            - "direct_measure"
+
+        - activity_id: "W7-A3"
+          activity_type_id: "ACT-REFLECT"
+          name: "Reflection: ขั้นตอนไหนที่ทำให้พลาดบ่อย"
+          primary_clo: "CLO5"
+          secondary_clos: ["CLO3"]
+          description: >
+            สะท้อนปัญหาการเชื่อมโยงระหว่างอนุพันธ์และการแปลผล
+          deliverable: "reflection_note"
+          assessment_links: ["ASM-CLASSWORK"]
+          evidence_tags:
+            - "metacognition"
+            - "reasoning_quality"
+
+      weekly_assessment_focus:
+        direct_clos: ["CLO3", "CLO5"]
+        assessment_ids: ["ASM-CLASSWORK", "ASM-QUIZ"]
+      expected_evidence:
+        - "activity_artifact"
+        - "quiz_or_exercise_result"
+        - "teaching_reflection"
+
+    - week: 8
+      title: "Midterm Examination"
+      content_cluster_id: "UNIT1"
+      topics:
+        - "สอบกลางภาค"
+        - "ครอบคลุม UNIT1-UNIT3 ตอนต้น"
+      clo_mapping:
+        primary_clo: "CLO1"
+        secondary_clos:
+          - "CLO2"
+          - "CLO3"
+      strategy_mapping:
+        primary_strategies:
+          - "STRAT-PROBLEM"
+        secondary_strategies: []
+      activities:
+        - activity_id: "W8-A1"
+          activity_type_id: "ACT-QUIZ"
+          name: "Midterm Examination"
+          primary_clo: "CLO1"
+          secondary_clos: ["CLO2", "CLO3"]
+          description: >
+            การสอบข้อเขียนกลางภาค ครอบคลุมลิมิต อนุพันธ์ และการประยุกต์เบื้องต้น
+          deliverable: "midterm_script"
+          assessment_links: ["ASM-MID"]
+          evidence_tags:
+            - "summative"
+            - "midterm"
+            - "direct_assessment"
+
+      weekly_assessment_focus:
+        direct_clos: ["CLO1", "CLO2", "CLO3"]
+        assessment_ids: ["ASM-MID"]
+      expected_evidence:
+        - "exam_result"
+        - "item_analysis"
+        - "teaching_reflection"
+
+    - week: 9
+      title: "Applications of Derivatives II: Extrema and Optimization"
+      content_cluster_id: "UNIT3"
+      topics:
+        - "local and global extrema"
+        - "optimization problems"
+        - "interpreting mathematical models"
+      clo_mapping:
+        primary_clo: "CLO3"
+        secondary_clos:
+          - "CLO2"
+          - "CLO5"
+      strategy_mapping:
+        primary_strategies:
+          - "STRAT-SBRA"
+          - "STRAT-PROBLEM"
+        secondary_strategies:
+          - "STRAT-PAIR"
+      activities:
+        - activity_id: "W9-A1"
+          activity_type_id: "ACT-SBRA"
+          name: "SBRA Worksheet: Extrema Analysis"
+          primary_clo: "CLO3"
+          secondary_clos: ["CLO2", "CLO5"]
+          description: >
+            วิเคราะห์จุดวิกฤต ทดสอบเอ็กซ์ตรีมัม และสรุปคำตอบตามบริบท
+          deliverable: "sbra_extrema"
+          assessment_links: ["ASM-CLASSWORK"]
+          rubric_id: "RUBRIC-SBRA"
+          evidence_tags:
+            - "extrema"
+            - "step_reasoning"
+
+        - activity_id: "W9-A2"
+          activity_type_id: "ACT-PAIR"
+          name: "Pair Task: Optimization Modeling"
+          primary_clo: "CLO3"
+          secondary_clos: ["CLO5"]
+          description: >
+            ให้นักศึกษาจับคู่แปลสถานการณ์เป็นฟังก์ชันเป้าหมายก่อนหา optimum
+          deliverable: "optimization_pair_sheet"
+          assessment_links: ["ASM-CLASSWORK"]
+          evidence_tags:
+            - "modeling"
+            - "application"
+
+        - activity_id: "W9-A3"
+          activity_type_id: "ACT-HW"
+          name: "Homework: Optimization Problems"
+          primary_clo: "CLO3"
+          secondary_clos: ["CLO5"]
+          description: >
+            โจทย์ optimization ระดับพื้นฐานถึงปานกลาง
+          deliverable: "homework_set_5"
+          assessment_links: ["ASM-HW"]
+          evidence_tags:
+            - "optimization"
+            - "written_solution"
+
+      weekly_assessment_focus:
+        direct_clos: ["CLO3", "CLO5"]
+        assessment_ids: ["ASM-CLASSWORK", "ASM-HW"]
+      expected_evidence:
+        - "activity_artifact"
+        - "quiz_or_exercise_result"
+        - "teaching_reflection"
+
+    - week: 10
+      title: "Antiderivatives and Indefinite Integrals"
+      content_cluster_id: "UNIT4"
+      topics:
+        - "แนวคิดปริพันธ์ไม่จำกัดเขต"
+        - "antiderivative"
+        - "basic integration formulas"
+        - "reverse process of differentiation"
+      clo_mapping:
+        primary_clo: "CLO4"
+        secondary_clos:
+          - "CLO2"
+          - "CLO5"
+      strategy_mapping:
+        primary_strategies:
+          - "STRAT-WORKED-EXAMPLE"
+          - "STRAT-SBRA"
+        secondary_strategies:
+          - "STRAT-PAIR"
+      activities:
+        - activity_id: "W10-A1"
+          activity_type_id: "ACT-WE"
+          name: "Worked Example Note: Antiderivative Basics"
+          primary_clo: "CLO4"
+          secondary_clos: ["CLO2", "CLO5"]
+          description: >
+            สาธิตการย้อนจากอนุพันธ์กลับไปสู่ปริพันธ์ พร้อมอธิบาย constant of integration
+          deliverable: "worked_example_note"
+          assessment_links: ["ASM-CLASSWORK"]
+          evidence_tags:
+            - "antiderivative"
+            - "concept_link"
+
+        - activity_id: "W10-A2"
+          activity_type_id: "ACT-SBRA"
+          name: "SBRA Worksheet: Selecting Integration Formulas"
+          primary_clo: "CLO4"
+          secondary_clos: ["CLO5"]
+          description: >
+            ให้นักศึกษาเลือกสูตรที่เหมาะสมและแสดงเหตุผลทีละขั้น
+          deliverable: "sbra_basic_integrals"
+          assessment_links: ["ASM-CLASSWORK"]
+          rubric_id: "RUBRIC-SBRA"
+          evidence_tags:
+            - "integration_basics"
+            - "step_reasoning"
+
+        - activity_id: "W10-A3"
+          activity_type_id: "ACT-HW"
+          name: "Homework: Indefinite Integrals"
+          primary_clo: "CLO4"
+          secondary_clos: ["CLO5"]
+          description: >
+            ฝึกปริพันธ์ไม่จำกัดเขตพื้นฐาน
+          deliverable: "homework_set_6"
+          assessment_links: ["ASM-HW"]
+          evidence_tags:
+            - "indefinite_integral"
+            - "written_solution"
+
+      weekly_assessment_focus:
+        direct_clos: ["CLO4", "CLO5"]
+        assessment_ids: ["ASM-CLASSWORK", "ASM-HW"]
+      expected_evidence:
+        - "activity_artifact"
+        - "quiz_or_exercise_result"
+        - "teaching_reflection"
+
+    - week: 11
+      title: "Substitution Technique"
+      content_cluster_id: "UNIT4"
+      topics:
+        - "u-substitution"
+        - "pattern recognition in integrals"
+        - "relation between chain rule and substitution"
+      clo_mapping:
+        primary_clo: "CLO4"
+        secondary_clos:
+          - "CLO2"
+          - "CLO5"
+      strategy_mapping:
+        primary_strategies:
+          - "STRAT-SBRA"
+          - "STRAT-WORKED-EXAMPLE"
+        secondary_strategies:
+          - "STRAT-PROBLEM"
+      activities:
+        - activity_id: "W11-A1"
+          activity_type_id: "ACT-SBRA"
+          name: "SBRA Worksheet: Detecting Substitution Structure"
+          primary_clo: "CLO4"
+          secondary_clos: ["CLO2", "CLO5"]
+          description: >
+            แยก integrand เพื่อดูว่าเลือก u อย่างไรและแทนกลับอย่างไร
+          deliverable: "sbra_substitution"
+          assessment_links: ["ASM-CLASSWORK"]
+          rubric_id: "RUBRIC-SBRA"
+          evidence_tags:
+            - "substitution"
+            - "pattern_recognition"
+
+        - activity_id: "W11-A2"
+          activity_type_id: "ACT-QUIZ"
+          name: "Quiz: Basic u-Substitution"
+          primary_clo: "CLO4"
+          secondary_clos: ["CLO2"]
+          description: >
+            แบบทดสอบสั้นเรื่อง substitution ในโจทย์พื้นฐาน
+          deliverable: "quiz_4"
+          assessment_links: ["ASM-QUIZ"]
+          evidence_tags:
+            - "substitution_quiz"
+            - "direct_measure"
+
+        - activity_id: "W11-A3"
+          activity_type_id: "ACT-HW"
+          name: "Homework: Mixed Substitution"
+          primary_clo: "CLO4"
+          secondary_clos: ["CLO5"]
+          description: >
+            โจทย์ substitution หลายรูปแบบพร้อมเขียนขั้นตอนอย่างครบถ้วน
+          deliverable: "homework_set_7"
+          assessment_links: ["ASM-HW"]
+          evidence_tags:
+            - "mixed_practice"
+            - "written_solution"
+
+      weekly_assessment_focus:
+        direct_clos: ["CLO4", "CLO5"]
+        assessment_ids: ["ASM-CLASSWORK", "ASM-QUIZ", "ASM-HW"]
+      expected_evidence:
+        - "activity_artifact"
+        - "quiz_or_exercise_result"
+        - "teaching_reflection"
+
+    - week: 12
+      title: "Definite Integrals and the Fundamental Theorem of Calculus"
+      content_cluster_id: "UNIT4"
+      topics:
+        - "ปริพันธ์จำกัดเขต"
+        - "พื้นที่สะสม"
+        - "Fundamental Theorem of Calculus"
+        - "evaluation by antiderivative"
+      clo_mapping:
+        primary_clo: "CLO4"
+        secondary_clos:
+          - "CLO1"
+          - "CLO5"
+      strategy_mapping:
+        primary_strategies:
+          - "STRAT-LECTURE"
+          - "STRAT-WORKED-EXAMPLE"
+        secondary_strategies:
+          - "STRAT-PAIR"
+      activities:
+        - activity_id: "W12-A1"
+          activity_type_id: "ACT-WE"
+          name: "Worked Example Note: FTC and Evaluation"
+          primary_clo: "CLO4"
+          secondary_clos: ["CLO5"]
+          description: >
+            เชื่อมแนวคิดพื้นที่สะสมกับการคำนวณค่าปริพันธ์จำกัดเขต
+          deliverable: "worked_example_note"
+          assessment_links: ["ASM-CLASSWORK"]
+          evidence_tags:
+            - "FTC"
+            - "conceptual_link"
+
+        - activity_id: "W12-A2"
+          activity_type_id: "ACT-PAIR"
+          name: "Pair Discussion: Meaning of Definite Integral"
+          primary_clo: "CLO4"
+          secondary_clos: ["CLO1", "CLO5"]
+          description: >
+            อภิปรายว่าค่าปริพันธ์จำกัดเขตสื่อความหมายอะไรในเชิงพื้นที่และการสะสม
+          deliverable: "pair_discussion_notes"
+          assessment_links: ["ASM-CLASSWORK"]
+          evidence_tags:
+            - "conceptual_understanding"
+            - "communication"
+
+        - activity_id: "W12-A3"
+          activity_type_id: "ACT-HW"
+          name: "Homework: FTC Practice"
+          primary_clo: "CLO4"
+          secondary_clos: ["CLO5"]
+          description: >
+            ฝึกใช้ทฤษฎีบทมูลฐานของแคลคูลัสในการประเมินปริพันธ์
+          deliverable: "homework_set_8"
+          assessment_links: ["ASM-HW"]
+          evidence_tags:
+            - "definite_integral"
+            - "written_solution"
+
+      weekly_assessment_focus:
+        direct_clos: ["CLO4", "CLO5"]
+        assessment_ids: ["ASM-CLASSWORK", "ASM-HW"]
+      expected_evidence:
+        - "activity_artifact"
+        - "quiz_or_exercise_result"
+        - "teaching_reflection"
+
+    - week: 13
+      title: "Applications and Improper Integrals"
+      content_cluster_id: "UNIT4"
+      topics:
+        - "applications of definite integrals"
+        - "area under curve / between curves"
+        - "improper integrals"
+      clo_mapping:
+        primary_clo: "CLO4"
+        secondary_clos:
+          - "CLO3"
+          - "CLO5"
+      strategy_mapping:
+        primary_strategies:
+          - "STRAT-SBRA"
+          - "STRAT-PROBLEM"
+        secondary_strategies:
+          - "STRAT-REFLECTION"
+      activities:
+        - activity_id: "W13-A1"
+          activity_type_id: "ACT-SBRA"
+          name: "SBRA Worksheet: Area and Improper Integrals"
+          primary_clo: "CLO4"
+          secondary_clos: ["CLO3", "CLO5"]
+          description: >
+            แยกขั้นตอนการตั้งปัญหา กำหนดขอบเขต และคำนวณค่าปริพันธ์
+          deliverable: "sbra_area_improper"
+          assessment_links: ["ASM-CLASSWORK"]
+          rubric_id: "RUBRIC-SBRA"
+          evidence_tags:
+            - "applied_integral"
+            - "step_reasoning"
+
+        - activity_id: "W13-A2"
+          activity_type_id: "ACT-QUIZ"
+          name: "Quiz: Definite and Improper Integrals"
+          primary_clo: "CLO4"
+          secondary_clos: []
+          description: >
+            แบบทดสอบสั้นเรื่องการคำนวณและการตีความปริพันธ์จำกัดเขต/ไม่ตรงแบบ
+          deliverable: "quiz_5"
+          assessment_links: ["ASM-QUIZ"]
+          evidence_tags:
+            - "integral_quiz"
+            - "direct_measure"
+
+        - activity_id: "W13-A3"
+          activity_type_id: "ACT-REFLECT"
+          name: "Reflection: เปรียบเทียบโจทย์อนุพันธ์กับโจทย์ปริพันธ์"
+          primary_clo: "CLO5"
+          secondary_clos: ["CLO4"]
+          description: >
+            สะท้อนว่ากระบวนการคิดต่างกันอย่างไรระหว่างโจทย์อนุพันธ์และปริพันธ์
+          deliverable: "reflection_note"
+          assessment_links: ["ASM-CLASSWORK"]
+          evidence_tags:
+            - "metacognition"
+            - "comparative_reasoning"
+
+      weekly_assessment_focus:
+        direct_clos: ["CLO4", "CLO5"]
+        assessment_ids: ["ASM-CLASSWORK", "ASM-QUIZ"]
+      expected_evidence:
+        - "activity_artifact"
+        - "quiz_or_exercise_result"
+        - "teaching_reflection"
+
+    - week: 14
+      title: "Comprehensive Review and CLO Consolidation"
+      content_cluster_id: "UNIT4"
+      topics:
+        - "ทบทวนภาพรวมทั้งรายวิชา"
+        - "เชื่อมโยงลิมิต อนุพันธ์ และปริพันธ์"
+        - "แก้โจทย์ผสมหลายแนวคิด"
+      clo_mapping:
+        primary_clo: "CLO5"
+        secondary_clos:
+          - "CLO2"
+          - "CLO3"
+          - "CLO4"
+      strategy_mapping:
+        primary_strategies:
+          - "STRAT-SBRA"
+          - "STRAT-PROBLEM"
+        secondary_strategies:
+          - "STRAT-REFLECTION"
+      activities:
+        - activity_id: "W14-A1"
+          activity_type_id: "ACT-SBRA"
+          name: "SBRA Worksheet: Mixed Calculus Problems"
+          primary_clo: "CLO5"
+          secondary_clos: ["CLO2", "CLO3", "CLO4"]
+          description: >
+            โจทย์ผสมที่เน้นการเลือกวิธี การจัดลำดับขั้น และการสื่อสารวิธีคิด
+          deliverable: "sbra_mixed_review"
+          assessment_links: ["ASM-CLASSWORK"]
+          rubric_id: "RUBRIC-SBRA"
+          evidence_tags:
+            - "integration_of_learning"
+            - "communication"
+
+        - activity_id: "W14-A2"
+          activity_type_id: "ACT-PAIR"
+          name: "Pair Discussion: Why this method?"
+          primary_clo: "CLO5"
+          secondary_clos: ["CLO2", "CLO3", "CLO4"]
+          description: >
+            จับคู่เปรียบเทียบวิธีคิดและอธิบายว่าทำไมโจทย์นี้ควรใช้แนวทางใด
+          deliverable: "method_compare_sheet"
+          assessment_links: ["ASM-CLASSWORK"]
+          evidence_tags:
+            - "method_selection"
+            - "communication"
+
+        - activity_id: "W14-A3"
+          activity_type_id: "ACT-HW"
+          name: "Homework: Final Review Set"
+          primary_clo: "CLO5"
+          secondary_clos: ["CLO2", "CLO3", "CLO4"]
+          description: >
+            ชุดทบทวนก่อนสอบปลายภาค เน้นการเขียนวิธีทำครบถ้วน
+          deliverable: "homework_set_9"
+          assessment_links: ["ASM-HW"]
+          evidence_tags:
+            - "review"
+            - "written_solution"
+
+      weekly_assessment_focus:
+        direct_clos: ["CLO5", "CLO2", "CLO3", "CLO4"]
+        assessment_ids: ["ASM-CLASSWORK", "ASM-HW"]
+      expected_evidence:
+        - "activity_artifact"
+        - "quiz_or_exercise_result"
+        - "teaching_reflection"
+
+    - week: 15
+      title: "Final Examination"
+      content_cluster_id: "UNIT4"
+      topics:
+        - "สอบปลายภาค"
+        - "ครอบคลุมอนุพันธ์ การประยุกต์ และปริพันธ์"
+      clo_mapping:
+        primary_clo: "CLO4"
+        secondary_clos:
+          - "CLO2"
+          - "CLO3"
+          - "CLO5"
+      strategy_mapping:
+        primary_strategies:
+          - "STRAT-PROBLEM"
+        secondary_strategies: []
+      activities:
+        - activity_id: "W15-A1"
+          activity_type_id: "ACT-QUIZ"
+          name: "Final Examination"
+          primary_clo: "CLO4"
+          secondary_clos: ["CLO2", "CLO3", "CLO5"]
+          description: >
+            การสอบข้อเขียนปลายภาคเพื่อประเมินความเข้าใจ ทักษะคำนวณ การประยุกต์ และการสื่อสารวิธีทำ
+          deliverable: "final_exam_script"
+          assessment_links: ["ASM-FINAL"]
+          evidence_tags:
+            - "summative"
+            - "final"
+            - "direct_assessment"
+
+      weekly_assessment_focus:
+        direct_clos: ["CLO2", "CLO3", "CLO4", "CLO5"]
+        assessment_ids: ["ASM-FINAL"]
+      expected_evidence:
+        - "exam_result"
+        - "item_analysis"
+        - "clo_summary"
+
+  plan_level_maps:
+    clo_to_weeks:
+      CLO1: [1, 2, 3, 8, 12]
+      CLO2: [4, 5, 6, 7, 8, 9, 10, 11, 14, 15]
+      CLO3: [7, 8, 9, 13, 14, 15]
+      CLO4: [10, 11, 12, 13, 14, 15]
+      CLO5: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15]
+
+    activity_type_to_weeks:
+      ACT-DIAG: [1]
+      ACT-WE: [2, 4, 10, 12]
+      ACT-SBRA: [3, 5, 6, 7, 9, 10, 11, 13, 14]
+      ACT-PAIR: [1, 2, 4, 6, 9, 12, 14]
+      ACT-QUIZ: [3, 5, 7, 8, 11, 13, 15]
+      ACT-HW: [2, 4, 5, 6, 9, 10, 11, 12, 14]
+      ACT-REFLECT: [1, 3, 7, 13]
+
+    assessment_to_weeks:
+      ASM-CLASSWORK: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14]
+      ASM-QUIZ: [3, 5, 7, 11, 13]
+      ASM-HW: [2, 4, 5, 6, 9, 10, 11, 12, 14]
+      ASM-MID: [8]
+      ASM-FINAL: [15]
+
+  implementation_notes:
+    design_rules:
+      - "ทุกสัปดาห์ต้องมี primary CLO อย่างน้อย 1 ตัว"
+      - "ทุก activity ต้องมี primary_clo"
+      - "หนึ่ง activity สามารถมี secondary_clos ได้หลายตัว"
+      - "SBRA ใช้กับหัวข้อที่ต้องการเห็น reasoning เป็นขั้นตอน"
+      - "Reflection ใช้เก็บ evidence ของ CLO5 ได้ดี"
+      - "assessment_links ต้องอ้างอิง assessment_id จาก course.yaml"
+    evidence_collection_rules:
+      - "เก็บ artifact อย่างน้อย 1 ชิ้นต่อสัปดาห์"
+      - "สัปดาห์ที่มี quiz/exam ควรมีผลคะแนนเก็บแยกต่างหาก"
+      - "ควรมี teaching reflection ทุกสัปดาห์เพื่อใช้ใน มคอ.5"
+    analytics_ready_fields:
+      - "primary_clo"
+      - "secondary_clos"
+      - "activity_type_id"
+      - "assessment_links"
+      - "evidence_tags"
+
+  optional_extensions:
+    suggested_future_fields:
+      - "estimated_time_per_activity"
+      - "difficulty_level"
+      - "digital_tool"
+      - "student_submission_mode"
+      - "week_status_planned_vs_actual"
+      - "post_teaching_reflection"
+      - "clo_attainment_result"

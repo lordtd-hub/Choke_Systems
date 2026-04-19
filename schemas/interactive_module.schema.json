@@ -1,0 +1,236 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/interactive_module.schema.json",
+  "title": "Interactive Module Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "interactive_module"
+  ],
+  "properties": {
+    "interactive_module": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "module_id",
+        "course_id",
+        "week",
+        "title",
+        "clo_focus",
+        "learning_flow",
+        "content_blocks",
+        "activities",
+        "progress_hooks",
+        "assessment_hooks",
+        "evidence_hooks"
+      ],
+      "properties": {
+        "module_id": {
+          "$ref": "#/$defs/idString"
+        },
+        "course_id": {
+          "$ref": "#/$defs/idString"
+        },
+        "week": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "title": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "clo_focus": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "primary",
+            "secondary"
+          ],
+          "properties": {
+            "primary": {
+              "$ref": "#/$defs/idString"
+            },
+            "secondary": {
+              "$ref": "#/$defs/idArray"
+            }
+          }
+        },
+        "learning_flow": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "section_id",
+              "section_type",
+              "block_refs",
+              "activity_refs"
+            ],
+            "properties": {
+              "section_id": {
+                "$ref": "#/$defs/idString"
+              },
+              "section_type": {
+                "type": "string",
+                "enum": [
+                  "intro",
+                  "content",
+                  "example",
+                  "practice",
+                  "sbra",
+                  "quiz",
+                  "reflection"
+                ]
+              },
+              "block_refs": {
+                "$ref": "#/$defs/idArray"
+              },
+              "activity_refs": {
+                "$ref": "#/$defs/idArray"
+              }
+            }
+          }
+        },
+        "content_blocks": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "block_id",
+              "type",
+              "content",
+              "clo_link"
+            ],
+            "properties": {
+              "block_id": {
+                "$ref": "#/$defs/idString"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "text",
+                  "example",
+                  "note"
+                ]
+              },
+              "content": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "clo_link": {
+                "$ref": "#/$defs/idString"
+              }
+            }
+          }
+        },
+        "activities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "activity_id",
+              "type",
+              "clo_mapping"
+            ],
+            "properties": {
+              "activity_id": {
+                "$ref": "#/$defs/idString"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "quiz",
+                  "sbra",
+                  "practice"
+                ]
+              },
+              "clo_mapping": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "primary",
+                  "secondary"
+                ],
+                "properties": {
+                  "primary": {
+                    "$ref": "#/$defs/idString"
+                  },
+                  "secondary": {
+                    "$ref": "#/$defs/idArray"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "progress_hooks": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "required_sections",
+            "required_activities"
+          ],
+          "properties": {
+            "required_sections": {
+              "$ref": "#/$defs/idArray"
+            },
+            "required_activities": {
+              "$ref": "#/$defs/idArray"
+            }
+          }
+        },
+        "assessment_hooks": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "graded_activities"
+          ],
+          "properties": {
+            "graded_activities": {
+              "$ref": "#/$defs/idArray"
+            }
+          }
+        },
+        "evidence_hooks": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "types"
+          ],
+          "properties": {
+            "types": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "completion",
+                  "score",
+                  "reflection"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "idString": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "idArray": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/idString"
+      }
+    }
+  }
+}

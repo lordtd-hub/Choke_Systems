@@ -1,0 +1,500 @@
+course:
+  schema_version: "math-course-v1"
+  course_id: "SMAC001"
+  course_code: "SMAC001"
+  course_title_th: "แคลคูลัส 1"
+  course_title_en: "Calculus 1"
+  credits:
+    lecture: 3
+    lab: 0
+    self_study: 6
+    total: 3
+  semester:
+    term: 1
+    academic_year: 2569
+  department: "สาขาวิชาคณิตศาสตร์"
+  faculty: "คณะวิทยาศาสตร์และเทคโนโลยี"
+  institution: "มหาวิทยาลัยราชภัฏสุราษฎร์ธานี"
+  course_type: "core"
+  delivery_mode:
+    onsite: true
+    online: false
+    hybrid: false
+  language: "th"
+  prerequisites: []
+  co_requisites: []
+  target_learners:
+    year: 1
+    programs:
+      - "วิทยาศาสตรบัณฑิต"
+    assumed_background:
+      - "พีชคณิตพื้นฐาน"
+      - "ฟังก์ชันเบื้องต้น"
+      - "เรขาคณิตวิเคราะห์เบื้องต้น"
+  course_description:
+    th: >
+      ลิมิตและความต่อเนื่องของฟังก์ชัน อนุพันธ์ของฟังก์ชันพีชคณิตและฟังก์ชันอดิศัย
+      การประยุกต์ของอนุพันธ์ รูปแบบไม่กำหนด กฎของโลปิตาล อนุพันธ์รวม ปริพันธ์ไม่จำกัดเขต
+      การหาปริพันธ์โดยการเปลี่ยนตัวแปร ปริพันธ์จำกัดเขต ทฤษฎีบทมูลฐานของแคลคูลัส
+      เทคนิคการหาปริพันธ์ และปริพันธ์ไม่ตรงแบบ
+    en: >
+      Limits and continuity of functions, derivatives of algebraic and transcendental functions,
+      applications of derivatives, indeterminate forms, L'Hospital's rule, total differential,
+      antiderivatives, substitution, definite integrals, the fundamental theorem of calculus,
+      techniques of integration, and improper integrals.
+
+  philosophy:
+    course_role: >
+      รายวิชานี้เป็นฐานสำคัญของการคิดเชิงวิเคราะห์ทางคณิตศาสตร์
+      เพื่อใช้ต่อยอดไปยังวิชาคณิตศาสตร์ระดับสูง วิทยาศาสตร์ และการสร้างแบบจำลอง
+    design_principles:
+      - "เน้นความเข้าใจเชิงมโนทัศน์ควบคู่กับทักษะคำนวณ"
+      - "ใช้โจทย์เป็นขั้นตอนเพื่อเห็นกระบวนการคิด"
+      - "เชื่อมความหมายทางเรขาคณิต พีชคณิต และอัตราการเปลี่ยนแปลง"
+      - "ใช้ active learning เท่าที่เหมาะกับรายวิชาคณิตศาสตร์พื้นฐาน"
+      - "ประเมินผลทั้งความถูกต้องและเหตุผลระหว่างขั้น"
+
+  plo_alignment:
+    - plo_id: "PLO2.4"
+      support_level: "R"
+      note: "สืบค้นและเลือกใช้ข้อมูล/สูตร/แนวคิดที่ถูกต้องในการทำงานที่ได้รับมอบหมาย"
+    - plo_id: "PLO3.2"
+      support_level: "R"
+      note: "อธิบายแนวคิดและเชื่อมโยงความรู้เดิมกับเนื้อหาใหม่"
+    - plo_id: "PLO4.1"
+      support_level: "A"
+      note: "มีความรู้เรื่องเครื่องมือทางคณิตศาสตร์ที่ใช้ในการวิเคราะห์ปัญหา"
+    - plo_id: "PLO4.2"
+      support_level: "A"
+      note: "ประยุกต์ใช้เครื่องมือทางคณิตศาสตร์ได้เหมาะสม"
+    - plo_id: "PLO6.3"
+      support_level: "R"
+      note: "ซื่อสัตย์ มีวินัย และรับผิดชอบในการเรียน"
+
+  cilos:
+    - clo_id: "CLO1"
+      statement: >
+        อธิบายความหมายของลิมิตและความต่อเนื่องของฟังก์ชัน
+        และใช้กฎพื้นฐานในการหาลิมิตของฟังก์ชันได้
+      bloom:
+        cognitive: "U"
+      domain: "conceptual"
+      mapped_plos:
+        - "PLO3.2"
+        - "PLO4.1"
+      performance_indicators:
+        - "อธิบายความหมายของลิมิตได้ถูกต้อง"
+        - "ตรวจสอบความต่อเนื่องของฟังก์ชันที่กำหนดให้ได้"
+        - "คำนวณลิมิตพื้นฐานได้"
+      passing_criteria:
+        min_score_percent: 60
+
+    - clo_id: "CLO2"
+      statement: >
+        คำนวณอนุพันธ์ของฟังก์ชันพีชคณิตและฟังก์ชันอดิศัย
+        พร้อมทั้งอธิบายความหมายของอนุพันธ์ในฐานะอัตราการเปลี่ยนแปลงได้
+      bloom:
+        cognitive: "A"
+      domain: "procedural"
+      mapped_plos:
+        - "PLO3.2"
+        - "PLO4.1"
+        - "PLO4.2"
+      performance_indicators:
+        - "หาอนุพันธ์โดยใช้กฎต่าง ๆ ได้ถูกต้อง"
+        - "เชื่อมโยงอนุพันธ์กับความชันหรืออัตราการเปลี่ยนแปลงได้"
+        - "จัดรูปคำตอบได้เหมาะสม"
+      passing_criteria:
+        min_score_percent: 65
+
+    - clo_id: "CLO3"
+      statement: >
+        ประยุกต์ใช้อนุพันธ์ในการวิเคราะห์พฤติกรรมของฟังก์ชัน
+        การหาเอ็กซ์ตรีมัม และการแก้โจทย์ปัญหาที่เกี่ยวข้องได้
+      bloom:
+        cognitive: "A"
+      domain: "application"
+      mapped_plos:
+        - "PLO4.1"
+        - "PLO4.2"
+      performance_indicators:
+        - "วิเคราะห์ช่วงเพิ่มช่วงลดได้"
+        - "หา local/global extrema ในโจทย์พื้นฐานได้"
+        - "แก้ปัญหาประยุกต์จากสถานการณ์ได้"
+      passing_criteria:
+        min_score_percent: 65
+
+    - clo_id: "CLO4"
+      statement: >
+        คำนวณปริพันธ์ไม่จำกัดเขตและปริพันธ์จำกัดเขต
+        โดยใช้แนวคิดปริพันธ์ เทคนิคพื้นฐาน และทฤษฎีบทมูลฐานของแคลคูลัสได้
+      bloom:
+        cognitive: "A"
+      domain: "procedural"
+      mapped_plos:
+        - "PLO4.1"
+        - "PLO4.2"
+      performance_indicators:
+        - "หาปริพันธ์พื้นฐานได้"
+        - "ใช้ substitution ได้เหมาะสม"
+        - "ใช้ทฤษฎีบทมูลฐานของแคลคูลัสได้"
+      passing_criteria:
+        min_score_percent: 65
+
+    - clo_id: "CLO5"
+      statement: >
+        แสดงวิธีทำอย่างเป็นลำดับขั้น ใช้สัญลักษณ์ทางคณิตศาสตร์ได้ถูกต้อง
+        และมีความซื่อสัตย์รับผิดชอบต่อการเรียนรู้ของตนเอง
+      bloom:
+        cognitive: "A"
+      domain: "communication_and_ethics"
+      mapped_plos:
+        - "PLO2.4"
+        - "PLO3.2"
+        - "PLO6.3"
+      performance_indicators:
+        - "เขียนวิธีทำอ่านเข้าใจได้"
+        - "ใช้สัญลักษณ์และนิยามได้เหมาะสม"
+        - "ส่งงานตรงเวลาและปฏิบัติตามกติกา"
+      passing_criteria:
+        min_score_percent: 70
+
+  content_clusters:
+    - cluster_id: "UNIT1"
+      title: "Functions, Limits, and Continuity"
+      description: "ฟังก์ชัน ลิมิต ความต่อเนื่อง และการเตรียมพร้อมสู่อนุพันธ์"
+      related_clos: ["CLO1"]
+
+    - cluster_id: "UNIT2"
+      title: "Derivatives"
+      description: "ความหมายของอนุพันธ์ กฎการหาอนุพันธ์ และฟังก์ชันอดิศัย"
+      related_clos: ["CLO2"]
+
+    - cluster_id: "UNIT3"
+      title: "Applications of Derivatives"
+      description: "การประยุกต์ของอนุพันธ์ เอ็กซ์ตรีมัม และโจทย์ปัญหา"
+      related_clos: ["CLO3"]
+
+    - cluster_id: "UNIT4"
+      title: "Integrals"
+      description: "ปริพันธ์ไม่จำกัดเขต ปริพันธ์จำกัดเขต ทฤษฎีบทมูลฐาน และเทคนิคพื้นฐาน"
+      related_clos: ["CLO4", "CLO5"]
+
+  teaching_strategies:
+    strategy_catalog:
+      - strategy_id: "STRAT-LECTURE"
+        name: "Interactive Lecture"
+        description: "บรรยายแบบถามตอบเพื่อสร้างความเข้าใจหลัก"
+        tags: ["concept", "guided"]
+
+      - strategy_id: "STRAT-WORKED-EXAMPLE"
+        name: "Worked Example with Step Explanation"
+        description: "สาธิตวิธีทำทีละขั้นพร้อมอธิบายเหตุผล"
+        tags: ["procedural", "scaffold"]
+
+      - strategy_id: "STRAT-SBRA"
+        name: "Step-Based Reasoning Activity"
+        description: "กิจกรรมฝึกคิดเป็นขั้นตอน ให้คะแนนตามคุณภาพของแต่ละขั้น"
+        tags: ["reasoning", "formative", "active"]
+
+      - strategy_id: "STRAT-PAIR"
+        name: "Think-Pair-Share"
+        description: "คิดคนเดียว จับคู่ แลกเปลี่ยน แล้วสรุปร่วมกัน"
+        tags: ["active", "communication"]
+
+      - strategy_id: "STRAT-PROBLEM"
+        name: "Problem-Based Practice"
+        description: "ฝึกแก้โจทย์จากง่ายไปยากและเชื่อมโยงหลายแนวคิด"
+        tags: ["application", "practice"]
+
+      - strategy_id: "STRAT-REFLECTION"
+        name: "Reflection / Exit Ticket"
+        description: "สะท้อนสิ่งที่เข้าใจ สิ่งที่ยังสับสน และวิธีพัฒนาตนเอง"
+        tags: ["metacognition", "evidence"]
+
+    clo_strategy_map:
+      - clo_id: "CLO1"
+        primary_strategies:
+          - "STRAT-LECTURE"
+          - "STRAT-WORKED-EXAMPLE"
+        secondary_strategies:
+          - "STRAT-PAIR"
+          - "STRAT-REFLECTION"
+
+      - clo_id: "CLO2"
+        primary_strategies:
+          - "STRAT-WORKED-EXAMPLE"
+          - "STRAT-SBRA"
+        secondary_strategies:
+          - "STRAT-PROBLEM"
+          - "STRAT-PAIR"
+
+      - clo_id: "CLO3"
+        primary_strategies:
+          - "STRAT-SBRA"
+          - "STRAT-PROBLEM"
+        secondary_strategies:
+          - "STRAT-LECTURE"
+          - "STRAT-REFLECTION"
+
+      - clo_id: "CLO4"
+        primary_strategies:
+          - "STRAT-WORKED-EXAMPLE"
+          - "STRAT-SBRA"
+        secondary_strategies:
+          - "STRAT-PROBLEM"
+          - "STRAT-PAIR"
+
+      - clo_id: "CLO5"
+        primary_strategies:
+          - "STRAT-SBRA"
+          - "STRAT-REFLECTION"
+        secondary_strategies:
+          - "STRAT-PAIR"
+
+  activity_types:
+    - activity_type_id: "ACT-DIAG"
+      name: "Diagnostic Check"
+      description: "เช็กพื้นฐานก่อนเริ่มหรือก่อนขึ้นหัวข้อใหม่"
+
+    - activity_type_id: "ACT-WE"
+      name: "Worked Example Note"
+      description: "จดและเติมคำอธิบายจากตัวอย่างที่อาจารย์สาธิต"
+
+    - activity_type_id: "ACT-SBRA"
+      name: "SBRA Worksheet"
+      description: "ใบงานแก้โจทย์แบบเป็นขั้นตอน มีเกณฑ์ให้คะแนนรายขั้น"
+
+    - activity_type_id: "ACT-PAIR"
+      name: "Pair Discussion"
+      description: "อภิปรายคำตอบ เหตุผล หรือความผิดพลาดร่วมกัน"
+
+    - activity_type_id: "ACT-QUIZ"
+      name: "Quiz"
+      description: "แบบทดสอบสั้นระหว่างเรียนหรือท้ายคาบ"
+
+    - activity_type_id: "ACT-HW"
+      name: "Homework"
+      description: "งานเดี่ยวเพื่อฝึกทักษะและความสม่ำเสมอ"
+
+    - activity_type_id: "ACT-REFLECT"
+      name: "Reflection"
+      description: "สะท้อนความเข้าใจ ปัญหา และแผนพัฒนาตนเอง"
+
+  assessment:
+    assessment_policy:
+      philosophy: >
+        ประเมินทั้งความเข้าใจเชิงมโนทัศน์ ทักษะคำนวณ การประยุกต์ใช้
+        และการสื่อสารวิธีคิดทางคณิตศาสตร์ โดยมีทั้ง formative และ summative assessment
+      grading_basis: "criterion_referenced_with_course_grading"
+
+    components:
+      - assessment_id: "ASM-CLASSWORK"
+        name: "งานระหว่างเรียนและกิจกรรมในชั้น"
+        type: "formative"
+        weight_percent: 20
+        related_clos: ["CLO1", "CLO2", "CLO3", "CLO4", "CLO5"]
+        methods:
+          - "SBRA Worksheet"
+          - "Pair Discussion"
+          - "Exit Ticket"
+        scoring_notes: >
+          ใช้รูบริกความครบถ้วนของวิธีทำ ความถูกต้อง และการมีส่วนร่วม
+
+      - assessment_id: "ASM-QUIZ"
+        name: "แบบทดสอบย่อย"
+        type: "formative"
+        weight_percent: 15
+        related_clos: ["CLO1", "CLO2", "CLO4"]
+        methods:
+          - "Short Quiz"
+          - "Timed Practice"
+        scoring_notes: >
+          เน้นความถูกต้อง ความคล่อง และการใช้กฎพื้นฐาน
+
+      - assessment_id: "ASM-HW"
+        name: "การบ้าน"
+        type: "formative"
+        weight_percent: 15
+        related_clos: ["CLO2", "CLO3", "CLO4", "CLO5"]
+        methods:
+          - "Homework Set"
+        scoring_notes: >
+          เน้นความสม่ำเสมอ ความครบถ้วน และการเขียนวิธีทำ
+
+      - assessment_id: "ASM-MID"
+        name: "สอบกลางภาค"
+        type: "summative"
+        weight_percent: 20
+        related_clos: ["CLO1", "CLO2", "CLO3"]
+        methods:
+          - "Written Examination"
+        scoring_notes: >
+          ครอบคลุมลิมิต อนุพันธ์ และการประยุกต์เบื้องต้น
+
+      - assessment_id: "ASM-FINAL"
+        name: "สอบปลายภาค"
+        type: "summative"
+        weight_percent: 30
+        related_clos: ["CLO2", "CLO3", "CLO4", "CLO5"]
+        methods:
+          - "Written Examination"
+        scoring_notes: >
+          ครอบคลุมอนุพันธ์ การประยุกต์ ปริพันธ์ และการสื่อสารวิธีคิด
+
+    clo_assessment_map:
+      - clo_id: "CLO1"
+        direct_assessments: ["ASM-CLASSWORK", "ASM-QUIZ", "ASM-MID"]
+        indirect_assessments: ["ASM-HW"]
+
+      - clo_id: "CLO2"
+        direct_assessments: ["ASM-CLASSWORK", "ASM-QUIZ", "ASM-MID", "ASM-FINAL"]
+        indirect_assessments: ["ASM-HW"]
+
+      - clo_id: "CLO3"
+        direct_assessments: ["ASM-CLASSWORK", "ASM-MID", "ASM-FINAL"]
+        indirect_assessments: ["ASM-HW"]
+
+      - clo_id: "CLO4"
+        direct_assessments: ["ASM-CLASSWORK", "ASM-QUIZ", "ASM-FINAL"]
+        indirect_assessments: ["ASM-HW"]
+
+      - clo_id: "CLO5"
+        direct_assessments: ["ASM-CLASSWORK", "ASM-HW", "ASM-FINAL"]
+        indirect_assessments: []
+
+  rubrics:
+    rubric_catalog:
+      - rubric_id: "RUBRIC-SBRA"
+        name: "SBRA Step Reasoning Rubric"
+        applies_to:
+          - "ACT-SBRA"
+          - "ASM-CLASSWORK"
+        criteria:
+          - criterion_id: "step_correctness"
+            name: "ความถูกต้องรายขั้น"
+            description: "ตรวจความถูกต้องของแต่ละขั้นในการแก้โจทย์"
+          - criterion_id: "reasoning_quality"
+            name: "เหตุผลและการเชื่อมโยง"
+            description: "อธิบายว่าทำไมจึงเลือกใช้วิธีนั้น"
+          - criterion_id: "notation"
+            name: "การใช้สัญลักษณ์"
+            description: "ใช้สัญลักษณ์และรูปแบบทางคณิตศาสตร์ได้ถูกต้อง"
+        scoring_model:
+          type: "step_based"
+          levels:
+            first_try_correct: 1.0
+            one_minor_error: 0.6
+            multiple_errors: 0.3
+            missing_or_invalid: 0.0
+          pass_threshold_percent: 70
+          xp_enabled: true
+          xp_rule: "45 * score_ratio + confidence_bonus"
+
+      - rubric_id: "RUBRIC-REFLECTION"
+        name: "Reflection Completion Rubric"
+        applies_to:
+          - "ACT-REFLECT"
+        criteria:
+          - criterion_id: "completion"
+            name: "การส่งครบ"
+            description: "ตอบครบตามโจทย์สะท้อนคิด"
+          - criterion_id: "relevance"
+            name: "ความสอดคล้อง"
+            description: "สะท้อนตรงกับสิ่งที่เรียนจริง"
+        scoring_model:
+          type: "completion_based"
+          levels:
+            complete: 1.0
+            partial: 0.5
+            missing: 0.0
+
+  learning_evidence:
+    evidence_type_catalog:
+      - evidence_type_id: "attendance_or_participation"
+        category: "engagement"
+        scope: "weekly"
+        description: "หลักฐานการเข้าเรียน การมีส่วนร่วมในชั้นเรียน หรือการเข้าร่วมกิจกรรมการเรียนรู้"
+      - evidence_type_id: "activity_artifact"
+        category: "learning_process"
+        scope: "weekly"
+        description: "ชิ้นงาน ใบงาน โน้ต หรือผลงานจากกิจกรรมการเรียนรู้"
+      - evidence_type_id: "quiz_or_exercise_result"
+        category: "assessment_result"
+        scope: "weekly"
+        description: "ผลจากแบบฝึกหัด แบบทดสอบย่อย หรือกิจกรรมประเมินระหว่างเรียน"
+      - evidence_type_id: "teaching_reflection"
+        category: "teaching_feedback"
+        scope: "weekly"
+        description: "บันทึกสะท้อนผลการสอนเพื่อใช้ปรับปรุงการจัดการเรียนรู้รอบถัดไป"
+      - evidence_type_id: "exam_result"
+        category: "assessment_result"
+        scope: "assessment_week"
+        description: "ผลการสอบกลางภาคหรือปลายภาค"
+      - evidence_type_id: "item_analysis"
+        category: "assessment_quality"
+        scope: "assessment_week"
+        description: "ข้อมูลวิเคราะห์ข้อสอบหรือพฤติกรรมการตอบเพื่อใช้ทบทวนคุณภาพการวัดผล"
+      - evidence_type_id: "clo_summary"
+        category: "attainment_summary"
+        scope: "course_cycle"
+        description: "สรุปผลการบรรลุ CLO เพื่อใช้ในการปรับปรุงรายวิชาและรายงานคุณภาพ"
+    required_weekly_evidence:
+      - "attendance_or_participation"
+      - "activity_artifact"
+      - "quiz_or_exercise_result"
+      - "teaching_reflection"
+    clo_evidence_examples:
+      CLO1:
+        - "แบบฝึกหัดลิมิต"
+        - "ใบงานตรวจความต่อเนื่อง"
+      CLO2:
+        - "ใบงานอนุพันธ์"
+        - "quiz เรื่อง derivative rules"
+      CLO3:
+        - "โจทย์ optimization"
+        - "worksheet วิเคราะห์กราฟ"
+      CLO4:
+        - "แบบฝึกหัด integration"
+        - "ข้อสอบย่อยเรื่อง FTC"
+      CLO5:
+        - "reflection"
+        - "งานที่มีการเขียนวิธีทำครบถ้วน"
+
+  weekly_plan_linking:
+    expected_week_count: 15
+    weekly_plan_file: "calculus1_weekly_plan.yaml"
+    weekly_fields_required_from_course:
+      - "clo_id"
+      - "strategy_id"
+      - "activity_type_id"
+      - "assessment_id"
+      - "content_cluster_id"
+    rule_notes:
+      - "หนึ่งกิจกรรมสามารถ map ได้หลาย CLO แต่ควรกำหนด primary CLO 1 ตัว"
+      - "weekly_plan ควรอ้างอิง strategy/activity/assessment จาก catalog ใน course.yaml"
+      - "รายละเอียดปลีกย่อยรายสัปดาห์ไม่ควรย้อนมาใส่ใน course.yaml"
+
+  instructor_notes:
+    constraints:
+      - "ผู้เรียนปี 1 พื้นฐานไม่สม่ำเสมอ"
+      - "ต้องมีทั้งการทบทวนและการเร่งจังหวะในบางช่วง"
+      - "รายวิชาต้องสมดุลระหว่างความเข้าใจและการคำนวณ"
+    recommended_teaching_flow:
+      - "เริ่มด้วย concept anchor"
+      - "ตามด้วย worked example"
+      - "ให้ฝึกแบบมีโครง"
+      - "ค่อยเพิ่มโจทย์ประยุกต์"
+      - "ปิดด้วย reflection หรือ quick check"
+
+  export_hints:
+    suitable_outputs:
+      - "มคอ.3"
+      - "weekly_plan.yaml"
+      - "CLO mapping table"
+      - "assessment blueprint"
+      - "teaching dashboard"
+    normalization_notes:
+      - "ใช้ clo_id เป็น key กลางสำหรับ mapping"
+      - "ใช้ strategy/activity catalogs เพื่อลดความซ้ำซ้อน"
+      - "หากมีหลาย section ของรายวิชาเดียวกัน ให้แยก section data ภายนอก course.yaml"

@@ -1,0 +1,115 @@
+sbra_blueprint:
+  blueprint_id: "sbra_derivative_rules_w5"
+  problem: "Find the derivative of y = (x^2 + 1)(3x - 4)."
+
+  classification:
+    topic: "differentiation"
+    type: "rule_selection"
+    difficulty: "foundational"
+
+  strategy:
+    summary: "Recognize the expression as a product of two functions, then apply the product rule before simplifying."
+    methods:
+      - "structure_recognition"
+      - "product_rule"
+      - "algebraic_simplification"
+
+  steps:
+    - step_no: 1
+      goal: "Choose the main differentiation technique."
+      prompt: "Which derivative rule should be chosen first for y = (x^2 + 1)(3x - 4)?"
+      options:
+        - option_id: "opt_product_rule"
+          value: "Use the product rule because the expression is a product of two nontrivial factors."
+          is_correct: true
+          error_type: "correct_strategy"
+        - option_id: "opt_chain_rule"
+          value: "Use the chain rule because one bracket is inside another bracket."
+          is_correct: false
+          error_type: "misreads_product_as_composition"
+        - option_id: "opt_quotient_rule"
+          value: "Use the quotient rule because there are two grouped expressions."
+          is_correct: false
+          error_type: "misreads_grouping_as_fraction"
+        - option_id: "opt_power_rule_only"
+          value: "Use only the power rule on x^2 and ignore the second factor."
+          is_correct: false
+          error_type: "ignores_second_factor"
+      correct_option_id: "opt_product_rule"
+      explanation: "The outer structure is multiplication, so the product rule is the correct first choice."
+
+    - step_no: 2
+      goal: "Write the product rule setup correctly."
+      prompt: "If u = x^2 + 1 and v = 3x - 4, which setup is correct?"
+      options:
+        - option_id: "opt_uprimev_plus_uvprime"
+          value: "y' = u'v + uv'"
+          is_correct: true
+          error_type: "correct_formula"
+        - option_id: "opt_uprimevprime"
+          value: "y' = u'v'"
+          is_correct: false
+          error_type: "multiplies_derivatives_only"
+        - option_id: "opt_uprime_plus_vprime"
+          value: "y' = u' + v'"
+          is_correct: false
+          error_type: "treats_product_as_sum"
+        - option_id: "opt_uv_all_prime"
+          value: "y' = (uv)' = uv"
+          is_correct: false
+          error_type: "drops_derivative_operation"
+      correct_option_id: "opt_uprimev_plus_uvprime"
+      explanation: "The product rule states that the derivative of uv is u'v + uv'."
+
+    - step_no: 3
+      goal: "Compute the derivatives of the factors accurately."
+      prompt: "What are u' and v'?"
+      options:
+        - option_id: "opt_2x_and_3"
+          value: "u' = 2x and v' = 3"
+          is_correct: true
+          error_type: "correct_derivatives"
+        - option_id: "opt_2_and_3x"
+          value: "u' = 2 and v' = 3x"
+          is_correct: false
+          error_type: "incorrect_basic_derivatives"
+        - option_id: "opt_2x_and_3x_minus_4"
+          value: "u' = 2x and v' = 3x - 4"
+          is_correct: false
+          error_type: "fails_to_differentiate_linear_factor"
+        - option_id: "opt_x_and_3"
+          value: "u' = x and v' = 3"
+          is_correct: false
+          error_type: "power_rule_coefficient_error"
+      correct_option_id: "opt_2x_and_3"
+      explanation: "Differentiate x^2 + 1 to get 2x, and differentiate 3x - 4 to get 3."
+
+  full_solution:
+    - "Let u = x^2 + 1 and v = 3x - 4."
+    - "Then u' = 2x and v' = 3."
+    - "Apply the product rule: y' = u'v + uv' = 2x(3x - 4) + (x^2 + 1)(3)."
+    - "Expand: y' = 6x^2 - 8x + 3x^2 + 3."
+    - "So y' = 9x^2 - 8x + 3."
+
+  misconception_map:
+    - error_type: "misreads_product_as_composition"
+      description: "Student treats grouped factors as if one function were nested inside the other."
+    - error_type: "misreads_grouping_as_fraction"
+      description: "Student sees multiple grouped expressions and chooses quotient rule without a denominator."
+    - error_type: "ignores_second_factor"
+      description: "Student differentiates only one factor and forgets the rest of the product."
+    - error_type: "multiplies_derivatives_only"
+      description: "Student incorrectly thinks the derivative of a product is the product of derivatives."
+    - error_type: "treats_product_as_sum"
+      description: "Student differentiates each factor separately and adds the results."
+    - error_type: "drops_derivative_operation"
+      description: "Student writes back the original expression instead of a derivative rule."
+    - error_type: "incorrect_basic_derivatives"
+      description: "Student makes a basic derivative error while differentiating the factors."
+    - error_type: "fails_to_differentiate_linear_factor"
+      description: "Student copies the linear factor instead of differentiating it."
+    - error_type: "power_rule_coefficient_error"
+      description: "Student applies the power rule incompletely to x^2."
+
+  scoring:
+    step_based: true

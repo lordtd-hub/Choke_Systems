@@ -1,0 +1,47 @@
+{
+  "manifest_version": "content-manifest-v1",
+  "items": [
+    {
+      "id": "limits-intuition-note",
+      "topic": "limits",
+      "title": "Limit Intuition Note",
+      "description": "Short note that frames limits as approaching behavior before formal computation.",
+      "type": "note",
+      "body": "Use this note when students need a conceptual bridge before symbolic limit rules.",
+      "addedDate": "2026-04-19",
+      "tags": [
+        "concept",
+        "foundation"
+      ],
+      "author": "Codex scaffold"
+    },
+    {
+      "id": "shared-study-routine",
+      "topic": "shared",
+      "title": "Study Routine for Worked Practice",
+      "description": "Shared note on how to study examples, practice, and reflection tasks across weeks.",
+      "type": "note",
+      "body": "Preview the topic, attempt one example independently, compare reasoning, and finish with a reflection note.",
+      "addedDate": "2026-04-19",
+      "tags": [
+        "study-skills",
+        "shared"
+      ],
+      "author": "Codex scaffold"
+    },
+    {
+      "id": "integration-ftc-video",
+      "topic": "integration",
+      "title": "FTC Overview Video",
+      "description": "Suggested external video for connecting definite integrals with accumulation and evaluation.",
+      "type": "link",
+      "url": "https://example.com/ftc-overview",
+      "addedDate": "2026-04-19",
+      "tags": [
+        "integration",
+        "video"
+      ],
+      "author": "Codex scaffold"
+    }
+  ]
+}

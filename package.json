@@ -1,0 +1,23 @@
+{
+  "name": "choke-systems",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Contract-first schemas and validators for OBE-aligned course and weekly planning data.",
+  "scripts": {
+    "validate:contracts": "node tools/validate-contracts.js calculus1_course.yaml calculus1_weekly_plan.yaml",
+    "generate:module:week1": "node tools/build-interactive-module.js calculus1_course.yaml calculus1_weekly_plan.yaml 1",
+    "validate:materials": "node tools/material-library.js",
+    "validate:sbra": "node tools/sbra-blueprints.js",
+    "build:bundle:week1": "node tools/build-week-bundle.js calculus1_course.yaml calculus1_weekly_plan.yaml 1",
+    "test:contracts": "node tests/contract-validation.test.js",
+    "test:module": "node tests/interactive-module.test.js",
+    "test:bundle": "node tests/week-bundle.test.js",
+    "test:materials": "node tests/material-library.test.js",
+    "test:sbra": "node tests/sbra-blueprints.test.js",
+    "test:authoring": "node tests/sbra-authoring.test.js"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "yaml": "^2.8.1"
+  }
+}

@@ -1,0 +1,734 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/course.schema.json",
+  "title": "Course Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "course"
+  ],
+  "properties": {
+    "course": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "course_id",
+        "course_code",
+        "course_title_th",
+        "course_title_en",
+        "credits",
+        "semester",
+        "department",
+        "faculty",
+        "institution",
+        "course_type",
+        "delivery_mode",
+        "language",
+        "prerequisites",
+        "co_requisites",
+        "target_learners",
+        "course_description",
+        "philosophy",
+        "plo_alignment",
+        "cilos",
+        "content_clusters",
+        "teaching_strategies",
+        "activity_types",
+        "assessment",
+        "rubrics",
+        "learning_evidence",
+        "weekly_plan_linking",
+        "instructor_notes",
+        "export_hints"
+      ],
+      "properties": {
+        "schema_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "course_id": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "course_code": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "course_title_th": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "course_title_en": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "credits": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "lecture",
+            "lab",
+            "self_study",
+            "total"
+          ],
+          "properties": {
+            "lecture": {
+              "type": "number",
+              "minimum": 0
+            },
+            "lab": {
+              "type": "number",
+              "minimum": 0
+            },
+            "self_study": {
+              "type": "number",
+              "minimum": 0
+            },
+            "total": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        },
+        "semester": {
+          "$ref": "#/$defs/semester"
+        },
+        "department": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "faculty": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "institution": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "course_type": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "delivery_mode": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "onsite",
+            "online",
+            "hybrid"
+          ],
+          "properties": {
+            "onsite": {
+              "type": "boolean"
+            },
+            "online": {
+              "type": "boolean"
+            },
+            "hybrid": {
+              "type": "boolean"
+            }
+          }
+        },
+        "language": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "prerequisites": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "co_requisites": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "target_learners": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "year",
+            "programs",
+            "assumed_background"
+          ],
+          "properties": {
+            "year": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "programs": {
+              "$ref": "#/$defs/stringArray"
+            },
+            "assumed_background": {
+              "$ref": "#/$defs/stringArray"
+            }
+          }
+        },
+        "course_description": {
+          "$ref": "#/$defs/bilingualText"
+        },
+        "philosophy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "course_role",
+            "design_principles"
+          ],
+          "properties": {
+            "course_role": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "design_principles": {
+              "$ref": "#/$defs/stringArray"
+            }
+          }
+        },
+        "plo_alignment": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "plo_id",
+              "support_level",
+              "note"
+            ],
+            "properties": {
+              "plo_id": {
+                "$ref": "#/$defs/idString"
+              },
+              "support_level": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "note": {
+                "$ref": "#/$defs/nonEmptyString"
+              }
+            }
+          }
+        },
+        "cilos": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "clo_id",
+              "statement",
+              "bloom",
+              "domain",
+              "mapped_plos",
+              "performance_indicators",
+              "passing_criteria"
+            ],
+            "properties": {
+              "clo_id": {
+                "$ref": "#/$defs/idString"
+              },
+              "statement": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "bloom": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "cognitive"
+                ],
+                "properties": {
+                  "cognitive": {
+                    "$ref": "#/$defs/nonEmptyString"
+                  }
+                }
+              },
+              "domain": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "mapped_plos": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/idString"
+                }
+              },
+              "performance_indicators": {
+                "$ref": "#/$defs/stringArray"
+              },
+              "passing_criteria": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "min_score_percent"
+                ],
+                "properties": {
+                  "min_score_percent": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                  }
+                }
+              }
+            }
+          }
+        },
+        "content_clusters": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "cluster_id",
+              "title",
+              "description",
+              "related_clos"
+            ],
+            "properties": {
+              "cluster_id": {
+                "$ref": "#/$defs/idString"
+              },
+              "title": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "description": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "related_clos": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/idString"
+                }
+              }
+            }
+          }
+        },
+        "teaching_strategies": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "strategy_catalog",
+            "clo_strategy_map"
+          ],
+          "properties": {
+            "strategy_catalog": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "strategy_id",
+                  "name",
+                  "description",
+                  "tags"
+                ],
+                "properties": {
+                  "strategy_id": {
+                    "$ref": "#/$defs/idString"
+                  },
+                  "name": {
+                    "$ref": "#/$defs/nonEmptyString"
+                  },
+                  "description": {
+                    "$ref": "#/$defs/nonEmptyString"
+                  },
+                  "tags": {
+                    "$ref": "#/$defs/stringArray"
+                  }
+                }
+              }
+            },
+            "clo_strategy_map": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "clo_id",
+                  "primary_strategies",
+                  "secondary_strategies"
+                ],
+                "properties": {
+                  "clo_id": {
+                    "$ref": "#/$defs/idString"
+                  },
+                  "primary_strategies": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "$ref": "#/$defs/idString"
+                    }
+                  },
+                  "secondary_strategies": {
+                    "$ref": "#/$defs/idArray"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "activity_types": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "activity_type_id",
+              "name",
+              "description"
+            ],
+            "properties": {
+              "activity_type_id": {
+                "$ref": "#/$defs/idString"
+              },
+              "name": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "description": {
+                "$ref": "#/$defs/nonEmptyString"
+              }
+            }
+          }
+        },
+        "assessment": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "assessment_policy",
+            "components",
+            "clo_assessment_map"
+          ],
+          "properties": {
+            "assessment_policy": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "philosophy",
+                "grading_basis"
+              ],
+              "properties": {
+                "philosophy": {
+                  "$ref": "#/$defs/nonEmptyString"
+                },
+                "grading_basis": {
+                  "$ref": "#/$defs/nonEmptyString"
+                }
+              }
+            },
+            "components": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "assessment_id",
+                  "name",
+                  "type",
+                  "weight_percent",
+                  "related_clos",
+                  "methods",
+                  "scoring_notes"
+                ],
+                "properties": {
+                  "assessment_id": {
+                    "$ref": "#/$defs/idString"
+                  },
+                  "name": {
+                    "$ref": "#/$defs/nonEmptyString"
+                  },
+                  "type": {
+                    "$ref": "#/$defs/nonEmptyString"
+                  },
+                  "weight_percent": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  "related_clos": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "$ref": "#/$defs/idString"
+                    }
+                  },
+                  "methods": {
+                    "$ref": "#/$defs/stringArray"
+                  },
+                  "scoring_notes": {
+                    "$ref": "#/$defs/nonEmptyString"
+                  }
+                }
+              }
+            },
+            "clo_assessment_map": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "clo_id",
+                  "direct_assessments",
+                  "indirect_assessments"
+                ],
+                "properties": {
+                  "clo_id": {
+                    "$ref": "#/$defs/idString"
+                  },
+                  "direct_assessments": {
+                    "$ref": "#/$defs/idArray"
+                  },
+                  "indirect_assessments": {
+                    "$ref": "#/$defs/idArray"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "rubrics": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "rubric_catalog"
+          ],
+          "properties": {
+            "rubric_catalog": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "rubric_id",
+                  "name",
+                  "applies_to",
+                  "criteria",
+                  "scoring_model"
+                ],
+                "properties": {
+                  "rubric_id": {
+                    "$ref": "#/$defs/idString"
+                  },
+                  "name": {
+                    "$ref": "#/$defs/nonEmptyString"
+                  },
+                  "applies_to": {
+                    "$ref": "#/$defs/idArray"
+                  },
+                  "criteria": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "criterion_id",
+                        "name",
+                        "description"
+                      ],
+                      "properties": {
+                        "criterion_id": {
+                          "$ref": "#/$defs/idString"
+                        },
+                        "name": {
+                          "$ref": "#/$defs/nonEmptyString"
+                        },
+                        "description": {
+                          "$ref": "#/$defs/nonEmptyString"
+                        }
+                      }
+                    }
+                  },
+                  "scoring_model": {
+                    "type": "object",
+                    "required": [
+                      "type",
+                      "levels"
+                    ],
+                    "properties": {
+                      "type": {
+                        "$ref": "#/$defs/nonEmptyString"
+                      },
+                      "levels": {
+                        "type": "object",
+                        "minProperties": 1
+                      },
+                      "pass_threshold_percent": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 100
+                      },
+                      "xp_enabled": {
+                        "type": "boolean"
+                      },
+                      "xp_rule": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "learning_evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "evidence_type_catalog",
+            "required_weekly_evidence",
+            "clo_evidence_examples"
+          ],
+          "properties": {
+            "evidence_type_catalog": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "evidence_type_id",
+                  "category",
+                  "scope",
+                  "description"
+                ],
+                "properties": {
+                  "evidence_type_id": {
+                    "$ref": "#/$defs/idString"
+                  },
+                  "category": {
+                    "$ref": "#/$defs/nonEmptyString"
+                  },
+                  "scope": {
+                    "$ref": "#/$defs/nonEmptyString"
+                  },
+                  "description": {
+                    "$ref": "#/$defs/nonEmptyString"
+                  }
+                }
+              }
+            },
+            "required_weekly_evidence": {
+              "$ref": "#/$defs/stringArray"
+            },
+            "clo_evidence_examples": {
+              "type": "object",
+              "minProperties": 1,
+              "additionalProperties": {
+                "$ref": "#/$defs/stringArray"
+              }
+            }
+          }
+        },
+        "weekly_plan_linking": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "expected_week_count",
+            "weekly_plan_file",
+            "weekly_fields_required_from_course",
+            "rule_notes"
+          ],
+          "properties": {
+            "expected_week_count": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "weekly_plan_file": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "weekly_fields_required_from_course": {
+              "$ref": "#/$defs/stringArray"
+            },
+            "rule_notes": {
+              "$ref": "#/$defs/stringArray"
+            }
+          }
+        },
+        "instructor_notes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "constraints",
+            "recommended_teaching_flow"
+          ],
+          "properties": {
+            "constraints": {
+              "$ref": "#/$defs/stringArray"
+            },
+            "recommended_teaching_flow": {
+              "$ref": "#/$defs/stringArray"
+            }
+          }
+        },
+        "export_hints": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "suitable_outputs",
+            "normalization_notes"
+          ],
+          "properties": {
+            "suitable_outputs": {
+              "$ref": "#/$defs/stringArray"
+            },
+            "normalization_notes": {
+              "$ref": "#/$defs/stringArray"
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "idString": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "stringArray": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "idArray": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/idString"
+      }
+    },
+    "semester": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "term",
+        "academic_year"
+      ],
+      "properties": {
+        "term": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "academic_year": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "bilingualText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "th",
+        "en"
+      ],
+      "properties": {
+        "th": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "en": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    }
+  }
+}

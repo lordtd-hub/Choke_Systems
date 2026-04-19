@@ -1,0 +1,116 @@
+sbra_blueprint:
+  blueprint_id: "sbra_integration_formulas_w10"
+  problem: "Choose the correct integration formula to evaluate ∫ (4x^3 - 5x + 2) dx."
+
+  classification:
+    topic: "integration"
+    type: "formula_selection"
+    difficulty: "foundational"
+
+  strategy:
+    summary: "Recognize the integrand as a sum of polynomial terms and apply linearity together with the power rule for antiderivatives."
+    methods:
+      - "term_by_term_integration"
+      - "power_rule_for_integrals"
+      - "linearity_of_integral"
+
+  steps:
+    - step_no: 1
+      goal: "Select the overall integration approach."
+      prompt: "What is the best first idea for ∫ (4x^3 - 5x + 2) dx?"
+      options:
+        - option_id: "opt_term_by_term"
+          value: "Split the polynomial into separate terms and integrate each term with the power rule."
+          is_correct: true
+          error_type: "correct_strategy"
+        - option_id: "opt_substitution"
+          value: "Use u-substitution because every polynomial integral needs a substitution."
+          is_correct: false
+          error_type: "overuses_substitution"
+        - option_id: "opt_parts"
+          value: "Use integration by parts because there are multiple terms."
+          is_correct: false
+          error_type: "chooses_advanced_method_unnecessarily"
+        - option_id: "opt_product_rule_reverse"
+          value: "Reverse the product rule because the integrand has more than one term."
+          is_correct: false
+          error_type: "confuses_sum_with_product"
+      correct_option_id: "opt_term_by_term"
+      explanation: "A polynomial is integrated most directly by linearity and the power rule."
+
+    - step_no: 2
+      goal: "Recall the correct antiderivative rule."
+      prompt: "Which formula matches the antiderivative power rule for x^n with n ≠ -1?"
+      options:
+        - option_id: "opt_xnplus1_over_nplus1"
+          value: "∫ x^n dx = x^(n+1)/(n+1) + C"
+          is_correct: true
+          error_type: "correct_formula"
+        - option_id: "opt_nxnminus1"
+          value: "∫ x^n dx = nx^(n-1) + C"
+          is_correct: false
+          error_type: "uses_derivative_formula"
+        - option_id: "opt_xn_over_n"
+          value: "∫ x^n dx = x^n / n + C"
+          is_correct: false
+          error_type: "forgets_increment_power"
+        - option_id: "opt_ln_absx"
+          value: "∫ x^n dx = ln|x| + C for all n."
+          is_correct: false
+          error_type: "overgeneralizes_log_case"
+      correct_option_id: "opt_xnplus1_over_nplus1"
+      explanation: "The antiderivative power rule raises the exponent by 1 and divides by the new exponent."
+
+    - step_no: 3
+      goal: "Assemble the antiderivative correctly."
+      prompt: "Which result is correct?"
+      options:
+        - option_id: "opt_x4_minus_5over2x2_plus2x_plusc"
+          value: "x^4 - (5/2)x^2 + 2x + C"
+          is_correct: true
+          error_type: "correct_antiderivative"
+        - option_id: "opt_4x4_minus5x2_plus2"
+          value: "4x^4 - 5x^2 + 2 + C"
+          is_correct: false
+          error_type: "forgets_division_after_power_rule"
+        - option_id: "opt_x4_minus5x_plus2x"
+          value: "x^4 - 5x + 2x + C"
+          is_correct: false
+          error_type: "integrates_linear_term_incorrectly"
+        - option_id: "opt_x3_minus5x_plus2"
+          value: "x^3 - 5x + 2 + C"
+          is_correct: false
+          error_type: "keeps_original_expression"
+      correct_option_id: "opt_x4_minus_5over2x2_plus2x_plusc"
+      explanation: "Integrate each term: ∫4x^3dx = x^4, ∫-5x dx = -(5/2)x^2, and ∫2 dx = 2x."
+
+  full_solution:
+    - "Use linearity: ∫(4x^3 - 5x + 2)dx = ∫4x^3dx - ∫5x dx + ∫2 dx."
+    - "Apply the power rule to each term."
+    - "∫4x^3dx = x^4."
+    - "∫-5x dx = -(5/2)x^2."
+    - "∫2 dx = 2x."
+    - "Therefore the antiderivative is x^4 - (5/2)x^2 + 2x + C."
+
+  misconception_map:
+    - error_type: "overuses_substitution"
+      description: "Student chooses substitution even when the integrand is a simple polynomial."
+    - error_type: "chooses_advanced_method_unnecessarily"
+      description: "Student picks an advanced technique without checking the simplest structure first."
+    - error_type: "confuses_sum_with_product"
+      description: "Student mistakes a sum of terms for a product structure."
+    - error_type: "uses_derivative_formula"
+      description: "Student recalls the derivative power rule instead of the antiderivative rule."
+    - error_type: "forgets_increment_power"
+      description: "Student divides by n but forgets to increase the exponent."
+    - error_type: "overgeneralizes_log_case"
+      description: "Student misapplies the logarithm rule beyond the x^-1 case."
+    - error_type: "forgets_division_after_power_rule"
+      description: "Student increases the power but forgets the division step."
+    - error_type: "integrates_linear_term_incorrectly"
+      description: "Student treats ∫x dx as x instead of x^2/2."
+    - error_type: "keeps_original_expression"
+      description: "Student writes back the original integrand rather than an antiderivative."
+
+  scoring:
+    step_based: true
