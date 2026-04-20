@@ -61,7 +61,7 @@ Current phase:
 
 - `Phase`: `P5-PRODUCT`
 - `Process`: `PROC-DOC`
-- `Position`: `adapter-rollout planning`
+- `Position`: `adapter-selection planning`
 
 Completed layers:
 
@@ -94,15 +94,16 @@ Completed layers:
 - migration review for the `Learning Record Store`
 - swap-ready repository boundary for the `Learning Record Store`
 - repository adapter conformance criteria for the `Learning Record Store`
+- first adapter-swap rollout plan for the `Learning Record Store`
 
 In progress:
 
-- adapter-rollout planning for the `Learning Record Store`
-- control-doc alignment for the locked `P5-PLAN-013` task
+- adapter-selection planning for the `Learning Record Store`
+- control-doc alignment for the locked `P5-PLAN-014` task
 
 Next focus:
 
-- define the first adapter-swap rollout plan behind the current repository ports
+- define the adapter selection and activation seam behind the current repository ports
 - keep the current file-backed adapter as the preserved reference implementation
 - keep database, API, auth, and app-shell implementation out of scope during this planning step
 

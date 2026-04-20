@@ -116,7 +116,8 @@ Tasks:
 - `done` review whether the first `Learning Record Store` migration is complete enough to move to the next controlled product step
 - `done` define the swap-ready repository implementation boundary for product persistence
 - `done` define repository adapter conformance tests and swap-readiness criteria
-- `todo` define the first adapter-swap rollout plan behind the current repository ports
+- `done` define the first adapter-swap rollout plan behind the current repository ports
+- `todo` define the adapter selection and activation seam behind the current repository ports
 - `todo` design persistent application state layer
 - `todo` design authenticated multi-user system
 - `todo` design production API/service layer

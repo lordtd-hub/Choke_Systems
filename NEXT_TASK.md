@@ -4,19 +4,19 @@
 
 - `Phase`: `P5-PRODUCT`
 - `Process`: `PROC-DOC`
-- `Task ID`: `P5-PLAN-013`
+- `Task ID`: `P5-PLAN-014`
 
 ## Task
 
-Define the first adapter-swap rollout plan behind the current repository ports.
+Define the adapter selection and activation seam behind the current repository ports.
 
 ## Scope
 
 In scope:
 
-- define the execution order for introducing a second repository adapter behind the current ports
-- define the rollout boundary between preserved baseline behavior and future adapter activation
-- define the validation checkpoints required before the future adapter may become active
+- define where the active repository adapter will be selected
+- define the boundary between inactive adapter availability and active adapter use
+- define the guard conditions for future adapter activation without changing current contracts
 - update control docs so the repo lock is unambiguous
 
 Out of scope:
@@ -29,12 +29,12 @@ Out of scope:
 
 ## Done Criteria
 
-- the adapter-swap rollout sequence is explicit
-- the activation boundary for the future adapter is explicit
+- the adapter selection seam is explicit
+- the activation guard conditions are explicit
 - the next controlled task after this planning slice is explicit
 - control docs are consistent
 - work is committed and pushed
 
 ## Why This Task
 
-The conformance rules are now defined, and the smallest safe next step is to define exactly how a future adapter would be introduced without combining rollout work with broader database or API implementation.
+The rollout sequence is now defined, and the smallest safe next step is to define the narrow composition seam that would eventually choose between the preserved file-backed adapter and a future inactive adapter.
