@@ -31,11 +31,11 @@ try {
 
   assert.equal(summary.summary_type, 'control_status_summary_v1');
   assert.equal(summary.current_phase.phase, 'P5-PRODUCT');
-  assert.equal(summary.current_phase.position, 'fourth package implementation');
+  assert.equal(summary.current_phase.position, 'post-rewire review');
   assert.equal(summary.current_status.completed_layers.includes('spec core'), true);
-  assert.equal(summary.current_status.in_progress.includes('fourth implementation package for the `Learning Record Store`'), true);
-  assert.equal(summary.current_status.next_focus.includes('rewire teacher week dashboard data through query/projection services'), true);
-  assert.equal(summary.locked_task.task_id, 'P5-IMPL-004');
+  assert.equal(summary.current_status.in_progress.includes('post-rewire review for the `Learning Record Store`'), true);
+  assert.equal(summary.current_status.next_focus.includes('review whether the first `Learning Record Store` migration is complete enough to move beyond the four-package seam build'), true);
+  assert.equal(summary.locked_task.task_id, 'P5-REVIEW-002');
   assert.equal(summary.next_recommended_action.action_type, 'build_next_missing_week');
   assert.equal(summary.next_phase_target.phase, null);
   assert.equal(summary.next_phase_target.exit_criteria.length, 0);

@@ -5,6 +5,13 @@ const {
   createAnalyticsEvents,
   summarizeCloEvents
 } = require('./analytics');
+const { fromRuntimeStatePayload } = require('../state/records/learner-module-state');
+const { fromRuntimeActivityAttempt } = require('../state/records/attempt-record');
+const { fromStoredAssessmentResult } = require('../state/records/assessment-result-record');
+const { fromStoredAnalyticsEvent } = require('../state/records/analytics-event-record');
+const { LearningRecordQueryService } = require('../state/services/learning-record-query-service');
+const { ProjectionAssemblyService } = require('../state/services/projection-assembly-service');
+const { buildLearningRecordIdentity, DEFAULT_LEARNER_KEY } = require('./learning-record-read-layer');
 
 function countByEventType(events, eventType) {
   return (events || []).filter((event) => event.event_type === eventType).length;
@@ -75,15 +82,28 @@ function buildCqiReport({ course, bundle, runtimeState, assessmentResults = [], 
     assessmentResults,
     reflections
   });
-  const cloSummaries = summarizeCloEvents(course, events);
-  const cqiSignals = buildCqiSignals(cloSummaries);
+  const identity = buildLearningRecordIdentity({
+    course_id: bundle.interactive_module.course_id,
+    module_id: bundle.interactive_module.module_id,
+    week: bundle.interactive_module.week
+  }, DEFAULT_LEARNER_KEY);
   const reportContext = {
     generated_at: generatedAt || runtimeState.runtime_state.updated_at || null,
     course_id: bundle.interactive_module.course_id,
     module_id: bundle.interactive_module.module_id,
     week: bundle.interactive_module.week
   };
-  const cloReports = buildCloReports(cloSummaries, cqiSignals);
+  const projectionAssemblyService = buildInMemoryProjectionAssemblyService({
+    identity,
+    runtimeState,
+    assessmentResults,
+    analyticsEvents: events
+  });
+  const cqiProjection = projectionAssemblyService.buildCqiProjection({
+    identity,
+    course
+  });
+  const cloReports = cqiProjection.clo_reports;
 
   return {
     report_type: 'cqi_summary_v1',
@@ -92,6 +112,102 @@ function buildCqiReport({ course, bundle, runtimeState, assessmentResults = [], 
     clo_reports: cloReports,
     source_events: events
   };
+}
+
+function buildInMemoryProjectionAssemblyService({
+  identity,
+  runtimeState,
+  assessmentResults,
+  analyticsEvents
+}) {
+  const learnerModuleStateRecord = fromRuntimeStatePayload(runtimeState, {
+    learner_key: identity.learner_key
+  });
+  const attemptRecords = learnerModuleStateRecord.activity_state.flatMap((activity) =>
+    (activity.attempts || []).map((attempt, index) =>
+      fromRuntimeActivityAttempt(attempt, learnerModuleStateRecord, activity.activity_id, index)
+    )
+  );
+  const assessmentResultRecords = (assessmentResults || []).map((result, index) =>
+    fromStoredAssessmentResult(result, identity, index)
+  );
+  const analyticsEventRecords = (analyticsEvents || []).map((event, index) =>
+    fromStoredAnalyticsEvent(event, identity, index)
+  );
+  const learningRecordQueryService = new LearningRecordQueryService({
+    learnerModuleStateRepository: {
+      getByLearnerModule() {
+        return learnerModuleStateRecord;
+      },
+      saveCurrent() {
+        throw new Error('In-memory CQI query repository is read-only.');
+      },
+      exists() {
+        return true;
+      }
+    },
+    attemptRecordRepository: {
+      append() {
+        throw new Error('In-memory CQI query repository is read-only.');
+      },
+      getById(attemptId) {
+        return attemptRecords.find((record) => record.attempt_id === attemptId) || null;
+      },
+      listByLearnerModule() {
+        return attemptRecords;
+      },
+      listByActivity(activityScope) {
+        const activityId = activityScope.activity_id || activityScope.activityId;
+        return attemptRecords.filter((record) => record.activity_id === activityId);
+      }
+    },
+    assessmentResultRepository: {
+      append() {
+        throw new Error('In-memory CQI query repository is read-only.');
+      },
+      getById(assessmentResultId) {
+        return assessmentResultRecords.find((record) => record.assessment_result_id === assessmentResultId) || null;
+      },
+      listByLearnerModule() {
+        return assessmentResultRecords;
+      },
+      listByAttempt(attemptId) {
+        return assessmentResultRecords.filter((record) => record.attempt_id === attemptId);
+      },
+      listByActivity(activityScope) {
+        const activityId = activityScope.activity_id || activityScope.activityId;
+        return assessmentResultRecords.filter((record) => record.activity_id === activityId);
+      }
+    },
+    analyticsEventRepository: {
+      append() {
+        throw new Error('In-memory CQI query repository is read-only.');
+      },
+      appendMany() {
+        throw new Error('In-memory CQI query repository is read-only.');
+      },
+      getById(eventId) {
+        return analyticsEventRecords.find((record) => record.event_id === eventId) || null;
+      },
+      listByLearnerModule() {
+        return analyticsEventRecords;
+      },
+      listByLearnerWeek() {
+        return analyticsEventRecords;
+      },
+      listBySource(sourceScope) {
+        const sourceType = sourceScope.source_type || sourceScope.sourceType;
+        const sourceId = sourceScope.source_id || sourceScope.sourceId;
+        return analyticsEventRecords.filter((record) =>
+          record.source_type === sourceType && record.source_id === sourceId
+        );
+      }
+    }
+  });
+
+  return new ProjectionAssemblyService({
+    learningRecordQueryService
+  });
 }
 
 function formatPercent(value) {

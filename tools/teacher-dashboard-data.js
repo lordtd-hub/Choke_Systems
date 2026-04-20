@@ -5,10 +5,13 @@ const path = require('node:path');
 const {
   DEFAULT_STORAGE_ROOT,
   buildArtifactContext,
-  getArtifactDirectory,
-  loadLearningArtifacts
+  getArtifactDirectory
 } = require('./persistence');
-const { getRuntimeSummary } = require('./runtime-state');
+const {
+  buildLearningRecordIdentity,
+  createLearningRecordProjectionServices,
+  loadCourseDefinition
+} = require('./learning-record-read-layer');
 
 const DEFAULT_OUTPUT_ROOT = path.join(__dirname, '..', 'outputs');
 
@@ -51,35 +54,33 @@ function buildTeacherDashboardData(context, options = {}) {
   });
   const outputRoot = options.outputRoot || DEFAULT_OUTPUT_ROOT;
   const storageRoot = options.storageRoot || DEFAULT_STORAGE_ROOT;
+  const learnerKey = options.learnerKey;
+  const { course } = loadCourseDefinition(options);
+  const { projectionAssemblyService } = createLearningRecordProjectionServices({ storageRoot });
   const bundle = loadWeekBundle(normalized, { outputRoot });
   const workflowSummary = loadWorkflowSummary(normalized, { outputRoot });
-  const artifacts = loadLearningArtifacts(normalized, { storageRoot });
-  const runtimeSummary = getRuntimeSummary(artifacts.runtime_state);
-  const moduleRoot = bundle.interactive_module;
-  const cqiOverview = artifacts.cqi_report?.overview || {};
+  const identity = buildLearningRecordIdentity(normalized, learnerKey);
+  const teacherWeekProjection = projectionAssemblyService.buildTeacherWeekProjection({
+    identity,
+    course,
+    bundle
+  });
 
   return {
     dashboard_type: 'teacher_week_dashboard_v1',
     context: normalized,
-    module: {
-      title: moduleRoot.title,
-      clo_focus: moduleRoot.clo_focus,
-      section_count: (moduleRoot.learning_flow || []).length,
-      activity_count: (moduleRoot.activities || []).length,
-      supplementary_material_count: (bundle.supplementary_materials || []).length,
-      sbra_payload_count: (bundle.sbra_payloads || []).length
-    },
-    runtime_summary: runtimeSummary,
+    module: teacherWeekProjection.module,
+    runtime_summary: teacherWeekProjection.runtime_summary,
     cqi_summary: {
-      total_clos: cqiOverview.total_clos ?? 0,
-      attained_clos: cqiOverview.attained_clos ?? 0,
-      attainment_rate_percent: cqiOverview.attainment_rate_percent ?? 0,
-      clos_requiring_action: cqiOverview.clos_requiring_action ?? 0
+      total_clos: teacherWeekProjection.cqi_summary.total_clos ?? 0,
+      attained_clos: teacherWeekProjection.cqi_summary.attained_clos ?? 0,
+      attainment_rate_percent: teacherWeekProjection.cqi_summary.attainment_rate_percent ?? 0,
+      clos_requiring_action: teacherWeekProjection.cqi_summary.clos_requiring_action ?? 0
     },
     artifact_counts: {
-      assessment_results: (artifacts.assessment_results?.assessment_results || []).length,
-      analytics_events: (artifacts.analytics_events?.events || []).length,
-      cqi_clo_reports: (artifacts.cqi_report?.clo_reports || []).length
+      assessment_results: teacherWeekProjection.canonical_counts.assessment_result_records,
+      analytics_events: teacherWeekProjection.canonical_counts.analytics_event_records,
+      cqi_clo_reports: teacherWeekProjection.cqi_summary.total_clos
     },
     files: {
       dashboard_html: getWeekOutputFilePath(normalized, 'dashboard.html', outputRoot),

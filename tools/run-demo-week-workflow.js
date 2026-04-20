@@ -145,7 +145,8 @@ function runDemoWeekWorkflow({
 
   const dashboardData = buildTeacherDashboardData(context, {
     outputRoot,
-    storageRoot
+    storageRoot,
+    coursePath: resolvedCoursePath
   });
   writeJsonFile(dashboardDataJsonPath, dashboardData);
   writeTextFile(dashboardHtmlPath, renderTeacherDashboardPage(dashboardData));

@@ -35,6 +35,7 @@ function publishSystemOutputs({
   const courseDashboardDataPath = getCourseOutputFilePath(courseId, 'course-dashboard-data.json', outputRoot);
   const courseDashboardHtmlPath = getCourseOutputFilePath(courseId, 'course-dashboard.html', outputRoot);
   const courseDashboardData = buildCourseDashboardData(courseId, {
+    coursePath,
     outputRoot,
     storageRoot
   });

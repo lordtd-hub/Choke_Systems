@@ -4,6 +4,11 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { buildTeacherDashboardData, DEFAULT_OUTPUT_ROOT } = require('./teacher-dashboard-data');
 const { DEFAULT_STORAGE_ROOT } = require('./persistence');
+const {
+  buildLearningRecordIdentity,
+  createLearningRecordProjectionServices,
+  loadCourseDefinition
+} = require('./learning-record-read-layer');
 
 function parseWeekFromDirectoryName(name) {
   const match = /^week-(\d+)$/.exec(name);
@@ -94,8 +99,23 @@ function summarizeCourseWeeks(weekItems) {
 function buildCourseDashboardData(courseId, options = {}) {
   const outputRoot = options.outputRoot || DEFAULT_OUTPUT_ROOT;
   const storageRoot = options.storageRoot || DEFAULT_STORAGE_ROOT;
+  const learnerKey = options.learnerKey;
+  const { course } = loadCourseDefinition(options);
+  const { projectionAssemblyService } = createLearningRecordProjectionServices({ storageRoot });
   const contexts = options.contexts || listIndexedWeekContexts(courseId, { outputRoot });
-  const weeks = contexts.map((context) => buildTeacherDashboardData(context, { outputRoot, storageRoot }))
+  const courseProjection = projectionAssemblyService.buildCourseProjection({
+    course,
+    weeks: contexts.map((context) => ({
+      identity: buildLearningRecordIdentity(context, learnerKey),
+      bundle: loadWeekBundleForContext(context, outputRoot)
+    }))
+  });
+  const weeks = contexts.map((context) => buildTeacherDashboardData(context, {
+    outputRoot,
+    storageRoot,
+    coursePath: options.coursePath,
+    learnerKey
+  }))
     .map((item) => ({
       context: item.context,
       module: item.module,
@@ -116,9 +136,15 @@ function buildCourseDashboardData(courseId, options = {}) {
     context: {
       course_id: courseId
     },
-    overview: summarizeCourseWeeks(weeks),
+    overview: courseProjection.overview,
     weeks
   };
+}
+
+function loadWeekBundleForContext(context, outputRoot = DEFAULT_OUTPUT_ROOT) {
+  const normalizedWeek = String(context.week).padStart(2, '0');
+  const filePath = path.join(outputRoot, context.course_id, context.module_id, `week-${normalizedWeek}`, 'week-bundle.json');
+  return JSON.parse(fs.readFileSync(filePath, 'utf8'));
 }
 
 function getCourseOutputDirectory(courseId, outputRoot = DEFAULT_OUTPUT_ROOT) {

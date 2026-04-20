@@ -3,24 +3,25 @@
 ## Current Locked Task
 
 - `Phase`: `P5-PRODUCT`
-- `Process`: `PROC-STATE`
-- `Task ID`: `P5-IMPL-004`
+- `Process`: `PROC-DOC`
+- `Task ID`: `P5-REVIEW-002`
 
 ## Task
 
-Implement the fourth package for the `Learning Record Store`.
+Review whether the first `Learning Record Store` migration is complete enough to move to the next controlled product step.
 
 ## Scope
 
 In scope:
 
-- rewire teacher week dashboard data through query/projection services
-- rewire course dashboard data through query/projection services
-- rewire CQI inputs through query/projection services
-- add regression tests for unchanged output contracts
+- review the four implemented `Learning Record Store` packages against the current phase goal
+- identify any remaining blocker before the next controlled product step
+- make the next step explicit without implementing it
+- update control docs so the repo lock is unambiguous
 
 Out of scope:
 
+- state-layer implementation beyond the completed four packages
 - database implementation
 - API implementation
 - auth/user implementation
@@ -29,13 +30,12 @@ Out of scope:
 
 ## Done Criteria
 
-- teacher week dashboard data is produced through query/projection services
-- course dashboard data is produced through query/projection services
-- CQI inputs are produced through query/projection services
-- regression tests confirm unchanged output contracts
-- `npm run verify:machine` passes
+- the review decision is explicit
+- any remaining blocker is explicit
+- the next controlled task is explicit
+- control docs are consistent
 - work is committed and pushed
 
 ## Why This Task
 
-The third package is complete, and this is the smallest next slice that rewires current dashboard and CQI builders onto the new read seams without changing output contracts or opening database, API, or auth work.
+The fourth package is complete, and the repo should pause for one review task before choosing the next controlled product step.

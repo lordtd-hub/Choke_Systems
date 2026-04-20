@@ -112,7 +112,8 @@ Tasks:
 - `done` implement the first package for `state-identity`, `state-records`, and file-backed repository ports
 - `done` implement the second package for mutation services over repository ports
 - `done` implement the third package for query and projection services over canonical records
-- `todo` implement the fourth package for rewiring dashboard and CQI builders onto query/projection services
+- `done` implement the fourth package for rewiring dashboard and CQI builders onto query/projection services
+- `todo` review whether the first `Learning Record Store` migration is complete enough to move to the next controlled product step
 - `todo` design persistent application state layer
 - `todo` design authenticated multi-user system
 - `todo` design production API/service layer

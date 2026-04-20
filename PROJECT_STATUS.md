@@ -90,17 +90,18 @@ Completed layers:
 - first implementation package for the `Learning Record Store`
 - second implementation package for the `Learning Record Store`
 - third implementation package for the `Learning Record Store`
+- fourth implementation package for the `Learning Record Store`
 
 In progress:
 
-- fourth implementation package for the `Learning Record Store`
-- control-doc alignment for the locked `P5-IMPL-004` task
+- post-rewire review for the `Learning Record Store`
+- control-doc alignment for the locked `P5-REVIEW-002` task
 
 Next focus:
 
-- rewire teacher week dashboard data through query/projection services
-- rewire course dashboard data and CQI inputs through query/projection services
-- keep output contracts, build-control outputs, database, API, and auth out of scope during the fourth package
+- review whether the first `Learning Record Store` migration is complete enough to move beyond the four-package seam build
+- decide the next controlled product step without reopening output/control work
+- keep database, API, auth, and app-shell implementation out of scope during the review
 
 ## Status Against Main Plan
 

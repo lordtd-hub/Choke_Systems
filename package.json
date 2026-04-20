@@ -8,7 +8,7 @@
     "npm": ">=10"
   },
   "scripts": {
-    "verify:machine": "npm run validate:contracts && npm run test:bundle && npm run test:analytics && npm run test:cqi-report && npm run test:dashboard-data && npm run test:course-dashboard-data && npm run test:course-dashboard-view && npm run test:catalog-dashboard-data && npm run test:catalog-dashboard-view && npm run test:course-workflow && npm run test:build-history && npm run test:output-registry && npm run test:course-action-queue && npm run test:control-status-summary && npm run test:system-output-registry && npm run test:publish-system-outputs && npm run test:build-control && npm run test:dashboard && npm run test:learning-record-store && npm run test:learning-record-services && npm run test:learning-record-projections",
+    "verify:machine": "npm run validate:contracts && npm run test:bundle && npm run test:analytics && npm run test:cqi-report && npm run test:dashboard-data && npm run test:course-dashboard-data && npm run test:course-dashboard-view && npm run test:catalog-dashboard-data && npm run test:catalog-dashboard-view && npm run test:course-workflow && npm run test:build-history && npm run test:output-registry && npm run test:course-action-queue && npm run test:control-status-summary && npm run test:system-output-registry && npm run test:publish-system-outputs && npm run test:build-control && npm run test:dashboard && npm run test:learning-record-store && npm run test:learning-record-services && npm run test:learning-record-projections && npm run test:learning-record-output-rewire",
     "validate:contracts": "node tools/validate-contracts.js calculus1_course.yaml calculus1_weekly_plan.yaml",
     "generate:module:week1": "node tools/build-interactive-module.js calculus1_course.yaml calculus1_weekly_plan.yaml 1",
     "validate:materials": "node tools/material-library.js",
@@ -42,6 +42,7 @@
     "test:learning-record-store": "node tests/learning-record-store.test.js",
     "test:learning-record-services": "node tests/learning-record-services.test.js",
     "test:learning-record-projections": "node tests/learning-record-projections.test.js",
+    "test:learning-record-output-rewire": "node tests/learning-record-output-rewire.test.js",
     "test:demo-workflow": "node tests/demo-workflow.test.js",
     "test:frontend": "node tests/frontend-contract-reader.test.js",
     "test:materials": "node tests/material-library.test.js",
