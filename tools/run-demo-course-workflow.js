@@ -7,7 +7,7 @@ const { getCourseOutputFilePath } = require('./course-dashboard-data');
 const { getCatalogOutputFilePath } = require('./catalog-dashboard-data');
 const { appendCourseBuildHistory, getCourseBuildHistoryFilePath } = require('./build-history');
 const { getCourseOutputRegistryFilePath } = require('./output-registry');
-const { refreshInstructorOutputs } = require('./refresh-instructor-outputs');
+const { publishSystemOutputs } = require('./publish-system-outputs');
 const { runDemoWeekWorkflow } = require('./run-demo-week-workflow');
 
 function readYaml(filePath) {
@@ -135,10 +135,12 @@ function runDemoCourseWorkflow({
     workflow_summary_markdown: courseSummaryMarkdownPath
   }, { outputRoot });
 
-  refreshInstructorOutputs({
+  publishSystemOutputs({
+    courseId,
     coursePath: resolvedCoursePath,
     weeklyPlanPath: resolvedWeeklyPlanPath,
-    outputRoot
+    outputRoot,
+    storageRoot
   });
 
   return summary;

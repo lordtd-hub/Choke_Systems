@@ -8,7 +8,7 @@
     "npm": ">=10"
   },
   "scripts": {
-    "verify:machine": "npm run validate:contracts && npm run test:bundle && npm run test:analytics && npm run test:cqi-report && npm run test:dashboard-data && npm run test:course-dashboard-data && npm run test:course-dashboard-view && npm run test:catalog-dashboard-data && npm run test:catalog-dashboard-view && npm run test:course-workflow && npm run test:build-history && npm run test:output-registry && npm run test:build-control && npm run test:dashboard",
+    "verify:machine": "npm run validate:contracts && npm run test:bundle && npm run test:analytics && npm run test:cqi-report && npm run test:dashboard-data && npm run test:course-dashboard-data && npm run test:course-dashboard-view && npm run test:catalog-dashboard-data && npm run test:catalog-dashboard-view && npm run test:course-workflow && npm run test:build-history && npm run test:output-registry && npm run test:publish-system-outputs && npm run test:build-control && npm run test:dashboard",
     "validate:contracts": "node tools/validate-contracts.js calculus1_course.yaml calculus1_weekly_plan.yaml",
     "generate:module:week1": "node tools/build-interactive-module.js calculus1_course.yaml calculus1_weekly_plan.yaml 1",
     "validate:materials": "node tools/material-library.js",
@@ -33,6 +33,7 @@
     "test:course-workflow": "node tests/course-workflow.test.js",
     "test:build-history": "node tests/build-history.test.js",
     "test:output-registry": "node tests/output-registry.test.js",
+    "test:publish-system-outputs": "node tests/publish-system-outputs.test.js",
     "test:build-control": "node tests/instructor-build-control.test.js",
     "test:dashboard": "node tests/teacher-dashboard.test.js",
     "test:demo-workflow": "node tests/demo-workflow.test.js",
