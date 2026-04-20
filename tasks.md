@@ -117,7 +117,8 @@ Tasks:
 - `done` define the swap-ready repository implementation boundary for product persistence
 - `done` define repository adapter conformance tests and swap-readiness criteria
 - `done` define the first adapter-swap rollout plan behind the current repository ports
-- `todo` define the adapter selection and activation seam behind the current repository ports
+- `done` define the adapter selection and activation seam behind the current repository ports
+- `todo` define the first inactive-adapter package behind the selection seam
 - `todo` design persistent application state layer
 - `todo` design authenticated multi-user system
 - `todo` design production API/service layer

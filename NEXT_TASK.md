@@ -4,19 +4,19 @@
 
 - `Phase`: `P5-PRODUCT`
 - `Process`: `PROC-DOC`
-- `Task ID`: `P5-PLAN-014`
+- `Task ID`: `P5-PLAN-015`
 
 ## Task
 
-Define the adapter selection and activation seam behind the current repository ports.
+Define the first inactive-adapter package behind the selection seam.
 
 ## Scope
 
 In scope:
 
-- define where the active repository adapter will be selected
-- define the boundary between inactive adapter availability and active adapter use
-- define the guard conditions for future adapter activation without changing current contracts
+- define the smallest package that allows a future adapter to exist behind the seam without becoming active
+- define the deliverables and preserved baseline for that inactive-adapter package
+- define the validation expectations for that package without broadening into database or API implementation
 - update control docs so the repo lock is unambiguous
 
 Out of scope:
@@ -29,12 +29,12 @@ Out of scope:
 
 ## Done Criteria
 
-- the adapter selection seam is explicit
-- the activation guard conditions are explicit
+- the inactive-adapter package boundary is explicit
+- the package deliverables and validation expectations are explicit
 - the next controlled task after this planning slice is explicit
 - control docs are consistent
 - work is committed and pushed
 
 ## Why This Task
 
-The rollout sequence is now defined, and the smallest safe next step is to define the narrow composition seam that would eventually choose between the preserved file-backed adapter and a future inactive adapter.
+The selection seam is now defined, and the smallest safe next step is to define the bounded package that would let a future adapter exist behind that seam without changing the active baseline.

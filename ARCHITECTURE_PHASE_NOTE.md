@@ -8,15 +8,15 @@ This file locks the current architecture phase so implementation does not drift.
 
 - `Phase`: `P5-PRODUCT`
 - `Process`: `PROC-DOC`
-- `Position`: `adapter-selection planning`
+- `Position`: `inactive-adapter package planning`
 
 ## What This Phase Means
 
 The repository has finished the current output/control hardening pass and the first product-layer planning pass.
 
-The current work is now the next narrow planning step after defining the first adapter-swap rollout plan for the `Learning Record Store`:
+The current work is now the next narrow planning step after defining the adapter selection and activation seam for the `Learning Record Store`:
 
-- define the adapter selection and activation seam behind the current repository ports
+- define the first inactive-adapter package behind the selection seam
 - preserve the finished state-layer seams and current published output contracts
 - keep the current file-backed adapter as the preserved reference implementation
 - preserve the existing output/control backbone as the stable prototype base
@@ -71,6 +71,8 @@ The repository adapter conformance rules for that future adapter step are now do
 
 The first adapter-swap rollout plan for that future adapter step is now documented in [ADAPTER_SWAP_ROLLOUT_PLAN.md](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/ADAPTER_SWAP_ROLLOUT_PLAN.md).
 
+The adapter selection and activation seam for that future adapter step is now documented in [ADAPTER_SELECTION_SEAM.md](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/ADAPTER_SELECTION_SEAM.md).
+
 ## Allowed Work
 
 - `state-identity` implementation
@@ -85,6 +87,7 @@ The first adapter-swap rollout plan for that future adapter step is now document
 - planning and doc updates needed to define adapter conformance and swap-readiness criteria
 - planning and doc updates needed to define the first adapter-swap rollout plan
 - planning and doc updates needed to define the adapter selection and activation seam
+- planning and doc updates needed to define the first inactive-adapter package
 - bug fixes that protect the existing output/control backbone
 - tests or doc updates needed to keep the current backbone trustworthy
 
@@ -100,9 +103,9 @@ The first adapter-swap rollout plan for that future adapter step is now document
 
 ## Immediate Focus
 
-The next locked task in this phase should define the adapter selection and activation seam behind the current repository ports:
+The next locked task in this phase should define the first inactive-adapter package behind the selection seam:
 
 - keep the chosen boundary explicit
 - keep the file-backed adapter as the preserved baseline
-- define where and how a future adapter would be selected without changing current service or output contracts
+- define the smallest package that lets a future adapter exist without becoming the active baseline
 - keep the current prototype outputs as the baseline to preserve
