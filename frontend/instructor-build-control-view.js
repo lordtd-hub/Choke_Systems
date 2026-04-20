@@ -142,6 +142,38 @@ function renderWeekDirectory(weekDirectory) {
   `;
 }
 
+function renderRecommendedActions(actions) {
+  if (!actions || actions.length === 0) {
+    return '<p class="empty-copy">ยังไม่มีคำแนะนำงานถัดไปจาก backend ในรอบนี้</p>';
+  }
+
+  const priorityLabel = {
+    high: 'สำคัญสูง',
+    medium: 'สำคัญปานกลาง',
+    low: 'สำคัญต่ำ'
+  };
+
+  return `
+    <div class="action-grid">
+      ${actions.map((action) => `
+        <article class="action-card">
+          <div class="week-card-top">
+            <div>
+              <span class="week-card-label">${escapeHtml(`ลำดับความสำคัญ: ${priorityLabel[action.priority] || action.priority}`)}</span>
+              <h3>${escapeHtml(action.title)}</h3>
+            </div>
+            <span class="status-pill status-pill-${escapeHtml(action.priority === 'high' ? 'warm' : action.priority === 'medium' ? 'accent' : 'default')}">${escapeHtml(action.action_type)}</span>
+          </div>
+          <p class="week-card-copy">${escapeHtml(action.description)}</p>
+          <p class="action-rationale">${escapeHtml(`เหตุผล: ${action.rationale}`)}</p>
+          <p class="action-weeks">${escapeHtml(`สัปดาห์ที่เกี่ยวข้อง: ${action.weeks.join(', ')}`)}</p>
+          <pre>${escapeHtml(action.command)}</pre>
+        </article>
+      `).join('')}
+    </div>
+  `;
+}
+
 function renderInstructorBuildControlPage(controlData) {
   const context = controlData.context || {};
   const courseOverview = controlData.output_snapshots?.course_dashboard_overview || {};
@@ -206,7 +238,7 @@ function renderInstructorBuildControlPage(controlData) {
         margin: 0 0 16px;
         font-size: 1.45rem;
       }
-      .metric-grid, .preset-grid {
+      .metric-grid, .preset-grid, .action-grid {
         display: grid;
         gap: 14px;
       }
@@ -215,13 +247,16 @@ function renderInstructorBuildControlPage(controlData) {
         gap: 14px;
         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       }
+      .action-grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      }
       .metric-grid {
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       }
       .preset-grid {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       }
-      .metric-card, .preset-card {
+      .metric-card, .preset-card, .action-card {
         border-radius: 20px;
         padding: 18px;
         background: #fffaf2;
@@ -338,9 +373,18 @@ function renderInstructorBuildControlPage(controlData) {
         background: var(--accent-soft);
         border-color: rgba(15, 118, 110, 0.18);
       }
+      .status-pill-default {
+        background: #f3eee4;
+      }
       .status-pill-warm {
         background: var(--warm-soft);
         border-color: rgba(154, 103, 0, 0.18);
+      }
+      .action-rationale,
+      .action-weeks {
+        margin: 12px 0 0;
+        color: var(--muted);
+        line-height: 1.6;
       }
       a {
         color: var(--accent);
@@ -398,6 +442,11 @@ function renderInstructorBuildControlPage(controlData) {
       <section class="panel">
         <h2>ประวัติการรันล่าสุด</h2>
         ${renderRecentRuns(controlData.recent_runs)}
+      </section>
+
+      <section class="panel">
+        <h2>งานถัดไปที่แนะนำ</h2>
+        ${renderRecommendedActions(controlData.recommended_actions)}
       </section>
 
       <section class="panel">

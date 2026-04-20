@@ -59,6 +59,8 @@ try {
   assert.match(html, /ศูนย์ควบคุมการสร้างงานสำหรับอาจารย์/);
   assert.match(html, /ชุดคำสั่งแนะนำ/);
   assert.match(html, /ประวัติการรันล่าสุด/);
+  assert.match(html, /งานถัดไปที่แนะนำ/);
+  assert.match(html, /สร้างสัปดาห์ถัดไปที่ยังไม่มี output/);
   assert.match(html, /สถานะความครบของ output/);
   assert.match(html, /ไดเรกทอรี output รายสัปดาห์/);
   assert.match(html, /สัปดาห์ที่ยังขาดไฟล์/);
