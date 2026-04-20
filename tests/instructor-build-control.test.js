@@ -39,11 +39,16 @@ try {
   assert.equal(controlData.latest_run.generated_week_count, 3);
   assert.equal(controlData.recent_runs.length >= 1, true);
   assert.deepEqual(controlData.recent_runs[0].generated_weeks, [1, 2, 3]);
+  assert.equal(controlData.output_health.completed_week_count, 3);
+  assert.equal(controlData.output_health.missing_week_count, 12);
+  assert.deepEqual(controlData.output_health.completed_weeks, [1, 2, 3]);
   assert.equal(fs.existsSync(controlJsonPath), true);
   assert.equal(fs.existsSync(controlHtmlPath), true);
   assert.match(html, /ศูนย์ควบคุมการสร้างงานสำหรับอาจารย์/);
   assert.match(html, /ชุดคำสั่งแนะนำ/);
   assert.match(html, /ประวัติการรันล่าสุด/);
+  assert.match(html, /สถานะความครบของ output/);
+  assert.match(html, /สัปดาห์ที่ยังขาดไฟล์/);
   assert.match(html, /build-history\.json/);
   assert.match(html, /build-control-data\.json/);
   assert.match(html, /node tools\/run-demo-course-workflow\.js/);

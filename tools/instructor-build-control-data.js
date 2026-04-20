@@ -37,6 +37,41 @@ function buildPreset(coursePath, weeklyPlanPath, id, title, description, weeks) 
   };
 }
 
+function buildOutputHealth(courseId, weekNumbers, outputRoot) {
+  const existingWeeks = [];
+  const missingWeeks = [];
+
+  weekNumbers.forEach((week) => {
+    const moduleId = `${courseId}_w${String(week).padStart(2, '0')}`;
+    const weekDir = path.join(outputRoot, courseId, moduleId, `week-${String(week).padStart(2, '0')}`);
+    const requiredFiles = [
+      'week-bundle.json',
+      'week-bundle.html',
+      'cqi-report.md',
+      'dashboard-data.json',
+      'dashboard.html'
+    ];
+    const missingFiles = requiredFiles.filter((fileName) => !fs.existsSync(path.join(weekDir, fileName)));
+
+    if (missingFiles.length === 0) {
+      existingWeeks.push(week);
+    } else {
+      missingWeeks.push({
+        week,
+        module_id: moduleId,
+        missing_files: missingFiles
+      });
+    }
+  });
+
+  return {
+    completed_week_count: existingWeeks.length,
+    completed_weeks: existingWeeks,
+    missing_week_count: missingWeeks.length,
+    missing_weeks: missingWeeks
+  };
+}
+
 function buildInstructorBuildControlData({
   coursePath,
   weeklyPlanPath,
@@ -56,6 +91,7 @@ function buildInstructorBuildControlData({
   const courseDashboardData = readJsonIfExists(getCourseOutputFilePath(courseId, 'course-dashboard-data.json', outputRoot));
   const catalogDashboardData = readJsonIfExists(getCatalogOutputFilePath('catalog-dashboard-data.json', outputRoot));
   const buildHistory = loadCourseBuildHistory(courseId, { outputRoot });
+  const outputHealth = buildOutputHealth(courseId, weekNumbers, outputRoot);
 
   return {
     control_type: 'instructor_build_control_v1',
@@ -89,6 +125,7 @@ function buildInstructorBuildControlData({
       course_workflow_summary_markdown: getCourseOutputFilePath(courseId, 'course-workflow-summary.md', outputRoot)
     },
     recent_runs: buildHistory.runs.slice(0, 5),
+    output_health: outputHealth,
     output_snapshots: {
       course_dashboard_overview: courseDashboardData?.overview || null,
       catalog_dashboard_overview: catalogDashboardData?.overview || null

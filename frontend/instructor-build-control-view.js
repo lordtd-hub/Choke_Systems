@@ -66,6 +66,39 @@ function renderRecentRuns(runs) {
   `;
 }
 
+function renderOutputHealth(outputHealth) {
+  if (!outputHealth) {
+    return '<p class="empty-copy">ยังไม่มีข้อมูลสถานะ output</p>';
+  }
+
+  const missingCopy = outputHealth.missing_weeks.length === 0
+    ? '<p class="empty-copy">ไม่มีสัปดาห์ที่ขาดไฟล์หลัก ทุกสัปดาห์ที่สร้างแล้วมีไฟล์ครบตามเกณฑ์</p>'
+    : `
+      <ul class="history-list">
+        ${outputHealth.missing_weeks.map((item) => `
+          <li>
+            <strong>${escapeHtml(`สัปดาห์ที่ ${item.week}`)}</strong>
+            <span>${escapeHtml(`โมดูล: ${item.module_id}`)}</span>
+            <span>${escapeHtml(`ไฟล์ที่ขาด: ${item.missing_files.join(', ')}`)}</span>
+          </li>
+        `).join('')}
+      </ul>
+    `;
+
+  return `
+    <div class="health-block">
+      <div class="metric-grid">
+        ${renderMetricCard('สัปดาห์ที่ไฟล์ครบ', String(outputHealth.completed_week_count), 'accent')}
+        ${renderMetricCard('สัปดาห์ที่ยังขาดไฟล์', String(outputHealth.missing_week_count), 'warm')}
+      </div>
+      <div class="health-copy">
+        <p>${escapeHtml(`สัปดาห์ที่ไฟล์ครบ: ${outputHealth.completed_weeks.join(', ') || 'ไม่มี'}`)}</p>
+      </div>
+      ${missingCopy}
+    </div>
+  `;
+}
+
 function renderInstructorBuildControlPage(controlData) {
   const context = controlData.context || {};
   const courseOverview = controlData.output_snapshots?.course_dashboard_overview || {};
@@ -208,6 +241,14 @@ function renderInstructorBuildControlPage(controlData) {
         color: var(--muted);
         margin-top: 4px;
       }
+      .health-block {
+        display: grid;
+        gap: 16px;
+      }
+      .health-copy p {
+        margin: 0;
+        color: var(--muted);
+      }
       a {
         color: var(--accent);
         text-decoration: none;
@@ -264,6 +305,11 @@ function renderInstructorBuildControlPage(controlData) {
       <section class="panel">
         <h2>ประวัติการรันล่าสุด</h2>
         ${renderRecentRuns(controlData.recent_runs)}
+      </section>
+
+      <section class="panel">
+        <h2>สถานะความครบของ output</h2>
+        ${renderOutputHealth(controlData.output_health)}
       </section>
 
       <section class="panel">
