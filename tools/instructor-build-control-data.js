@@ -5,6 +5,7 @@ const path = require('node:path');
 const YAML = require('yaml');
 const { DEFAULT_OUTPUT_ROOT, getCourseOutputFilePath } = require('./course-dashboard-data');
 const { getCatalogOutputFilePath } = require('./catalog-dashboard-data');
+const { getCourseBuildHistoryFilePath, loadCourseBuildHistory } = require('./build-history');
 
 function readYaml(filePath) {
   return YAML.parse(fs.readFileSync(filePath, 'utf8'));
@@ -54,6 +55,7 @@ function buildInstructorBuildControlData({
   const lastCourseRun = readJsonIfExists(getCourseOutputFilePath(courseId, 'course-workflow-summary.json', outputRoot));
   const courseDashboardData = readJsonIfExists(getCourseOutputFilePath(courseId, 'course-dashboard-data.json', outputRoot));
   const catalogDashboardData = readJsonIfExists(getCatalogOutputFilePath('catalog-dashboard-data.json', outputRoot));
+  const buildHistory = loadCourseBuildHistory(courseId, { outputRoot });
 
   return {
     control_type: 'instructor_build_control_v1',
@@ -82,9 +84,11 @@ function buildInstructorBuildControlData({
       course_dashboard_html: getCourseOutputFilePath(courseId, 'course-dashboard.html', outputRoot),
       catalog_dashboard_data_json: getCatalogOutputFilePath('catalog-dashboard-data.json', outputRoot),
       catalog_dashboard_html: getCatalogOutputFilePath('catalog-dashboard.html', outputRoot),
+      build_history_json: getCourseBuildHistoryFilePath(courseId, outputRoot),
       course_workflow_summary_json: getCourseOutputFilePath(courseId, 'course-workflow-summary.json', outputRoot),
       course_workflow_summary_markdown: getCourseOutputFilePath(courseId, 'course-workflow-summary.md', outputRoot)
     },
+    recent_runs: buildHistory.runs.slice(0, 5),
     output_snapshots: {
       course_dashboard_overview: courseDashboardData?.overview || null,
       catalog_dashboard_overview: catalogDashboardData?.overview || null

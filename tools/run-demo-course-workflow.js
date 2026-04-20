@@ -5,6 +5,7 @@ const path = require('node:path');
 const YAML = require('yaml');
 const { getCourseOutputFilePath } = require('./course-dashboard-data');
 const { getCatalogOutputFilePath } = require('./catalog-dashboard-data');
+const { appendCourseBuildHistory, getCourseBuildHistoryFilePath } = require('./build-history');
 const { buildInstructorBuildControlData, getInstructorControlOutputFilePath } = require('./instructor-build-control-data');
 const { runDemoWeekWorkflow } = require('./run-demo-week-workflow');
 const { renderInstructorBuildControlPage } = require('../frontend/instructor-build-control-view');
@@ -108,6 +109,7 @@ function runDemoCourseWorkflow({
     context: {
       course_id: courseId
     },
+    generated_at: new Date().toISOString(),
     generated_week_count: weekRuns.length,
     generated_weeks: weekRuns.map((item) => item.context.week),
     week_runs: weekRuns,
@@ -116,6 +118,7 @@ function runDemoCourseWorkflow({
       course_dashboard_html: getCourseOutputFilePath(courseId, 'course-dashboard.html', outputRoot),
       catalog_dashboard_data_json: getCatalogOutputFilePath('catalog-dashboard-data.json', outputRoot),
       catalog_dashboard_html: getCatalogOutputFilePath('catalog-dashboard.html', outputRoot),
+      build_history_json: getCourseBuildHistoryFilePath(courseId, outputRoot),
       course_workflow_summary_json: courseSummaryJsonPath,
       course_workflow_summary_markdown: courseSummaryMarkdownPath
     }
@@ -123,6 +126,13 @@ function runDemoCourseWorkflow({
 
   writeJsonFile(courseSummaryJsonPath, summary);
   writeTextFile(courseSummaryMarkdownPath, renderThaiCourseWorkflowSummary(summary));
+  appendCourseBuildHistory(courseId, {
+    generated_at: summary.generated_at,
+    generated_week_count: summary.generated_week_count,
+    generated_weeks: summary.generated_weeks,
+    workflow_summary_json: courseSummaryJsonPath,
+    workflow_summary_markdown: courseSummaryMarkdownPath
+  }, { outputRoot });
 
   const buildControlDataPath = getInstructorControlOutputFilePath('build-control-data.json', outputRoot);
   const buildControlHtmlPath = getInstructorControlOutputFilePath('build-control.html', outputRoot);

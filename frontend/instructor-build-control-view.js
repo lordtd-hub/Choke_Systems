@@ -48,6 +48,24 @@ function renderLatestRun(latestRun) {
   `;
 }
 
+function renderRecentRuns(runs) {
+  if (!runs || runs.length === 0) {
+    return '<p class="empty-copy">ยังไม่มีประวัติการรันที่บันทึกไว้</p>';
+  }
+
+  return `
+    <ul class="history-list">
+      ${runs.map((run) => `
+        <li>
+          <strong>${escapeHtml(`สร้าง ${run.generated_week_count} สัปดาห์`)}</strong>
+          <span>${escapeHtml(`สัปดาห์: ${run.generated_weeks.join(', ')}`)}</span>
+          <span>${escapeHtml(`เวลา: ${run.generated_at}`)}</span>
+        </li>
+      `).join('')}
+    </ul>
+  `;
+}
+
 function renderInstructorBuildControlPage(controlData) {
   const context = controlData.context || {};
   const courseOverview = controlData.output_snapshots?.course_dashboard_overview || {};
@@ -178,6 +196,18 @@ function renderInstructorBuildControlPage(controlData) {
       .link-list li + li {
         margin-top: 6px;
       }
+      .history-list {
+        margin: 0;
+        padding-left: 18px;
+      }
+      .history-list li + li {
+        margin-top: 10px;
+      }
+      .history-list span {
+        display: block;
+        color: var(--muted);
+        margin-top: 4px;
+      }
       a {
         color: var(--accent);
         text-decoration: none;
@@ -232,9 +262,15 @@ function renderInstructorBuildControlPage(controlData) {
       </section>
 
       <section class="panel">
+        <h2>ประวัติการรันล่าสุด</h2>
+        ${renderRecentRuns(controlData.recent_runs)}
+      </section>
+
+      <section class="panel">
         <h2>ทางเข้าหลัก</h2>
         <ul class="link-list">
           <li><a href="./build-control-data.json">ข้อมูลศูนย์ควบคุม JSON</a></li>
+          <li><a href="./SMAC001/build-history.json">ประวัติการรันรายวิชา</a></li>
           <li><a href="./catalog-dashboard.html">แคตตาล็อกระบบ</a></li>
           <li><a href="./SMAC001/course-dashboard.html">แดชบอร์ดรายวิชา</a></li>
           <li><a href="./SMAC001/course-workflow-summary.md">สรุปการรันรายวิชา</a></li>
