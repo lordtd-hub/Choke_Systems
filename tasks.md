@@ -105,7 +105,8 @@ Tasks:
 - `done` define repository ports and service interfaces for the `Learning Record Store`
 - `done` define the persistent application state layer implementation plan for the `Learning Record Store`
 - `done` define the first implementation task package for `state-identity`, `state-records`, and file-backed repository ports
-- `todo` define the second implementation package for mutation services over repository ports
+- `done` define the second implementation package for mutation services over repository ports
+- `todo` define the third implementation package for query and projection services over canonical records
 - `todo` design persistent application state layer
 - `todo` design authenticated multi-user system
 - `todo` design production API/service layer

@@ -186,6 +186,8 @@ After `P5-PLAN-007`, the repo now has:
 - one explicit file/module list for that package
 - one explicit acceptance checklist for the first build slice
 
+The second implementation package for that sequence is now documented in [LEARNING_RECORD_SECOND_PACKAGE.md](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/LEARNING_RECORD_SECOND_PACKAGE.md).
+
 ## Next Planning Step
 
-The next task should define the second implementation package for mutation services over the new repository ports without expanding into database or API implementation.
+The next task should define the third implementation package for query and projection services over canonical records without expanding into database or API implementation.
