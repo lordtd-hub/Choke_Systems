@@ -36,6 +36,19 @@ For each task:
 6. review
 7. integrate
 
+## Progress Reporting Rule
+- Codex must report the current project location in user-facing progress updates and final summaries for substantive work.
+- Each report must include:
+  - current `phase`
+  - current `process`
+  - current `step`
+- Phase and process must use the shared codes defined in `PROJECT_STATUS.md`.
+- If a task crosses phases, Codex must state the starting phase and the target phase before implementation.
+- Purpose:
+  - help the human confirm the work is still aligned with plan
+  - reduce drift during long implementation sequences
+  - make it easier to catch wrong turns early
+
 ## Repo Sync Workflow
 - Before starting work on any machine, pull the latest saved repo state first.
 - If any file is updated, save the work back to the repo before stopping, changing machines, or handing off to another agent/person.

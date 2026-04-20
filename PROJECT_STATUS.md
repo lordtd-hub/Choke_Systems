@@ -4,6 +4,40 @@
 
 This document maps the repository against the intended platform plan in [main.md](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/main.md).
 
+## Shared Tracking Codes
+
+Use these codes in progress reporting so work can be tracked without ambiguity.
+
+### Phase Codes
+
+- `P1-SPEC`: Spec core, YAML source-of-truth, schemas, contract validation
+- `P2-GEN`: Content generation, module generation, week bundle generation
+- `P3-RUNTIME`: Runtime state, assessment, analytics, CQI logic
+- `P4-OUTPUT`: Output publishing, read models, dashboards, control layers
+- `P5-PRODUCT`: Persistent app state, multi-user system, production API/app shell
+
+### Process Codes
+
+- `PROC-VAL`: validation and contract enforcement
+- `PROC-GEN`: structured output generation
+- `PROC-RUN`: runtime state flow
+- `PROC-ASSESS`: scoring and assessment flow
+- `PROC-ANALYTICS`: analytics and CQI aggregation
+- `PROC-RM`: read-model construction
+- `PROC-PUB`: output publishing/orchestration
+- `PROC-CTRL`: instructor/control workflow
+- `PROC-FE`: frontend rendering
+- `PROC-DOC`: documentation alignment
+
+### Current Default Position
+
+At the current repo state, most recent implementation work is in:
+
+- `Phase`: `P4-OUTPUT`
+- `Process`: `PROC-PUB` / `PROC-RM` / `PROC-CTRL`
+
+This means the repository is currently strengthening backend output publication and read-model layers before moving into a fuller product/application phase.
+
 Status meanings:
 
 - `Done`: implemented in the repo and covered by current workflow/tests
