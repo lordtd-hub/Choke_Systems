@@ -6,7 +6,7 @@ const YAML = require('yaml');
 const { DEFAULT_OUTPUT_ROOT, getCourseOutputFilePath } = require('./course-dashboard-data');
 const { getCatalogOutputFilePath } = require('./catalog-dashboard-data');
 const { getCourseBuildHistoryFilePath, loadCourseBuildHistory } = require('./build-history');
-const { getWeekOutputFilePath } = require('./teacher-dashboard-data');
+const { buildCourseOutputRegistry, getCourseOutputRegistryFilePath } = require('./output-registry');
 
 function readYaml(filePath) {
   return YAML.parse(fs.readFileSync(filePath, 'utf8'));
@@ -18,12 +18,6 @@ function readJsonIfExists(filePath) {
   }
 
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
-}
-
-function deriveWeekNumbers(weeklyPlan) {
-  return (weeklyPlan?.weekly_plan?.weekly_units || [])
-    .map((unit) => Number(unit.week))
-    .filter((week) => Number.isInteger(week) && week > 0);
 }
 
 function buildPreset(coursePath, weeklyPlanPath, id, title, description, weeks) {
@@ -38,117 +32,56 @@ function buildPreset(coursePath, weeklyPlanPath, id, title, description, weeks) 
   };
 }
 
-function buildOutputHealth(courseId, weekNumbers, outputRoot) {
-  const existingWeeks = [];
-  const missingWeeks = [];
-
-  weekNumbers.forEach((week) => {
-    const moduleId = `${courseId}_w${String(week).padStart(2, '0')}`;
-    const weekDir = path.join(outputRoot, courseId, moduleId, `week-${String(week).padStart(2, '0')}`);
-    const requiredFiles = [
-      'week-bundle.json',
-      'week-bundle.html',
-      'cqi-report.md',
-      'dashboard-data.json',
-      'dashboard.html'
-    ];
-    const missingFiles = requiredFiles.filter((fileName) => !fs.existsSync(path.join(weekDir, fileName)));
-
-    if (missingFiles.length === 0) {
-      existingWeeks.push(week);
-    } else {
-      missingWeeks.push({
-        week,
-        module_id: moduleId,
-        missing_files: missingFiles
-      });
-    }
-  });
+function buildOutputHealth(registry) {
+  const completedWeeks = registry.weeks.filter((item) => item.status === 'complete');
+  const missingWeeks = registry.weeks
+    .filter((item) => item.status !== 'complete')
+    .map((item) => ({
+      week: item.week,
+      module_id: item.module_id,
+      missing_files: item.files.filter((fileItem) => !fileItem.exists).map((fileItem) => fileItem.file_name)
+    }));
 
   return {
-    completed_week_count: existingWeeks.length,
-    completed_weeks: existingWeeks,
+    completed_week_count: completedWeeks.length,
+    completed_weeks: completedWeeks.map((item) => item.week),
+    partial_week_count: registry.overview.partial_week_count,
     missing_week_count: missingWeeks.length,
     missing_weeks: missingWeeks
   };
 }
 
-function buildWeekDirectory(courseId, weeklyPlan, outputRoot) {
-  const weeklyUnits = weeklyPlan?.weekly_plan?.weekly_units || [];
-
-  return weeklyUnits
-    .map((unit) => {
-      const week = Number(unit.week);
-      if (!Number.isInteger(week) || week <= 0) {
-        return null;
-      }
-
-      const context = {
-        course_id: courseId,
-        module_id: `${courseId}_w${String(week).padStart(2, '0')}`,
-        week
-      };
-      const files = [
-        {
-          id: 'dashboard_html',
-          label: 'แดชบอร์ดประจำสัปดาห์',
-          absolute_path: getWeekOutputFilePath(context, 'dashboard.html', outputRoot)
-        },
-        {
-          id: 'week_bundle_html',
-          label: 'หน้าเรียนประจำสัปดาห์',
-          absolute_path: getWeekOutputFilePath(context, 'week-bundle.html', outputRoot)
-        },
-        {
-          id: 'cqi_report_markdown',
-          label: 'รายงาน CQI',
-          absolute_path: getWeekOutputFilePath(context, 'cqi-report.md', outputRoot)
-        },
-        {
-          id: 'workflow_summary_markdown',
-          label: 'สรุป workflow',
-          absolute_path: getWeekOutputFilePath(context, 'workflow-summary.md', outputRoot)
-        }
-      ].map((fileItem) => ({
-        ...fileItem,
-        exists: fs.existsSync(fileItem.absolute_path),
-        relative_path: `./${path.relative(outputRoot, fileItem.absolute_path).split(path.sep).join('/')}`
-      }));
-
-      const availableFiles = files.filter((fileItem) => fileItem.exists);
-      let status = 'missing';
-
-      if (availableFiles.length === files.length) {
-        status = 'complete';
-      } else if (availableFiles.length > 0) {
-        status = 'partial';
-      }
-
-      return {
-        week,
-        title: unit.title || `Week ${week}`,
-        module_id: context.module_id,
-        status,
-        available_file_count: availableFiles.length,
-        total_file_count: files.length,
-        files
-      };
-    })
-    .filter(Boolean);
+function buildWeekDirectory(registry) {
+  return registry.weeks.map((item) => ({
+    week: item.week,
+    title: item.title,
+    module_id: item.module_id,
+    status: item.status,
+    latest_generated_at: item.latest_generated_at,
+    latest_updated_at: item.latest_updated_at,
+    available_file_count: item.available_output_count,
+    total_file_count: item.total_output_count,
+    files: item.files
+  }));
 }
 
 function buildInstructorBuildControlData({
   coursePath,
   weeklyPlanPath,
-  outputRoot = DEFAULT_OUTPUT_ROOT
+  outputRoot = DEFAULT_OUTPUT_ROOT,
+  outputRegistry
 }) {
   const resolvedCoursePath = path.resolve(process.cwd(), coursePath);
   const resolvedWeeklyPlanPath = path.resolve(process.cwd(), weeklyPlanPath);
   const course = readYaml(resolvedCoursePath);
-  const weeklyPlan = readYaml(resolvedWeeklyPlanPath);
   const courseRoot = course.course || {};
   const courseId = courseRoot.course_id;
-  const weekNumbers = deriveWeekNumbers(weeklyPlan);
+  const registry = outputRegistry || buildCourseOutputRegistry({
+    coursePath: resolvedCoursePath,
+    weeklyPlanPath: resolvedWeeklyPlanPath,
+    outputRoot
+  });
+  const weekNumbers = registry.weeks.map((item) => item.week);
   const starterWeeks = weekNumbers.slice(0, 3);
   const sampleWeek = weekNumbers.includes(3) ? [3] : weekNumbers.slice(0, 1);
 
@@ -156,8 +89,8 @@ function buildInstructorBuildControlData({
   const courseDashboardData = readJsonIfExists(getCourseOutputFilePath(courseId, 'course-dashboard-data.json', outputRoot));
   const catalogDashboardData = readJsonIfExists(getCatalogOutputFilePath('catalog-dashboard-data.json', outputRoot));
   const buildHistory = loadCourseBuildHistory(courseId, { outputRoot });
-  const outputHealth = buildOutputHealth(courseId, weekNumbers, outputRoot);
-  const weekDirectory = buildWeekDirectory(courseId, weeklyPlan, outputRoot);
+  const outputHealth = buildOutputHealth(registry);
+  const weekDirectory = buildWeekDirectory(registry);
 
   return {
     control_type: 'instructor_build_control_v1',
@@ -187,12 +120,14 @@ function buildInstructorBuildControlData({
       catalog_dashboard_data_json: getCatalogOutputFilePath('catalog-dashboard-data.json', outputRoot),
       catalog_dashboard_html: getCatalogOutputFilePath('catalog-dashboard.html', outputRoot),
       build_history_json: getCourseBuildHistoryFilePath(courseId, outputRoot),
+      course_output_registry_json: getCourseOutputRegistryFilePath(courseId, outputRoot),
       course_workflow_summary_json: getCourseOutputFilePath(courseId, 'course-workflow-summary.json', outputRoot),
       course_workflow_summary_markdown: getCourseOutputFilePath(courseId, 'course-workflow-summary.md', outputRoot)
     },
     recent_runs: buildHistory.runs.slice(0, 5),
     output_health: outputHealth,
     week_directory: weekDirectory,
+    output_registry_overview: registry.overview,
     output_snapshots: {
       course_dashboard_overview: courseDashboardData?.overview || null,
       catalog_dashboard_overview: catalogDashboardData?.overview || null

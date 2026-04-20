@@ -31,7 +31,7 @@ function renderPresetCard(preset) {
   `;
 }
 
-function renderLatestRun(latestRun) {
+function renderLatestRun(latestRun, courseId) {
   if (!latestRun) {
     return '<p class="empty-copy">ยังไม่มีการบันทึกการรันล่าสุดใน workflow ระดับรายวิชา</p>';
   }
@@ -40,8 +40,8 @@ function renderLatestRun(latestRun) {
     <div class="latest-run">
       <p>${escapeHtml(`รันล่าสุดสร้าง ${latestRun.generated_week_count} สัปดาห์: ${latestRun.generated_weeks.join(', ')}`)}</p>
       <ul class="link-list">
-        <li><a href="./SMAC001/course-workflow-summary.md">สรุปการรันรายวิชา</a></li>
-        <li><a href="./SMAC001/course-dashboard.html">แดชบอร์ดรายวิชา</a></li>
+        <li><a href="./${escapeHtml(courseId)}/course-workflow-summary.md">สรุปการรันรายวิชา</a></li>
+        <li><a href="./${escapeHtml(courseId)}/course-dashboard.html">แดชบอร์ดรายวิชา</a></li>
         <li><a href="./catalog-dashboard.html">แคตตาล็อกระบบ</a></li>
       </ul>
     </div>
@@ -392,7 +392,7 @@ function renderInstructorBuildControlPage(controlData) {
 
       <section class="panel">
         <h2>การรันล่าสุด</h2>
-        ${renderLatestRun(controlData.latest_run)}
+        ${renderLatestRun(controlData.latest_run, context.course_id || 'course')}
       </section>
 
       <section class="panel">
@@ -414,10 +414,11 @@ function renderInstructorBuildControlPage(controlData) {
         <h2>ทางเข้าหลัก</h2>
         <ul class="link-list">
           <li><a href="./build-control-data.json">ข้อมูลศูนย์ควบคุม JSON</a></li>
-          <li><a href="./SMAC001/build-history.json">ประวัติการรันรายวิชา</a></li>
+          <li><a href="./${escapeHtml(context.course_id || 'course')}/build-history.json">ประวัติการรันรายวิชา</a></li>
+          <li><a href="./${escapeHtml(context.course_id || 'course')}/course-output-registry.json">ทะเบียน output รายวิชา</a></li>
           <li><a href="./catalog-dashboard.html">แคตตาล็อกระบบ</a></li>
-          <li><a href="./SMAC001/course-dashboard.html">แดชบอร์ดรายวิชา</a></li>
-          <li><a href="./SMAC001/course-workflow-summary.md">สรุปการรันรายวิชา</a></li>
+          <li><a href="./${escapeHtml(context.course_id || 'course')}/course-dashboard.html">แดชบอร์ดรายวิชา</a></li>
+          <li><a href="./${escapeHtml(context.course_id || 'course')}/course-workflow-summary.md">สรุปการรันรายวิชา</a></li>
         </ul>
       </section>
     </main>

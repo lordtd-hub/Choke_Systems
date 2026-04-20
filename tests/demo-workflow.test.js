@@ -33,6 +33,9 @@ try {
   assert.equal(fs.existsSync(summary.files.assessment_results_json), true);
   assert.equal(fs.existsSync(summary.files.analytics_events_json), true);
   assert.equal(fs.existsSync(summary.files.cqi_report_json), true);
+  assert.equal(fs.existsSync(path.join(outputRoot, 'build-control-data.json')), true);
+  assert.equal(fs.existsSync(path.join(outputRoot, 'build-control.html')), true);
+  assert.equal(fs.existsSync(path.join(outputRoot, 'SMAC001', 'course-output-registry.json')), true);
 }
 finally {
   fs.rmSync(tempRoot, { recursive: true, force: true });

@@ -8,6 +8,7 @@ const { saveLearningArtifacts, getArtifactDirectory } = require('./persistence')
 const { buildTeacherDashboardData } = require('./teacher-dashboard-data');
 const { buildCourseDashboardData, getCourseOutputFilePath } = require('./course-dashboard-data');
 const { buildCatalogDashboardData, getCatalogOutputFilePath } = require('./catalog-dashboard-data');
+const { refreshInstructorOutputs } = require('./refresh-instructor-outputs');
 const { renderTeacherDashboardPage } = require('../frontend/teacher-dashboard-view');
 const { renderCourseDashboardPage } = require('../frontend/course-dashboard-view');
 const { renderCatalogDashboardPage } = require('../frontend/catalog-dashboard-view');
@@ -124,6 +125,7 @@ function runDemoWeekWorkflow({
   });
 
   const summary = {
+    generated_at: new Date().toISOString(),
     context,
     output_directory: weekOutputDir,
     saved_artifact_directory: persisted.directory || getArtifactDirectory(context, storageRoot),
@@ -169,6 +171,12 @@ function runDemoWeekWorkflow({
   });
   writeJsonFile(catalogDashboardDataPath, catalogDashboardData);
   writeTextFile(catalogDashboardHtmlPath, renderCatalogDashboardPage(catalogDashboardData));
+
+  refreshInstructorOutputs({
+    coursePath: resolvedCoursePath,
+    weeklyPlanPath: resolvedWeeklyPlanPath,
+    outputRoot
+  });
 
   return summary;
 }

@@ -6,9 +6,9 @@ const YAML = require('yaml');
 const { getCourseOutputFilePath } = require('./course-dashboard-data');
 const { getCatalogOutputFilePath } = require('./catalog-dashboard-data');
 const { appendCourseBuildHistory, getCourseBuildHistoryFilePath } = require('./build-history');
-const { buildInstructorBuildControlData, getInstructorControlOutputFilePath } = require('./instructor-build-control-data');
+const { getCourseOutputRegistryFilePath } = require('./output-registry');
+const { refreshInstructorOutputs } = require('./refresh-instructor-outputs');
 const { runDemoWeekWorkflow } = require('./run-demo-week-workflow');
-const { renderInstructorBuildControlPage } = require('../frontend/instructor-build-control-view');
 
 function readYaml(filePath) {
   return YAML.parse(fs.readFileSync(filePath, 'utf8'));
@@ -119,6 +119,7 @@ function runDemoCourseWorkflow({
       catalog_dashboard_data_json: getCatalogOutputFilePath('catalog-dashboard-data.json', outputRoot),
       catalog_dashboard_html: getCatalogOutputFilePath('catalog-dashboard.html', outputRoot),
       build_history_json: getCourseBuildHistoryFilePath(courseId, outputRoot),
+      course_output_registry_json: getCourseOutputRegistryFilePath(courseId, outputRoot),
       course_workflow_summary_json: courseSummaryJsonPath,
       course_workflow_summary_markdown: courseSummaryMarkdownPath
     }
@@ -134,15 +135,11 @@ function runDemoCourseWorkflow({
     workflow_summary_markdown: courseSummaryMarkdownPath
   }, { outputRoot });
 
-  const buildControlDataPath = getInstructorControlOutputFilePath('build-control-data.json', outputRoot);
-  const buildControlHtmlPath = getInstructorControlOutputFilePath('build-control.html', outputRoot);
-  const buildControlData = buildInstructorBuildControlData({
+  refreshInstructorOutputs({
     coursePath: resolvedCoursePath,
     weeklyPlanPath: resolvedWeeklyPlanPath,
     outputRoot
   });
-  writeJsonFile(buildControlDataPath, buildControlData);
-  writeTextFile(buildControlHtmlPath, renderInstructorBuildControlPage(buildControlData));
 
   return summary;
 }

@@ -40,8 +40,11 @@ try {
   assert.equal(controlData.recent_runs.length >= 1, true);
   assert.deepEqual(controlData.recent_runs[0].generated_weeks, [1, 2, 3]);
   assert.equal(controlData.output_health.completed_week_count, 3);
+  assert.equal(controlData.output_health.partial_week_count, 0);
   assert.equal(controlData.output_health.missing_week_count, 12);
   assert.deepEqual(controlData.output_health.completed_weeks, [1, 2, 3]);
+  assert.equal(controlData.current_outputs.course_output_registry_json.endsWith('course-output-registry.json'), true);
+  assert.equal(controlData.output_registry_overview.complete_week_count, 3);
   assert.equal(controlData.week_directory.length, 15);
   assert.equal(controlData.week_directory[0].title, 'Introduction, Functions, and Readiness Check');
   assert.equal(controlData.week_directory[0].status, 'complete');
@@ -56,6 +59,7 @@ try {
   assert.match(html, /ไดเรกทอรี output รายสัปดาห์/);
   assert.match(html, /สัปดาห์ที่ยังขาดไฟล์/);
   assert.match(html, /\.\/SMAC001\/SMAC001_w01\/week-01\/dashboard\.html/);
+  assert.match(html, /course-output-registry\.json/);
   assert.match(html, /build-history\.json/);
   assert.match(html, /build-control-data\.json/);
   assert.match(html, /node tools\/run-demo-course-workflow\.js/);

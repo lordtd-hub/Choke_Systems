@@ -41,6 +41,9 @@ try {
   assert.equal(fs.existsSync(summary.files.catalog_dashboard_html), true);
   assert.equal(fs.existsSync(summary.files.course_workflow_summary_json), true);
   assert.equal(fs.existsSync(summary.files.course_workflow_summary_markdown), true);
+  assert.equal(fs.existsSync(summary.files.course_output_registry_json), true);
+  assert.equal(fs.existsSync(path.join(outputRoot, 'build-control-data.json')), true);
+  assert.equal(fs.existsSync(path.join(outputRoot, 'build-control.html')), true);
 }
 finally {
   fs.rmSync(tempRoot, { recursive: true, force: true });
