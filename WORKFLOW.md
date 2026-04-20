@@ -1,0 +1,5 @@
+- always pick ONE task
+- never expand scope
+- stay in current phase
+- validate before moving on
+- stop if unclear
