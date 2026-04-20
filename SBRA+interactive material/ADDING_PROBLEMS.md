@@ -1,11 +1,11 @@
 # Adding SBRA Problems
 
-This project no longer uses the old mission-bank structure. SBRA problems now live as standalone blueprint files under [sbra_blueprints](</C:/Users/User/Documents/Choke_Systems/SBRA+interactive material/sbra_blueprints>).
+This project no longer uses the old mission-bank structure. SBRA problems now live as standalone blueprint files under [`sbra_blueprints/`](sbra_blueprints/).
 
 Current source of truth:
-- registry: [sbra_blueprints/registry.json](</C:/Users/User/Documents/Choke_Systems/SBRA+interactive material/sbra_blueprints/registry.json>)
-- schema validator: [tools/sbra-blueprints.js](/C:/Users/User/Documents/Choke_Systems/tools/sbra-blueprints.js)
-- authoring helper: [tools/new-sbra-blueprint.js](/C:/Users/User/Documents/Choke_Systems/tools/new-sbra-blueprint.js)
+- registry: [`sbra_blueprints/registry.json`](sbra_blueprints/registry.json)
+- schema validator: [`tools/sbra-blueprints.js`](../tools/sbra-blueprints.js)
+- authoring helper: [`tools/new-sbra-blueprint.js`](../tools/new-sbra-blueprint.js)
 
 ## Current Model
 
@@ -67,9 +67,9 @@ node tools/new-sbra-blueprint.js W8-A1 sbra_related_rates_w8 differentiation rel
 Run:
 
 ```bash
-cmd /c npm.cmd run validate:sbra
-cmd /c npm.cmd run test:sbra
-cmd /c npm.cmd run test:authoring
+npm run validate:sbra
+npm run test:sbra
+npm run test:authoring
 ```
 
 To confirm bundle integration for an SBRA week:

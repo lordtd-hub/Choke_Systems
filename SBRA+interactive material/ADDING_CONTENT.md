@@ -3,9 +3,9 @@
 This folder stores supplementary learning materials that can be attached to weekly bundles.
 
 Current source of truth:
-- manifest file: [content/manifest.json](</C:/Users/User/Documents/Choke_Systems/SBRA+interactive material/content/manifest.json>)
-- validator: [tools/material-library.js](/C:/Users/User/Documents/Choke_Systems/tools/material-library.js)
-- authoring helper: [tools/new-material-entry.js](/C:/Users/User/Documents/Choke_Systems/tools/new-material-entry.js)
+- manifest file: [`content/manifest.json`](content/manifest.json)
+- validator: [`tools/material-library.js`](../tools/material-library.js)
+- authoring helper: [`tools/new-material-entry.js`](../tools/new-material-entry.js)
 
 ## Quick Workflow
 
@@ -19,40 +19,40 @@ Current source of truth:
 Add a local PDF:
 
 ```bash
-node tools/new-material-entry.js ^
-  --id diff-rules-cheatsheet ^
-  --topic differentiation ^
-  --type pdf ^
-  --title "Derivative Rules Cheatsheet" ^
-  --description "One-page reference for product, quotient, and chain rule." ^
-  --path "differentiation/handouts/diff-rules.pdf" ^
+node tools/new-material-entry.js \
+  --id diff-rules-cheatsheet \
+  --topic differentiation \
+  --type pdf \
+  --title "Derivative Rules Cheatsheet" \
+  --description "One-page reference for product, quotient, and chain rule." \
+  --path "differentiation/handouts/diff-rules.pdf" \
   --addedDate 2026-04-19
 ```
 
 Add an external link:
 
 ```bash
-node tools/new-material-entry.js ^
-  --id ftc-overview-video ^
-  --topic integration ^
-  --type link ^
-  --title "FTC Overview Video" ^
-  --description "Short external video for connecting accumulation and evaluation." ^
-  --url "https://example.com/ftc-overview" ^
-  --addedDate 2026-04-19 ^
+node tools/new-material-entry.js \
+  --id ftc-overview-video \
+  --topic integration \
+  --type link \
+  --title "FTC Overview Video" \
+  --description "Short external video for connecting accumulation and evaluation." \
+  --url "https://example.com/ftc-overview" \
+  --addedDate 2026-04-19 \
   --tags integration,video
 ```
 
 Add a note-only entry:
 
 ```bash
-node tools/new-material-entry.js ^
-  --id limits-intuition-note ^
-  --topic limits ^
-  --type note ^
-  --title "Limits Intuition Note" ^
-  --description "Short concept bridge before symbolic limit work." ^
-  --body "Ask what value the graph approaches from both sides before computing anything." ^
+node tools/new-material-entry.js \
+  --id limits-intuition-note \
+  --topic limits \
+  --type note \
+  --title "Limits Intuition Note" \
+  --description "Short concept bridge before symbolic limit work." \
+  --body "Ask what value the graph approaches from both sides before computing anything." \
   --addedDate 2026-04-19
 ```
 
@@ -83,9 +83,9 @@ node tools/new-material-entry.js --id shared-study-routine --topic shared --type
 Run:
 
 ```bash
-cmd /c npm.cmd run validate:materials
-cmd /c npm.cmd run test:materials
-cmd /c npm.cmd run test:material-authoring
+npm run validate:materials
+npm run test:materials
+npm run test:material-authoring
 ```
 
 Notes:

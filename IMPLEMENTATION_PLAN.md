@@ -12,7 +12,7 @@ This plan is derived from:
 - `sbra_blueprint.schema.md`
 
 ## Architectural Reading
-- The repository is currently specification-first and does not yet contain implementation files.
+- The repository remains contract-first, but it now also contains working prototype implementation modules.
 - `main.md` defines the end-to-end system flow and priority order.
 - `RULES.md` defines non-negotiable boundaries between data, generation, runtime, assessment, and UI.
 - `interactive_module.schema.md` defines the weekly module contract.
@@ -26,9 +26,19 @@ Current state:
 - example YAML specs now exist in this workspace as:
   - `calculus1_course.yaml`
   - `calculus1_weekly_plan.yaml`
-- implementation modules do not yet exist
+- working prototype modules now exist for:
+  - contract validation
+  - interactive module generation
+  - week bundle generation
+  - SBRA blueprint validation
+  - runtime state
+  - assessment scoring
+  - analytics
+  - CQI reporting
+  - frontend bundle rendering
+  - material and SBRA authoring helpers
 
-This means the next work should begin with contract materialization, validation, and only then implementation.
+This means the next work should focus on refinement, cleanup, persistence strategy, and expansion of the implemented prototype rather than initial contract materialization.
 
 ## YAML Contract Reading
 The newly added YAML examples clarify the intended source-of-truth split:
@@ -849,9 +859,9 @@ Forbidden changes:
 - SBRA blueprint schema
 
 Suggested verification:
-- `cmd /c npm.cmd run test:module`
-- `cmd /c npm.cmd run test:bundle`
-- `cmd /c npm.cmd run validate:contracts`
+- `npm run test:module`
+- `npm run test:bundle`
+- `npm run validate:contracts`
 
 Integration notes:
 - prioritize maintainable heuristics over clever prompt-like logic
@@ -922,8 +932,8 @@ Forbidden changes:
 
 Suggested verification:
 - add focused assessment tests
-- run `cmd /c npm.cmd run test:sbra`
-- run `cmd /c npm.cmd run test:bundle`
+- run `npm run test:sbra`
+- run `npm run test:bundle`
 
 Integration notes:
 - scoring output should be explainable and auditable
@@ -1028,9 +1038,9 @@ Forbidden changes:
 - source YAML redesign
 
 Suggested verification:
-- `cmd /c npm.cmd run test:authoring`
-- `cmd /c npm.cmd run validate:materials`
-- `cmd /c npm.cmd run validate:sbra`
+- `npm run test:authoring`
+- `npm run validate:materials`
+- `npm run validate:sbra`
 
 Integration notes:
 - optimize for hand-editable workflows, not heavy tooling
