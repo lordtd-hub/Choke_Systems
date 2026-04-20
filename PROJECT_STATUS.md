@@ -84,15 +84,16 @@ Completed layers:
 - first implementation package for the `Learning Record Store`
 - second implementation package for the `Learning Record Store`
 - third implementation package for the `Learning Record Store`
+- fourth implementation package for the `Learning Record Store`
 
 In progress:
 
-- fourth state-layer implementation package planning
-- documentation alignment for the locked `P5-PLAN-010` task
+- implementation-readiness review
+- documentation alignment for the locked `P5-REVIEW-001` task
 
 Next focus:
 
-- define the fourth implementation package for rewiring dashboard and CQI builders onto query/projection services
+- decide whether planning is complete enough to begin implementing the first package safely
 - keep output/control work limited to bug fixes or dependency alignment
 - avoid jumping into database/auth/API implementation without a written plan
 

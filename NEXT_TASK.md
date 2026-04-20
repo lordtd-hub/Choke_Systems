@@ -4,19 +4,19 @@
 
 - `Phase`: `P5-PRODUCT`
 - `Process`: `PROC-DOC`
-- `Task ID`: `P5-PLAN-010`
+- `Task ID`: `P5-REVIEW-001`
 
 ## Task
 
-Define the fourth implementation package for rewiring dashboard and CQI builders onto query/projection services without choosing database or API implementation details.
+Review whether planning is complete enough to begin implementing the first package for the `Learning Record Store`.
 
 ## Scope
 
 In scope:
 
-- define the files/modules that belong to the fourth build slice
-- define the acceptance criteria for that slice
-- define what must not change while that slice is implemented
+- compare completed planning docs against the first package needs
+- identify any remaining planning blockers before implementation starts
+- make the next step explicit: start implementation or stay in planning
 - update control docs if needed so the task is unambiguous
 
 Out of scope:
@@ -29,11 +29,11 @@ Out of scope:
 
 ## Done Criteria
 
-- fourth implementation package is explicit
-- fourth-slice acceptance criteria are explicit
+- planning-readiness decision is explicit
+- remaining blocker or implementation go-ahead is explicit
 - control docs are consistent with the new phase lock
 - work is committed and pushed
 
 ## Why This Task
 
-This is the smallest next step after defining the third slice, and it keeps the repository from jumping into wider implementation before the next slice is packaged clearly.
+This is the smallest next step after defining the fourth slice, and it keeps the repository from starting implementation without an explicit readiness check.

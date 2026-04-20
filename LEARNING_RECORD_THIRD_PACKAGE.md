@@ -173,6 +173,8 @@ After `P5-PLAN-009`, the repo now has:
 - one explicit query/projection service module list
 - one explicit acceptance checklist for the third build slice
 
+The fourth implementation package for that sequence is now documented in [LEARNING_RECORD_FOURTH_PACKAGE.md](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/LEARNING_RECORD_FOURTH_PACKAGE.md).
+
 ## Next Planning Step
 
-The next task should define the fourth implementation package for rewiring current dashboard and CQI builders onto query/projection services without expanding into database or API implementation.
+The next task should decide whether the remaining work stays in planning or whether the repo is ready to start implementing the first package (`state-identity`, `state-records`, file-backed repository ports).
