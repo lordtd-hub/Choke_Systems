@@ -75,15 +75,16 @@ Completed layers:
 - backend-generated action queue and control status summary
 - control page rendering of backend-recommended actions
 - `P4-OUTPUT` exit review and phase-close decision
+- first `P5-PRODUCT` planning slice for the `Learning Record Store` boundary
 
 In progress:
 
-- first `P5-PRODUCT` transition-planning slice
-- documentation alignment for the new phase lock and next task
+- canonical persistent state contract planning
+- documentation alignment for the locked `P5-PLAN-002` task
 
 Next focus:
 
-- define the first product-layer boundary before implementation starts
+- define canonical state records and repository boundary for the `Learning Record Store`
 - keep output/control work limited to bug fixes or dependency alignment
 - avoid jumping into database/auth/API implementation without a written plan
 

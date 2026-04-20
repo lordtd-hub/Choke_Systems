@@ -4,19 +4,19 @@
 
 - `Phase`: `P5-PRODUCT`
 - `Process`: `PROC-DOC`
-- `Task ID`: `P5-PLAN-001`
+- `Task ID`: `P5-PLAN-002`
 
 ## Task
 
-Define the first `P5-PRODUCT` planning slice for persistent application state boundaries without starting database or API implementation.
+Define canonical state entities and the repository boundary for the `Learning Record Store` without choosing database or API implementation details.
 
 ## Scope
 
 In scope:
 
-- define the first product-layer planning objective
-- state the module/boundary that planning should cover first
-- state what is in scope and out of scope for that planning slice
+- define the canonical records that belong in the `Learning Record Store`
+- define which modules own writes and reads across that boundary
+- define which current artifacts are canonical versus derived
 - update control docs if needed so the task is unambiguous
 
 Out of scope:
@@ -29,11 +29,11 @@ Out of scope:
 
 ## Done Criteria
 
-- the first `P5-PRODUCT` planning slice is named clearly
-- scope and non-scope are explicit
+- canonical records are named clearly
+- canonical versus derived state is explicit
 - control docs are consistent with the new phase lock
 - work is committed and pushed
 
 ## Why This Task
 
-This is the smallest next step after closing the `P4-OUTPUT` review, and it keeps the repository from jumping into product implementation without a written plan.
+This is the smallest next step after choosing the first product boundary, and it keeps the repository from jumping into implementation before the canonical state contract is written.

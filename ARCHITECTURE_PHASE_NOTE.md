@@ -30,6 +30,8 @@ This phase is about planning the product transition carefully before implementat
 - docs clearly show current phase and next work
 - backend output/control foundation no longer needs a new feature every small step
 
+The first chosen product boundary is now documented in [PERSISTENT_STATE_BOUNDARY.md](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/PERSISTENT_STATE_BOUNDARY.md).
+
 ## Allowed Work
 
 - product-transition planning docs
@@ -48,8 +50,8 @@ This phase is about planning the product transition carefully before implementat
 
 ## Immediate Focus
 
-The next locked task in this phase should define the first `P5-PRODUCT` planning slice without starting implementation:
+The next locked task in this phase should define canonical state entities and repository boundaries for the chosen `Learning Record Store` without starting implementation:
 
-- choose the first product boundary to design
-- state what is in scope and out of scope
+- keep the chosen boundary explicit
+- define the canonical records and ownership edges
 - keep the current prototype outputs as the baseline to preserve

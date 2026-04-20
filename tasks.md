@@ -98,7 +98,8 @@ Status: `doing`
 
 Tasks:
 
-- `todo` define the first product-transition planning slice for persistent application state
+- `done` define the first product-transition planning slice for persistent application state
+- `todo` define canonical state entities and repository boundary for the `Learning Record Store`
 - `todo` design persistent application state layer
 - `todo` design authenticated multi-user system
 - `todo` design production API/service layer
