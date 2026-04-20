@@ -26,6 +26,7 @@
     "test:frontend": "node tests/frontend-contract-reader.test.js",
     "test:materials": "node tests/material-library.test.js",
     "test:material-authoring": "node tests/material-authoring.test.js",
+    "test:persistence": "node tests/persistence.test.js",
     "test:sbra": "node tests/sbra-blueprints.test.js",
     "test:authoring": "node tests/sbra-authoring.test.js"
   },
