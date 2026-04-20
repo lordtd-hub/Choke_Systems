@@ -4,19 +4,19 @@
 
 - `Phase`: `P5-PRODUCT`
 - `Process`: `PROC-DOC`
-- `Task ID`: `P5-PLAN-002`
+- `Task ID`: `P5-PLAN-003`
 
 ## Task
 
-Define canonical state entities and the repository boundary for the `Learning Record Store` without choosing database or API implementation details.
+Define mutation flow, write ordering, and projection inputs for the `Learning Record Store` without choosing database or API implementation details.
 
 ## Scope
 
 In scope:
 
-- define the canonical records that belong in the `Learning Record Store`
-- define which modules own writes and reads across that boundary
-- define which current artifacts are canonical versus derived
+- define the order in which runtime, assessment, and analytics write canonical records
+- define which writes are mutable versus append-only
+- define which projections consume which canonical records
 - update control docs if needed so the task is unambiguous
 
 Out of scope:
@@ -29,11 +29,11 @@ Out of scope:
 
 ## Done Criteria
 
-- canonical records are named clearly
-- canonical versus derived state is explicit
+- write flow is explicit
+- projection inputs are explicit
 - control docs are consistent with the new phase lock
 - work is committed and pushed
 
 ## Why This Task
 
-This is the smallest next step after choosing the first product boundary, and it keeps the repository from jumping into implementation before the canonical state contract is written.
+This is the smallest next step after defining the canonical record contract, and it keeps the repository from jumping into implementation before mutation flow is written down.

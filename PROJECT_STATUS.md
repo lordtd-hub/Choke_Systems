@@ -76,15 +76,16 @@ Completed layers:
 - control page rendering of backend-recommended actions
 - `P4-OUTPUT` exit review and phase-close decision
 - first `P5-PRODUCT` planning slice for the `Learning Record Store` boundary
+- canonical entity and repository contract for the `Learning Record Store`
 
 In progress:
 
-- canonical persistent state contract planning
-- documentation alignment for the locked `P5-PLAN-002` task
+- mutation-flow planning for canonical learning records
+- documentation alignment for the locked `P5-PLAN-003` task
 
 Next focus:
 
-- define canonical state records and repository boundary for the `Learning Record Store`
+- define mutation flow, write ordering, and projection inputs for the `Learning Record Store`
 - keep output/control work limited to bug fixes or dependency alignment
 - avoid jumping into database/auth/API implementation without a written plan
 

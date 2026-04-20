@@ -132,6 +132,8 @@ After `P5-PLAN-001`, the repo now has:
 - one explicit canonical-vs-derived split
 - one safe starting point for the next planning task
 
+The canonical entity and repository contract for that boundary is now documented in [LEARNING_RECORD_STORE_CONTRACT.md](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/LEARNING_RECORD_STORE_CONTRACT.md).
+
 ## Next Planning Step
 
-The next task should define the canonical state entities and repository boundary for the `Learning Record Store` without choosing database or API implementation details.
+The next task should define mutation flow, write ordering, and projection inputs for the `Learning Record Store` without choosing database or API implementation details.

@@ -32,6 +32,8 @@ This phase is about planning the product transition carefully before implementat
 
 The first chosen product boundary is now documented in [PERSISTENT_STATE_BOUNDARY.md](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/PERSISTENT_STATE_BOUNDARY.md).
 
+The canonical entity and repository contract for that boundary is now documented in [LEARNING_RECORD_STORE_CONTRACT.md](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/LEARNING_RECORD_STORE_CONTRACT.md).
+
 ## Allowed Work
 
 - product-transition planning docs
@@ -50,8 +52,8 @@ The first chosen product boundary is now documented in [PERSISTENT_STATE_BOUNDAR
 
 ## Immediate Focus
 
-The next locked task in this phase should define canonical state entities and repository boundaries for the chosen `Learning Record Store` without starting implementation:
+The next locked task in this phase should define mutation flow and projection inputs for the chosen `Learning Record Store` without starting implementation:
 
 - keep the chosen boundary explicit
-- define the canonical records and ownership edges
+- define write ordering and read dependencies
 - keep the current prototype outputs as the baseline to preserve
