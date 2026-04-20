@@ -37,6 +37,7 @@ try {
   assert.equal(fs.existsSync(published.course_output_registry_json), true);
   assert.equal(fs.existsSync(published.build_control_data_json), true);
   assert.equal(fs.existsSync(published.build_control_html), true);
+  assert.equal(fs.existsSync(published.system_output_registry_json), true);
 }
 finally {
   fs.rmSync(tempRoot, { recursive: true, force: true });

@@ -3,6 +3,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { buildCourseDashboardData, DEFAULT_OUTPUT_ROOT, getCourseOutputFilePath } = require('./course-dashboard-data');
+const { getSystemOutputRegistryFilePath } = require('./system-output-registry');
 
 function listIndexedCourses(options = {}) {
   const outputRoot = options.outputRoot || DEFAULT_OUTPUT_ROOT;
@@ -70,13 +71,22 @@ function buildCatalogDashboardData(options = {}) {
       overview: courseDashboard.overview,
       files: {
         course_dashboard_html: getCourseOutputFilePath(courseDashboard.context.course_id, 'course-dashboard.html', outputRoot),
-        course_dashboard_data_json: getCourseOutputFilePath(courseDashboard.context.course_id, 'course-dashboard-data.json', outputRoot)
+        course_dashboard_data_json: getCourseOutputFilePath(courseDashboard.context.course_id, 'course-dashboard-data.json', outputRoot),
+        course_output_registry_json: getCourseOutputFilePath(courseDashboard.context.course_id, 'course-output-registry.json', outputRoot),
+        build_history_json: getCourseOutputFilePath(courseDashboard.context.course_id, 'build-history.json', outputRoot)
       }
     }));
 
   return {
     dashboard_type: 'teacher_catalog_dashboard_v1',
     overview: summarizeCatalogCourses(courses),
+    files: {
+      catalog_dashboard_data_json: getCatalogOutputFilePath('catalog-dashboard-data.json', outputRoot),
+      catalog_dashboard_html: getCatalogOutputFilePath('catalog-dashboard.html', outputRoot),
+      build_control_data_json: path.join(outputRoot, 'build-control-data.json'),
+      build_control_html: path.join(outputRoot, 'build-control.html'),
+      system_output_registry_json: getSystemOutputRegistryFilePath(outputRoot)
+    },
     courses
   };
 }

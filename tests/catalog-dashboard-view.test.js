@@ -41,7 +41,10 @@ try {
   assert.match(html, /รายการรายวิชาที่มีข้อมูล/);
   assert.match(html, /SMAC001/);
   assert.match(html, /catalog-dashboard-data\.json/);
+  assert.match(html, /build-control\.html/);
+  assert.match(html, /system-output-registry\.json/);
   assert.match(html, /course-dashboard\.html/);
+  assert.match(html, /course-output-registry\.json/);
 }
 finally {
   fs.rmSync(tempRoot, { recursive: true, force: true });

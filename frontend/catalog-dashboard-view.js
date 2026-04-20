@@ -39,6 +39,7 @@ function renderCourseCard(courseItem) {
       <div class="course-links">
         <a href="${escapeHtml(buildCourseRelativePath(courseItem.context.course_id, 'course-dashboard.html'))}">หน้าแดชบอร์ดรายวิชา</a>
         <a href="${escapeHtml(buildCourseRelativePath(courseItem.context.course_id, 'course-dashboard-data.json'))}">ข้อมูลรายวิชา JSON</a>
+        <a href="${escapeHtml(buildCourseRelativePath(courseItem.context.course_id, 'course-output-registry.json'))}">ทะเบียน output รายวิชา</a>
       </div>
     </article>
   `;
@@ -205,6 +206,8 @@ function renderCatalogDashboardPage(catalogDashboardData) {
         <h2>ไฟล์หลักระดับระบบ</h2>
         <div class="course-links">
           <a href="./catalog-dashboard-data.json">ข้อมูลแคตตาล็อก JSON</a>
+          <a href="./build-control.html">ศูนย์ควบคุมอาจารย์</a>
+          <a href="./system-output-registry.json">ทะเบียน output ระดับระบบ</a>
         </div>
       </section>
 

@@ -5,6 +5,7 @@ const path = require('node:path');
 const { buildCourseDashboardData, getCourseOutputFilePath } = require('./course-dashboard-data');
 const { buildCatalogDashboardData, getCatalogOutputFilePath } = require('./catalog-dashboard-data');
 const { refreshInstructorOutputs } = require('./refresh-instructor-outputs');
+const { buildSystemOutputRegistry, getSystemOutputRegistryFilePath } = require('./system-output-registry');
 const { renderCourseDashboardPage } = require('../frontend/course-dashboard-view');
 const { renderCatalogDashboardPage } = require('../frontend/catalog-dashboard-view');
 
@@ -52,6 +53,9 @@ function publishSystemOutputs({
     weeklyPlanPath,
     outputRoot
   });
+  const systemOutputRegistryPath = getSystemOutputRegistryFilePath(outputRoot);
+  const systemOutputRegistry = buildSystemOutputRegistry({ outputRoot });
+  writeJsonFile(systemOutputRegistryPath, systemOutputRegistry);
 
   return {
     course_dashboard_data_json: courseDashboardDataPath,
@@ -60,7 +64,8 @@ function publishSystemOutputs({
     catalog_dashboard_html: catalogDashboardHtmlPath,
     course_output_registry_json: instructorOutputs.files.course_output_registry_json,
     build_control_data_json: instructorOutputs.files.build_control_data_json,
-    build_control_html: instructorOutputs.files.build_control_html
+    build_control_html: instructorOutputs.files.build_control_html,
+    system_output_registry_json: systemOutputRegistryPath
   };
 }
 

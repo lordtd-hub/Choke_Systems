@@ -42,6 +42,11 @@ try {
   assert.equal(catalogDashboard.courses[0].context.course_id, 'SMAC001');
   assert.equal(fs.existsSync(catalogDashboard.courses[0].files.course_dashboard_html), true);
   assert.equal(fs.existsSync(catalogDashboard.courses[0].files.course_dashboard_data_json), true);
+  assert.equal(fs.existsSync(catalogDashboard.courses[0].files.course_output_registry_json), true);
+  assert.equal(catalogDashboard.courses[0].files.build_history_json.endsWith('build-history.json'), true);
+  assert.equal(fs.existsSync(catalogDashboard.files.build_control_data_json), true);
+  assert.equal(fs.existsSync(catalogDashboard.files.build_control_html), true);
+  assert.equal(fs.existsSync(catalogDashboard.files.system_output_registry_json), true);
   assert.equal(fs.existsSync(getCatalogOutputFilePath('catalog-dashboard-data.json', outputRoot)), true);
 }
 finally {
