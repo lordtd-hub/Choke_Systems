@@ -121,8 +121,18 @@ function buildCourseDashboardData(courseId, options = {}) {
   };
 }
 
+function getCourseOutputDirectory(courseId, outputRoot = DEFAULT_OUTPUT_ROOT) {
+  return path.join(outputRoot, courseId);
+}
+
+function getCourseOutputFilePath(courseId, fileName, outputRoot = DEFAULT_OUTPUT_ROOT) {
+  return path.join(getCourseOutputDirectory(courseId, outputRoot), fileName);
+}
+
 module.exports = {
   buildCourseDashboardData,
+  getCourseOutputDirectory,
+  getCourseOutputFilePath,
   listIndexedWeekContexts,
   summarizeCourseWeeks
 };

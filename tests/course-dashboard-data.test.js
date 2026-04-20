@@ -4,7 +4,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const { runDemoWeekWorkflow } = require('../tools/run-demo-week-workflow');
-const { buildCourseDashboardData, listIndexedWeekContexts } = require('../tools/course-dashboard-data');
+const { buildCourseDashboardData, getCourseOutputFilePath, listIndexedWeekContexts } = require('../tools/course-dashboard-data');
 
 const tempParent = path.join(__dirname, '.tmp');
 fs.mkdirSync(tempParent, { recursive: true });
@@ -48,6 +48,7 @@ try {
   assert.equal(courseDashboard.weeks[0].artifact_counts.analytics_events >= 1, true);
   assert.equal(fs.existsSync(courseDashboard.weeks[0].files.dashboard_html), true);
   assert.equal(fs.existsSync(courseDashboard.weeks[1].files.dashboard_data_json), true);
+  assert.equal(fs.existsSync(getCourseOutputFilePath('SMAC001', 'course-dashboard-data.json', outputRoot)), true);
 }
 finally {
   fs.rmSync(tempRoot, { recursive: true, force: true });

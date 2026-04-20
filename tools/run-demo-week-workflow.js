@@ -6,7 +6,9 @@ const YAML = require('yaml');
 const { createDemoLearningArtifacts } = require('./render-demo-cqi-report');
 const { saveLearningArtifacts, getArtifactDirectory } = require('./persistence');
 const { buildTeacherDashboardData } = require('./teacher-dashboard-data');
+const { buildCourseDashboardData, getCourseOutputFilePath } = require('./course-dashboard-data');
 const { renderTeacherDashboardPage } = require('../frontend/teacher-dashboard-view');
+const { renderCourseDashboardPage } = require('../frontend/course-dashboard-view');
 
 function readYaml(filePath) {
   return YAML.parse(fs.readFileSync(filePath, 'utf8'));
@@ -147,6 +149,16 @@ function runDemoWeekWorkflow({
   });
   writeJsonFile(dashboardDataJsonPath, dashboardData);
   writeTextFile(dashboardHtmlPath, renderTeacherDashboardPage(dashboardData));
+
+  const courseDashboardDataPath = getCourseOutputFilePath(context.course_id, 'course-dashboard-data.json', outputRoot);
+  const courseDashboardHtmlPath = getCourseOutputFilePath(context.course_id, 'course-dashboard.html', outputRoot);
+  const courseDashboardData = buildCourseDashboardData(context.course_id, {
+    outputRoot,
+    storageRoot
+  });
+  writeJsonFile(courseDashboardDataPath, courseDashboardData);
+  writeTextFile(courseDashboardHtmlPath, renderCourseDashboardPage(courseDashboardData));
+
   return summary;
 }
 
