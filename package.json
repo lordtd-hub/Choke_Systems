@@ -8,7 +8,7 @@
     "npm": ">=10"
   },
   "scripts": {
-    "verify:machine": "npm run validate:contracts && npm run test:bundle && npm run test:analytics && npm run test:cqi-report",
+    "verify:machine": "npm run validate:contracts && npm run test:bundle && npm run test:analytics && npm run test:cqi-report && npm run test:dashboard",
     "validate:contracts": "node tools/validate-contracts.js calculus1_course.yaml calculus1_weekly_plan.yaml",
     "generate:module:week1": "node tools/build-interactive-module.js calculus1_course.yaml calculus1_weekly_plan.yaml 1",
     "validate:materials": "node tools/material-library.js",
@@ -24,6 +24,7 @@
     "test:assessment": "node tests/assessment-engine.test.js",
     "test:analytics": "node tests/analytics.test.js",
     "test:cqi-report": "node tests/cqi-report.test.js",
+    "test:dashboard": "node tests/teacher-dashboard.test.js",
     "test:demo-workflow": "node tests/demo-workflow.test.js",
     "test:frontend": "node tests/frontend-contract-reader.test.js",
     "test:materials": "node tests/material-library.test.js",

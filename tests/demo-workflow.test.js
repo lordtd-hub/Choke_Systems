@@ -26,6 +26,7 @@ try {
   assert.equal(fs.existsSync(summary.files.week_bundle_json), true);
   assert.equal(fs.existsSync(summary.files.week_bundle_html), true);
   assert.equal(fs.existsSync(summary.files.cqi_report_markdown), true);
+  assert.equal(fs.existsSync(summary.files.dashboard_html), true);
   assert.equal(fs.existsSync(summary.files.workflow_summary_markdown), true);
   assert.equal(fs.existsSync(summary.files.runtime_state_json), true);
   assert.equal(fs.existsSync(summary.files.assessment_results_json), true);

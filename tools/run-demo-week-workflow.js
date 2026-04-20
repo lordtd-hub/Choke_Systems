@@ -5,6 +5,7 @@ const path = require('node:path');
 const YAML = require('yaml');
 const { createDemoLearningArtifacts } = require('./render-demo-cqi-report');
 const { saveLearningArtifacts, getArtifactDirectory } = require('./persistence');
+const { renderTeacherDashboardPage } = require('../frontend/teacher-dashboard-view');
 
 function readYaml(filePath) {
   return YAML.parse(fs.readFileSync(filePath, 'utf8'));
@@ -100,6 +101,7 @@ function runDemoWeekWorkflow({
   const bundleJsonPath = path.join(weekOutputDir, 'week-bundle.json');
   const frontendHtmlPath = path.join(weekOutputDir, 'week-bundle.html');
   const cqiMarkdownPath = path.join(weekOutputDir, 'cqi-report.md');
+  const dashboardHtmlPath = path.join(weekOutputDir, 'dashboard.html');
   const summaryMarkdownPath = path.join(weekOutputDir, 'workflow-summary.md');
   const summaryJsonPath = path.join(weekOutputDir, 'workflow-summary.json');
 
@@ -123,6 +125,7 @@ function runDemoWeekWorkflow({
       week_bundle_json: bundleJsonPath,
       week_bundle_html: frontendHtmlPath,
       cqi_report_markdown: cqiMarkdownPath,
+      dashboard_html: dashboardHtmlPath,
       workflow_summary_markdown: summaryMarkdownPath,
       runtime_state_json: persisted.runtime_state,
       assessment_results_json: persisted.assessment_results,
@@ -132,6 +135,7 @@ function runDemoWeekWorkflow({
     runtime_summary: artifacts.runtimeSummary
   };
 
+  writeTextFile(dashboardHtmlPath, renderTeacherDashboardPage(summary, artifacts.bundle));
   writeTextFile(summaryMarkdownPath, renderThaiWorkflowSummary(summary));
   writeJsonFile(summaryJsonPath, summary);
   return summary;
