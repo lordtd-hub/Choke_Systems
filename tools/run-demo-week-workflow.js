@@ -7,8 +7,10 @@ const { createDemoLearningArtifacts } = require('./render-demo-cqi-report');
 const { saveLearningArtifacts, getArtifactDirectory } = require('./persistence');
 const { buildTeacherDashboardData } = require('./teacher-dashboard-data');
 const { buildCourseDashboardData, getCourseOutputFilePath } = require('./course-dashboard-data');
+const { buildCatalogDashboardData, getCatalogOutputFilePath } = require('./catalog-dashboard-data');
 const { renderTeacherDashboardPage } = require('../frontend/teacher-dashboard-view');
 const { renderCourseDashboardPage } = require('../frontend/course-dashboard-view');
+const { renderCatalogDashboardPage } = require('../frontend/catalog-dashboard-view');
 
 function readYaml(filePath) {
   return YAML.parse(fs.readFileSync(filePath, 'utf8'));
@@ -158,6 +160,15 @@ function runDemoWeekWorkflow({
   });
   writeJsonFile(courseDashboardDataPath, courseDashboardData);
   writeTextFile(courseDashboardHtmlPath, renderCourseDashboardPage(courseDashboardData));
+
+  const catalogDashboardDataPath = getCatalogOutputFilePath('catalog-dashboard-data.json', outputRoot);
+  const catalogDashboardHtmlPath = getCatalogOutputFilePath('catalog-dashboard.html', outputRoot);
+  const catalogDashboardData = buildCatalogDashboardData({
+    outputRoot,
+    storageRoot
+  });
+  writeJsonFile(catalogDashboardDataPath, catalogDashboardData);
+  writeTextFile(catalogDashboardHtmlPath, renderCatalogDashboardPage(catalogDashboardData));
 
   return summary;
 }

@@ -130,6 +130,7 @@ function getCourseOutputFilePath(courseId, fileName, outputRoot = DEFAULT_OUTPUT
 }
 
 module.exports = {
+  DEFAULT_OUTPUT_ROOT,
   buildCourseDashboardData,
   getCourseOutputDirectory,
   getCourseOutputFilePath,

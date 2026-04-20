@@ -93,6 +93,8 @@ That command will:
 
 Main generated files:
 
+- `outputs/catalog-dashboard-data.json`
+- `outputs/catalog-dashboard.html`
 - `outputs/SMAC001/course-dashboard-data.json`
 - `outputs/SMAC001/course-dashboard.html`
 - `outputs/SMAC001/SMAC001_w03/week-03/dashboard-data.json`
