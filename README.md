@@ -95,6 +95,7 @@ Main generated files:
 
 - `outputs/catalog-dashboard-data.json`
 - `outputs/catalog-dashboard.html`
+- `outputs/system-output-registry.json`
 - `outputs/SMAC001/course-dashboard-data.json`
 - `outputs/SMAC001/course-dashboard.html`
 - `outputs/SMAC001/course-output-registry.json`
@@ -118,6 +119,7 @@ That command builds weeks `1,2,3` for the sample course and refreshes:
 
 - `outputs/catalog-dashboard-data.json`
 - `outputs/catalog-dashboard.html`
+- `outputs/system-output-registry.json`
 - `outputs/SMAC001/course-dashboard-data.json`
 - `outputs/SMAC001/course-dashboard.html`
 - `outputs/SMAC001/course-output-registry.json`

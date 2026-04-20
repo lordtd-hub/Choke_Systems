@@ -203,6 +203,30 @@ Important boundary:
 - frontend consumes bundle contracts
 - frontend does not generate contracts
 
+## Output Publication And Control Layer
+
+Published output/control backend:
+
+- [tools/publish-system-outputs.js](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/tools/publish-system-outputs.js)
+- [tools/output-registry.js](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/tools/output-registry.js)
+- [tools/system-output-registry.js](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/tools/system-output-registry.js)
+- [tools/course-action-queue.js](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/tools/course-action-queue.js)
+- [tools/control-status-summary.js](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/tools/control-status-summary.js)
+- [tools/instructor-build-control-data.js](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/tools/instructor-build-control-data.js)
+
+Responsibilities:
+
+- publish course, catalog, and control artifacts through one backend path
+- expose course-level output completeness and file availability
+- expose system-level output availability
+- generate recommended next actions from backend state
+- generate a normalized top-level control summary from repo control docs plus backend output state
+
+Important boundary:
+
+- control/task selection data is generated in backend tools
+- frontend control pages consume those published artifacts rather than inventing workflow logic
+
 ## Test Layer
 
 Test files in [`tests/`](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/tests):
@@ -240,6 +264,8 @@ What exists now:
 - source-of-truth YAML for one sample course
 - implemented validation and generation pipeline
 - implemented runtime, assessment, analytics, CQI, and HTML preview tools
+- implemented output publication/control backend for week, course, catalog, and instructor control outputs
+- implemented output registries, action queue, and control status summary artifacts
 - implemented authoring helpers for materials and SBRA blueprints
 - broad test coverage for the prototype pipeline
 

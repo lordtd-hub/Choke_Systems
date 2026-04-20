@@ -71,18 +71,20 @@ Completed layers:
 - runtime / assessment / analytics / CQI prototype logic
 - output publication backbone
 - week / course / catalog / control read models
+- course and system output registries
+- backend-generated action queue and control status summary
+- control page rendering of backend-recommended actions
 
 In progress:
 
-- control-layer stabilization
-- output registries and orchestration
-- backend-generated action guidance for what to build next
+- documentation alignment for the current output/control layer
+- phase review for whether `P4-OUTPUT` exit criteria are now mostly satisfied
 
 Next focus:
 
-- keep strengthening output/control backend
-- make the control layer consume backend task/action data more directly
-- avoid jumping early into a full product/app layer before the output backbone is stable
+- keep the output/control docs aligned with the actual backend artifacts
+- review whether the output/control backbone is stable enough to leave `P4-OUTPUT`
+- avoid jumping early into a full product/app layer without an explicit phase decision
 
 ## Status Against Main Plan
 

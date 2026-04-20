@@ -81,9 +81,10 @@ Tasks:
 - `done` add course output registry
 - `done` add system output registry
 - `done` add course action queue backend
-- `todo` render recommended actions from backend queue on the control page
-- `todo` add one normalized top-level control summary for current phase/status/next action
-- `todo` tighten output/control docs so they reflect current backend artifacts only
+- `done` render recommended actions from backend queue on the control page
+- `done` add one normalized top-level control summary for current phase/status/next action
+- `done` tighten output/control docs so they reflect current backend artifacts only
+- `todo` review `P4-OUTPUT` exit criteria and decide whether the phase should remain open or move to `P5-PRODUCT`
 
 Dependencies:
 
