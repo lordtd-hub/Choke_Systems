@@ -26,8 +26,9 @@ try {
   const registryPath = getSystemOutputRegistryFilePath(outputRoot);
 
   assert.equal(registry.registry_type, 'system_output_registry_v1');
-  assert.equal(registry.top_level_files.length, 4);
+  assert.equal(registry.top_level_files.length, 5);
   assert.equal(registry.top_level_files[0].exists, true);
+  assert.equal(registry.top_level_files[4].exists, true);
   assert.equal(registry.courses.length, 1);
   assert.equal(registry.courses[0].course_id, 'SMAC001');
   assert.equal(registry.courses[0].files.course_output_registry_json.exists, true);

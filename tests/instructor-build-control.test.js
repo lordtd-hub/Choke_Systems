@@ -45,6 +45,7 @@ try {
   assert.deepEqual(controlData.output_health.completed_weeks, [1, 2, 3]);
   assert.equal(controlData.current_outputs.course_output_registry_json.endsWith('course-output-registry.json'), true);
   assert.equal(controlData.current_outputs.course_action_queue_json.endsWith('course-action-queue.json'), true);
+  assert.equal(controlData.current_outputs.control_status_summary_json.endsWith('control-status-summary.json'), true);
   assert.equal(controlData.recommended_actions.length >= 2, true);
   assert.equal(controlData.recommended_actions[0].action_type, 'build_next_missing_week');
   assert.equal(controlData.output_registry_overview.complete_week_count, 3);

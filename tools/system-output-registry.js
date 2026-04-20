@@ -53,7 +53,8 @@ function buildSystemOutputRegistry(options = {}) {
     describeFile(getCatalogOutputFilePath('catalog-dashboard-data.json', outputRoot), outputRoot, 'ข้อมูลแคตตาล็อก JSON'),
     describeFile(getCatalogOutputFilePath('catalog-dashboard.html', outputRoot), outputRoot, 'หน้าแคตตาล็อกระบบ'),
     describeFile(path.join(outputRoot, 'build-control-data.json'), outputRoot, 'ข้อมูลศูนย์ควบคุม JSON'),
-    describeFile(path.join(outputRoot, 'build-control.html'), outputRoot, 'หน้าศูนย์ควบคุมอาจารย์')
+    describeFile(path.join(outputRoot, 'build-control.html'), outputRoot, 'หน้าศูนย์ควบคุมอาจารย์'),
+    describeFile(path.join(outputRoot, 'control-status-summary.json'), outputRoot, 'สรุปสถานะควบคุมระดับระบบ')
   ];
 
   const courses = courseIds.map((courseId) => {

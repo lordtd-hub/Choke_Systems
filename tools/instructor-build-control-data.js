@@ -7,6 +7,7 @@ const { DEFAULT_OUTPUT_ROOT, getCourseOutputFilePath } = require('./course-dashb
 const { getCatalogOutputFilePath } = require('./catalog-dashboard-data');
 const { getCourseBuildHistoryFilePath, loadCourseBuildHistory } = require('./build-history');
 const { buildCourseActionQueue, getCourseActionQueueFilePath } = require('./course-action-queue');
+const { getControlStatusSummaryFilePath } = require('./control-status-summary');
 const { buildCourseOutputRegistry, getCourseOutputRegistryFilePath } = require('./output-registry');
 
 function readYaml(filePath) {
@@ -127,6 +128,7 @@ function buildInstructorBuildControlData({
       course_dashboard_html: getCourseOutputFilePath(courseId, 'course-dashboard.html', outputRoot),
       catalog_dashboard_data_json: getCatalogOutputFilePath('catalog-dashboard-data.json', outputRoot),
       catalog_dashboard_html: getCatalogOutputFilePath('catalog-dashboard.html', outputRoot),
+      control_status_summary_json: getControlStatusSummaryFilePath(outputRoot),
       build_history_json: getCourseBuildHistoryFilePath(courseId, outputRoot),
       course_output_registry_json: getCourseOutputRegistryFilePath(courseId, outputRoot),
       course_action_queue_json: getCourseActionQueueFilePath(courseId, outputRoot),
