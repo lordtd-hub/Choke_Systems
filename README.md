@@ -76,6 +76,27 @@ npm run test:analytics
 npm run test:cqi-report
 ```
 
+## One-Command Demo Output
+
+If you want one simple product-style output for the sample course, run:
+
+```bash
+npm run run:demo:week3
+```
+
+That command will:
+
+- generate the week 3 bundle
+- simulate learner progress and scoring
+- save runtime, assessment, analytics, and CQI artifacts
+- write human-readable output files under `outputs/`
+
+Main generated files:
+
+- `outputs/SMAC001/SMAC001_w03/week-03/week-bundle.json`
+- `outputs/SMAC001/SMAC001_w03/week-03/week-bundle.html`
+- `outputs/SMAC001/SMAC001_w03/week-03/cqi-report.md`
+
 ## Project Notes
 
 - Architecture and delegation rules live in [AGENTS.md](AGENTS.md).

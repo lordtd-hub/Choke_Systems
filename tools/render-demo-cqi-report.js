@@ -6,9 +6,10 @@ const YAML = require('yaml');
 const { loadManifest } = require('./material-library');
 const { DEFAULT_REGISTRY_PATH, validateRegistryAndBlueprints } = require('./sbra-blueprints');
 const { buildWeekBundle } = require('./build-week-bundle');
-const { createRuntimeState, markActivityCompleted, markSectionCompleted } = require('./runtime-state');
+const { createRuntimeState, getRuntimeSummary, markActivityCompleted, markSectionCompleted } = require('./runtime-state');
 const { scoreActivitySubmission } = require('./assessment-engine');
 const { buildCqiReport, renderCqiReportMarkdown } = require('./cqi-report');
+const { renderWeekBundlePage } = require('../frontend/week-bundle-view');
 
 function readYaml(filePath) {
   return YAML.parse(fs.readFileSync(filePath, 'utf8'));
@@ -43,7 +44,7 @@ function buildDemoReflection(activityId, timestamp) {
   };
 }
 
-function createDemoCqiReport(course, weeklyPlan, weekNumber) {
+function createDemoLearningArtifacts(course, weeklyPlan, weekNumber) {
   const manifest = loadManifest();
   const { blueprintsByActivityId } = validateRegistryAndBlueprints(DEFAULT_REGISTRY_PATH);
   const bundle = buildWeekBundle(course, weeklyPlan, weekNumber, manifest, blueprintsByActivityId);
@@ -79,7 +80,7 @@ function createDemoCqiReport(course, weeklyPlan, weekNumber) {
     }
   });
 
-  return buildCqiReport({
+  const cqiReport = buildCqiReport({
     course,
     bundle,
     runtimeState,
@@ -87,6 +88,21 @@ function createDemoCqiReport(course, weeklyPlan, weekNumber) {
     reflections,
     generatedAt: runtimeState.runtime_state.updated_at
   });
+
+  return {
+    bundle,
+    runtimeState,
+    runtimeSummary: getRuntimeSummary(runtimeState),
+    assessmentResults,
+    reflections,
+    cqiReport,
+    cqiMarkdown: renderCqiReportMarkdown(cqiReport),
+    bundleHtml: renderWeekBundlePage(bundle, getRuntimeSummary(runtimeState))
+  };
+}
+
+function createDemoCqiReport(course, weeklyPlan, weekNumber) {
+  return createDemoLearningArtifacts(course, weeklyPlan, weekNumber).cqiReport;
 }
 
 if (require.main === module) {
@@ -106,5 +122,6 @@ if (require.main === module) {
 }
 
 module.exports = {
+  createDemoLearningArtifacts,
   createDemoCqiReport
 };
