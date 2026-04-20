@@ -33,9 +33,9 @@ try {
   assert.equal(summary.current_phase.phase, 'P5-PRODUCT');
   assert.equal(summary.current_phase.position, 'transition planning');
   assert.equal(summary.current_status.completed_layers.includes('spec core'), true);
-  assert.equal(summary.current_status.in_progress.includes('mutation-flow planning for canonical learning records'), true);
-  assert.equal(summary.current_status.next_focus.includes('define mutation flow, write ordering, and projection inputs for the `Learning Record Store`'), true);
-  assert.equal(summary.locked_task.task_id, 'P5-PLAN-003');
+  assert.equal(summary.current_status.in_progress.includes('persistent application state layer planning'), true);
+  assert.equal(summary.current_status.next_focus.includes('define the persistent application state layer shape for the `Learning Record Store`'), true);
+  assert.equal(summary.locked_task.task_id, 'P5-PLAN-004');
   assert.equal(summary.next_recommended_action.action_type, 'build_next_missing_week');
   assert.equal(summary.next_phase_target.phase, null);
   assert.equal(summary.next_phase_target.exit_criteria.length, 0);

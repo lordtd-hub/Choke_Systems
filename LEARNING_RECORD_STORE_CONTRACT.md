@@ -279,6 +279,8 @@ After `P5-PLAN-002`, the repo now has:
 - an explicit repository ownership boundary
 - a clean split between mutable snapshot state and append-only evidence
 
+The mutation flow and projection inputs for that boundary are now documented in [LEARNING_RECORD_MUTATION_FLOW.md](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/LEARNING_RECORD_MUTATION_FLOW.md).
+
 ## Next Planning Step
 
-The next task should define mutation flow, write ordering, and projection inputs for the `Learning Record Store` without choosing database or API implementation details.
+The next task should define the persistent application state layer shape for the `Learning Record Store` without choosing database or API implementation details.

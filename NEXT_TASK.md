@@ -4,19 +4,19 @@
 
 - `Phase`: `P5-PRODUCT`
 - `Process`: `PROC-DOC`
-- `Task ID`: `P5-PLAN-003`
+- `Task ID`: `P5-PLAN-004`
 
 ## Task
 
-Define mutation flow, write ordering, and projection inputs for the `Learning Record Store` without choosing database or API implementation details.
+Define the persistent application state layer shape for the `Learning Record Store` without choosing database or API implementation details.
 
 ## Scope
 
 In scope:
 
-- define the order in which runtime, assessment, and analytics write canonical records
-- define which writes are mutable versus append-only
-- define which projections consume which canonical records
+- define the modules that make up the state layer
+- define the responsibilities at each module seam
+- define which existing prototype modules map into that state layer
 - update control docs if needed so the task is unambiguous
 
 Out of scope:
@@ -29,11 +29,11 @@ Out of scope:
 
 ## Done Criteria
 
-- write flow is explicit
-- projection inputs are explicit
+- state-layer modules are explicit
+- responsibility boundaries are explicit
 - control docs are consistent with the new phase lock
 - work is committed and pushed
 
 ## Why This Task
 
-This is the smallest next step after defining the canonical record contract, and it keeps the repository from jumping into implementation before mutation flow is written down.
+This is the smallest next step after defining mutation flow, and it keeps the repository from jumping into implementation before the state layer shape is written down.
