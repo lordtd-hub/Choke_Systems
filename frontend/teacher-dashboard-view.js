@@ -37,17 +37,27 @@ function formatRuntimeStatus(value) {
   return labels[value] || value || 'ไม่มีข้อมูล';
 }
 
-function renderTeacherDashboardPage(summary, bundle) {
-  const moduleRoot = bundle.interactive_module;
-  const runtimeSummary = summary.runtime_summary || {};
-  const secondaryClos = (moduleRoot.clo_focus.secondary || []).join(', ') || 'ไม่มี';
+function formatPercent(value) {
+  if (value === null || value === undefined) {
+    return 'ไม่มีข้อมูล';
+  }
+
+  return `${value}%`;
+}
+
+function renderTeacherDashboardPage(dashboardData) {
+  const moduleRoot = dashboardData.module || {};
+  const runtimeSummary = dashboardData.runtime_summary || {};
+  const cqiSummary = dashboardData.cqi_summary || {};
+  const artifactCounts = dashboardData.artifact_counts || {};
+  const secondaryClos = (moduleRoot.clo_focus?.secondary || []).join(', ') || 'ไม่มี';
 
   return `<!DOCTYPE html>
 <html lang="th">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${escapeHtml(`แดชบอร์ด ${moduleRoot.module_id}`)}</title>
+    <title>${escapeHtml(`แดชบอร์ด ${dashboardData.context.module_id}`)}</title>
     <style>
       :root {
         --bg: #f7f2e8;
@@ -59,12 +69,10 @@ function renderTeacherDashboardPage(summary, bundle) {
         --accent-soft: #d5f0eb;
         --warm: #9a6700;
         --warm-soft: #f7e6c0;
-        --rose: #a53b52;
         --shadow: 0 24px 70px rgba(36, 50, 58, 0.1);
       }
 
       * { box-sizing: border-box; }
-
       body {
         margin: 0;
         font-family: Georgia, "Times New Roman", serif;
@@ -244,49 +252,66 @@ function renderTeacherDashboardPage(summary, bundle) {
     <main class="page">
       <section class="hero">
         <h1>แดชบอร์ดภาพรวมรายสัปดาห์</h1>
-        <p>${escapeHtml(`ใช้หน้านี้เป็นทางเข้าหลักสำหรับตรวจงานของ ${moduleRoot.module_id} ในรายวิชา ${moduleRoot.course_id} โดยรวมบทเรียน รายงาน CQI และสรุปสถานะงานไว้ในหน้าเดียว`)}</p>
+        <p>${escapeHtml(`ใช้หน้านี้เป็นทางเข้าหลักสำหรับตรวจงานของ ${dashboardData.context.module_id} ในรายวิชา ${dashboardData.context.course_id} โดย backend จะโหลดข้อมูลจาก artifact ที่บันทึกไว้จริงแล้วสรุปเป็น payload เดียวสำหรับหน้าแดชบอร์ด`)}</p>
         <div class="hero-meta">
-          <span class="hero-chip">${escapeHtml(`สัปดาห์ที่ ${moduleRoot.week}`)}</span>
-          <span class="hero-chip">${escapeHtml(`ชื่อหน่วย: ${moduleRoot.title}`)}</span>
-          <span class="hero-chip">${escapeHtml(`CLO หลัก: ${moduleRoot.clo_focus.primary}`)}</span>
+          <span class="hero-chip">${escapeHtml(`สัปดาห์ที่ ${dashboardData.context.week}`)}</span>
+          <span class="hero-chip">${escapeHtml(`ชื่อหน่วย: ${moduleRoot.title || 'ไม่มีข้อมูล'}`)}</span>
+          <span class="hero-chip">${escapeHtml(`CLO หลัก: ${moduleRoot.clo_focus?.primary || 'ไม่มีข้อมูล'}`)}</span>
           <span class="hero-chip">${escapeHtml(`CLO รอง: ${secondaryClos}`)}</span>
         </div>
       </section>
 
       <section class="panel">
         <h2>สรุปสถานะการเรียนรู้</h2>
-        <p class="panel-copy">ส่วนนี้สรุปผลจาก workflow ตัวอย่างที่สร้าง bundle, ประเมินกิจกรรม, บันทึกหลักฐาน และสรุปรายงาน CQI อัตโนมัติสำหรับสัปดาห์นี้</p>
+        <p class="panel-copy">ส่วนนี้มาจาก runtime state และ CQI report ที่ backend โหลดกลับจาก persistence layer แล้วสรุปใหม่สำหรับแดชบอร์ด</p>
         <div class="metric-grid">
           ${renderMetricCard('สถานะโมดูล', formatRuntimeStatus(runtimeSummary.status), 'accent')}
           ${renderMetricCard('ความคืบหน้า', `${runtimeSummary.progress_percent ?? 0}%`, 'accent')}
-          ${renderMetricCard('ส่วนที่ทำเสร็จ', `${runtimeSummary.required_sections_completed ?? 0}/${runtimeSummary.required_sections_total ?? 0}`, 'warm')}
-          ${renderMetricCard('กิจกรรมที่ทำเสร็จ', `${runtimeSummary.required_activities_completed ?? 0}/${runtimeSummary.required_activities_total ?? 0}`, 'warm')}
+          ${renderMetricCard('CLO ที่บรรลุ', `${cqiSummary.attained_clos ?? 0}/${cqiSummary.total_clos ?? 0}`, 'warm')}
+          ${renderMetricCard('อัตราการบรรลุ CLO', formatPercent(cqiSummary.attainment_rate_percent), 'warm')}
+          ${renderMetricCard('ส่วนที่ทำเสร็จ', `${runtimeSummary.required_sections_completed ?? 0}/${runtimeSummary.required_sections_total ?? 0}`)}
+          ${renderMetricCard('กิจกรรมที่ทำเสร็จ', `${runtimeSummary.required_activities_completed ?? 0}/${runtimeSummary.required_activities_total ?? 0}`)}
         </div>
       </section>
 
       <section class="panel">
         <h2>ทางเข้าหลัก</h2>
-        <p class="panel-copy">กดจากหน้านี้เพื่อเข้าไปดูหน้าบทเรียน รายงานคุณภาพการเรียนรู้ และไฟล์สรุปที่ระบบสร้างไว้แล้ว</p>
+        <p class="panel-copy">หน้าเหล่านี้สร้างจาก workflow เดียวกัน แต่แดชบอร์ดนี้ใช้ backend read-model เป็นตัวรวบรวมข้อมูลก่อนแสดงผล</p>
         <div class="link-grid">
           ${renderLinkCard('เปิดหน้าบทเรียน', 'ดู week bundle แบบหน้า HTML สำหรับอ่านภาพรวมการเรียนรู้', './week-bundle.html')}
           ${renderLinkCard('เปิดรายงาน CQI', 'ดูรายงานคุณภาพราย CLO ในรูปแบบ Markdown ภาษาไทย', './cqi-report.md')}
           ${renderLinkCard('เปิดสรุป workflow', 'ดูรายการไฟล์และสถานะผลลัพธ์ที่ระบบสร้างในรอบนี้', './workflow-summary.md')}
+          ${renderLinkCard('เปิดข้อมูล dashboard', 'ดู backend payload สำหรับแดชบอร์ดในรูปแบบ JSON', './dashboard-data.json')}
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>ตัวชี้วัดเชิงระบบ</h2>
+        <p class="panel-copy">ส่วนนี้ช่วยให้ backend พร้อมต่อยอดไปเป็น API หรือ dashboard จริงในขั้นถัดไป</p>
+        <div class="metric-grid">
+          ${renderMetricCard('จำนวน sections', String(moduleRoot.section_count ?? 0))}
+          ${renderMetricCard('จำนวน activities', String(moduleRoot.activity_count ?? 0))}
+          ${renderMetricCard('จำนวนสื่อประกอบ', String(moduleRoot.supplementary_material_count ?? 0))}
+          ${renderMetricCard('จำนวน SBRA payloads', String(moduleRoot.sbra_payload_count ?? 0))}
+          ${renderMetricCard('ผลประเมินที่บันทึก', String(artifactCounts.assessment_results ?? 0))}
+          ${renderMetricCard('เหตุการณ์ analytics', String(artifactCounts.analytics_events ?? 0))}
         </div>
       </section>
 
       <section class="panel">
         <h2>ไฟล์ข้อมูลที่ระบบบันทึก</h2>
-        <p class="panel-copy">ส่วนนี้คือไฟล์ข้อมูลสำหรับระบบหรือการพัฒนาต่อ เช่นการทำ dashboard จริง, persistence, หรือเชื่อมต่อ API ในอนาคต</p>
+        <p class="panel-copy">ส่วนนี้คือข้อมูลต้นทางที่ backend ใช้อ่านและประกอบ payload ของหน้าแดชบอร์ด</p>
         <ul class="detail-list">
-          <li>${escapeHtml(`ไฟล์ข้อมูลบทเรียน JSON: ${summary.files.week_bundle_json}`)}</li>
-          <li>${escapeHtml(`ไฟล์สถานะการเรียน JSON: ${summary.files.runtime_state_json}`)}</li>
-          <li>${escapeHtml(`ไฟล์ผลการประเมิน JSON: ${summary.files.assessment_results_json}`)}</li>
-          <li>${escapeHtml(`ไฟล์เหตุการณ์วิเคราะห์การเรียนรู้ JSON: ${summary.files.analytics_events_json}`)}</li>
-          <li>${escapeHtml(`ไฟล์รายงาน CQI JSON: ${summary.files.cqi_report_json}`)}</li>
+          <li>${escapeHtml(`ไฟล์ข้อมูล dashboard JSON: ${dashboardData.files.dashboard_data_json}`)}</li>
+          <li>${escapeHtml(`ไฟล์ข้อมูลบทเรียน JSON: ${dashboardData.files.week_bundle_json}`)}</li>
+          <li>${escapeHtml(`ไฟล์สถานะการเรียน JSON: ${dashboardData.files.runtime_state_json}`)}</li>
+          <li>${escapeHtml(`ไฟล์ผลการประเมิน JSON: ${dashboardData.files.assessment_results_json}`)}</li>
+          <li>${escapeHtml(`ไฟล์เหตุการณ์วิเคราะห์การเรียนรู้ JSON: ${dashboardData.files.analytics_events_json}`)}</li>
+          <li>${escapeHtml(`ไฟล์รายงาน CQI JSON: ${dashboardData.files.cqi_report_json}`)}</li>
         </ul>
       </section>
 
-      <p class="footer-note">หมายเหตุ: หน้านี้เป็น product-style dashboard สำหรับ prototype ปัจจุบัน และสามารถใช้เป็นฐานต่อไปสู่ frontend แบบเต็มระบบได้</p>
+      <p class="footer-note">หมายเหตุ: dashboard นี้ไม่ได้อ่านจากตัวแปรชั่วคราวใน workflow อย่างเดียวอีกต่อไป แต่ใช้ backend read-model จาก artifact ที่ถูกบันทึกจริงแล้ว</p>
     </main>
   </body>
 </html>`;

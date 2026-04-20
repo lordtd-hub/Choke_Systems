@@ -26,6 +26,9 @@ try {
   assert.match(dashboardHtml, /ทางเข้าหลัก/);
   assert.match(dashboardHtml, /เปิดหน้าบทเรียน/);
   assert.match(dashboardHtml, /เปิดรายงาน CQI/);
+  assert.match(dashboardHtml, /เปิดข้อมูล dashboard/);
+  assert.match(dashboardHtml, /backend read-model/);
+  assert.match(dashboardHtml, /dashboard-data\.json/);
   assert.match(dashboardHtml, /workflow-summary\.md/);
   assert.match(dashboardHtml, /สัปดาห์ที่ 3/);
 }
