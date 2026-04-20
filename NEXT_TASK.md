@@ -4,19 +4,19 @@
 
 - `Phase`: `P5-PRODUCT`
 - `Process`: `PROC-DOC`
-- `Task ID`: `P5-PLAN-011`
+- `Task ID`: `P5-PLAN-013`
 
 ## Task
 
-Define the swap-ready repository implementation boundary for product persistence.
+Define the first adapter-swap rollout plan behind the current repository ports.
 
 ## Scope
 
 In scope:
 
-- define the repository-implementation boundary that a future non-file-backed store must satisfy
-- define what the current file-backed adapter preserves and what a future adapter may replace
-- define the stability rules for services, projections, and output contracts during a future adapter swap
+- define the execution order for introducing a second repository adapter behind the current ports
+- define the rollout boundary between preserved baseline behavior and future adapter activation
+- define the validation checkpoints required before the future adapter may become active
 - update control docs so the repo lock is unambiguous
 
 Out of scope:
@@ -29,12 +29,12 @@ Out of scope:
 
 ## Done Criteria
 
-- the swap-ready repository boundary is explicit
-- preserved versus replaceable seams are explicit
+- the adapter-swap rollout sequence is explicit
+- the activation boundary for the future adapter is explicit
 - the next controlled task after this planning slice is explicit
 - control docs are consistent
 - work is committed and pushed
 
 ## Why This Task
 
-The first `Learning Record Store` migration is complete enough to move on, and the smallest safe next step is to plan the future storage-adapter swap boundary before any concrete backend implementation starts.
+The conformance rules are now defined, and the smallest safe next step is to define exactly how a future adapter would be introduced without combining rollout work with broader database or API implementation.

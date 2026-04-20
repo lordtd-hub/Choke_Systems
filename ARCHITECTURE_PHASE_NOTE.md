@@ -8,15 +8,15 @@ This file locks the current architecture phase so implementation does not drift.
 
 - `Phase`: `P5-PRODUCT`
 - `Process`: `PROC-DOC`
-- `Position`: `storage-adapter planning`
+- `Position`: `adapter-rollout planning`
 
 ## What This Phase Means
 
 The repository has finished the current output/control hardening pass and the first product-layer planning pass.
 
-The current work is now one narrow planning step after the first four bounded implementation slices for the `Learning Record Store`:
+The current work is now the next narrow planning step after defining adapter conformance and swap-readiness criteria for the `Learning Record Store`:
 
-- define the swap-ready repository implementation boundary for future product persistence
+- define the first adapter-swap rollout plan behind the current repository ports
 - preserve the finished state-layer seams and current published output contracts
 - keep the current file-backed adapter as the preserved reference implementation
 - preserve the existing output/control backbone as the stable prototype base
@@ -65,6 +65,10 @@ The fourth implementation package for that boundary is now implemented in the re
 
 The migration review for that boundary is now documented in [LEARNING_RECORD_MIGRATION_REVIEW.md](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/LEARNING_RECORD_MIGRATION_REVIEW.md).
 
+The swap-ready repository boundary for that future adapter step is now documented in [SWAP_READY_REPOSITORY_BOUNDARY.md](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/SWAP_READY_REPOSITORY_BOUNDARY.md).
+
+The repository adapter conformance rules for that future adapter step are now documented in [REPOSITORY_ADAPTER_CONFORMANCE.md](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/REPOSITORY_ADAPTER_CONFORMANCE.md).
+
 ## Allowed Work
 
 - `state-identity` implementation
@@ -76,6 +80,8 @@ The migration review for that boundary is now documented in [LEARNING_RECORD_MIG
 - projection assembly service implementation and projection-input modules
 - dashboard/CQI rewiring onto query/projection services
 - planning and doc updates needed to define the future storage-adapter swap boundary
+- planning and doc updates needed to define adapter conformance and swap-readiness criteria
+- planning and doc updates needed to define the first adapter-swap rollout plan
 - bug fixes that protect the existing output/control backbone
 - tests or doc updates needed to keep the current backbone trustworthy
 
@@ -91,9 +97,9 @@ The migration review for that boundary is now documented in [LEARNING_RECORD_MIG
 
 ## Immediate Focus
 
-The next locked task in this phase should define the swap-ready repository implementation boundary for product persistence:
+The next locked task in this phase should define the first adapter-swap rollout plan behind the current repository ports:
 
 - keep the chosen boundary explicit
 - keep the file-backed adapter as the preserved baseline
-- define what can change and what must stay stable when a future storage adapter is introduced
+- define the execution sequence for introducing a second adapter without breaking current seams
 - keep the current prototype outputs as the baseline to preserve
