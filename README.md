@@ -132,6 +132,9 @@ That command builds weeks `1,2,3` for the sample course and refreshes:
 - Architecture and delegation rules live in [AGENTS.md](AGENTS.md).
 - Implementation architecture is summarized in [ARCHITECTURE.md](ARCHITECTURE.md).
 - Current plan progress is summarized in [PROJECT_STATUS.md](PROJECT_STATUS.md).
+- Backlog and roadmap live in [tasks.md](tasks.md).
+- The single locked next task lives in [NEXT_TASK.md](NEXT_TASK.md).
+- The current architecture phase lock lives in [ARCHITECTURE_PHASE_NOTE.md](ARCHITECTURE_PHASE_NOTE.md).
 - The implementation roadmap lives in [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md).
 - Source-of-truth sample specs are:
   - `calculus1_course.yaml`

@@ -54,6 +54,36 @@ It is currently:
 - `Partial` as an end-to-end internal learning workflow
 - `Not Started` as a production multi-user application
 
+## Current Position
+
+Current phase:
+
+- `Phase`: `P4-OUTPUT`
+- `Process`: `PROC-PUB` / `PROC-RM` / `PROC-CTRL`
+- `Position`: `late prototype`
+
+Completed layers:
+
+- spec core
+- contract validation
+- interactive module builder
+- week bundle generation
+- runtime / assessment / analytics / CQI prototype logic
+- output publication backbone
+- week / course / catalog / control read models
+
+In progress:
+
+- control-layer stabilization
+- output registries and orchestration
+- backend-generated action guidance for what to build next
+
+Next focus:
+
+- keep strengthening output/control backend
+- make the control layer consume backend task/action data more directly
+- avoid jumping early into a full product/app layer before the output backbone is stable
+
 ## Status Against Main Plan
 
 ### 1. Spec Core
