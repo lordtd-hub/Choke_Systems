@@ -26,9 +26,9 @@ const weeklyPlan = readYaml(path.join(__dirname, '..', 'calculus1_weekly_plan.ya
   assert.ok(report.overview.score_event_count >= 2);
   assert.ok(report.overview.reflection_event_count >= 1);
   assert.ok(report.clo_reports.some((item) => item.clo_id === 'CLO1'));
-  assert.ok(markdown.includes('# CQI Summary Report'));
+  assert.ok(markdown.includes('# รายงานสรุป CQI'));
   assert.ok(markdown.includes('### CLO1'));
-  assert.ok(markdown.includes('## Overview'));
+  assert.ok(markdown.includes('## ภาพรวม'));
 }
 
 console.log('cqi report tests passed');

@@ -1,5 +1,34 @@
 'use strict';
 
+const STATUS_LABELS = {
+  not_started: 'ยังไม่เริ่ม',
+  in_progress: 'กำลังดำเนินการ',
+  completed: 'เสร็จสิ้น'
+};
+
+const SECTION_TYPE_LABELS = {
+  intro: 'บทนำ',
+  content: 'เนื้อหา',
+  example: 'ตัวอย่าง',
+  practice: 'แบบฝึก',
+  sbra: 'กิจกรรม SBRA',
+  quiz: 'แบบทดสอบ',
+  reflection: 'สะท้อนคิด'
+};
+
+const ACTIVITY_TYPE_LABELS = {
+  quiz: 'แบบทดสอบ',
+  sbra: 'SBRA',
+  practice: 'แบบฝึก'
+};
+
+const BLOCK_TYPE_LABELS = {
+  text: 'ข้อความ',
+  example: 'ตัวอย่าง',
+  note: 'โน้ต',
+  link: 'ลิงก์'
+};
+
 function escapeHtml(value) {
   return String(value ?? '')
     .replace(/&/g, '&amp;')
@@ -11,7 +40,7 @@ function escapeHtml(value) {
 
 function renderTagList(items, className = 'tag-list') {
   if (!items || items.length === 0) {
-    return '<span class="tag empty">None</span>';
+    return '<span class="tag empty">ไม่มี</span>';
   }
 
   return `<div class="${className}">${items.map((item) => `<span class="tag">${escapeHtml(item)}</span>`).join('')}</div>`;
@@ -20,29 +49,30 @@ function renderTagList(items, className = 'tag-list') {
 function renderProgress(runtimeSummary = {}) {
   const progressPercent = Number(runtimeSummary.progress_percent ?? 0);
   const status = runtimeSummary.status || 'not_started';
+  const statusLabel = STATUS_LABELS[status] || status;
   const requiredSections = `${runtimeSummary.required_sections_completed ?? 0}/${runtimeSummary.required_sections_total ?? 0}`;
   const requiredActivities = `${runtimeSummary.required_activities_completed ?? 0}/${runtimeSummary.required_activities_total ?? 0}`;
 
   return `
     <section class="panel progress-panel">
       <div class="panel-header">
-        <h2>Progress</h2>
-        <span class="status-pill">${escapeHtml(status.replace(/_/g, ' '))}</span>
+        <h2>ความก้าวหน้า</h2>
+        <span class="status-pill">${escapeHtml(statusLabel)}</span>
       </div>
-      <div class="progress-meter" aria-label="Module progress">
+      <div class="progress-meter" aria-label="ความก้าวหน้าของโมดูล">
         <div class="progress-fill" style="width:${progressPercent}%"></div>
       </div>
       <div class="progress-grid">
         <div class="metric">
-          <span class="metric-label">Completion</span>
+          <span class="metric-label">ความคืบหน้า</span>
           <strong>${escapeHtml(`${progressPercent}%`)}</strong>
         </div>
         <div class="metric">
-          <span class="metric-label">Required sections</span>
+          <span class="metric-label">ส่วนที่ต้องทำ</span>
           <strong>${escapeHtml(requiredSections)}</strong>
         </div>
         <div class="metric">
-          <span class="metric-label">Required activities</span>
+          <span class="metric-label">กิจกรรมที่ต้องทำ</span>
           <strong>${escapeHtml(requiredActivities)}</strong>
         </div>
       </div>
@@ -57,8 +87,8 @@ function renderSectionCards(bundle) {
   return `
     <section class="panel">
       <div class="panel-header">
-        <h2>Learning Flow</h2>
-        <span class="panel-meta">${escapeHtml(`${bundle.interactive_module.learning_flow.length} sections`)}</span>
+        <h2>ลำดับการเรียนรู้</h2>
+        <span class="panel-meta">${escapeHtml(`${bundle.interactive_module.learning_flow.length} ส่วน`)}</span>
       </div>
       <div class="section-stack">
         ${bundle.interactive_module.learning_flow.map((section, index) => `
@@ -66,37 +96,37 @@ function renderSectionCards(bundle) {
             <div class="section-card-header">
               <span class="section-order">${escapeHtml(String(index + 1).padStart(2, '0'))}</span>
               <div>
-                <h3>${escapeHtml(section.section_type)}</h3>
+                <h3>${escapeHtml(SECTION_TYPE_LABELS[section.section_type] || section.section_type)}</h3>
                 <p>${escapeHtml(section.section_id)}</p>
               </div>
             </div>
             <div class="section-body">
               <div class="section-subblock">
-                <h4>Blocks</h4>
+                <h4>บล็อกเนื้อหา</h4>
                 ${section.block_refs.map((blockId) => {
                   const block = blockById.get(blockId);
                   return `
                     <article class="content-card">
                       <header>
-                        <strong>${escapeHtml(block?.type || 'unknown')}</strong>
+                        <strong>${escapeHtml(BLOCK_TYPE_LABELS[block?.type] || block?.type || 'ไม่ทราบประเภท')}</strong>
                         <span>${escapeHtml(blockId)}</span>
                       </header>
-                      <pre>${escapeHtml(block?.content || 'Missing block content')}</pre>
+                      <pre>${escapeHtml(block?.content || 'ไม่พบเนื้อหาในบล็อกนี้')}</pre>
                     </article>
                   `;
                 }).join('')}
               </div>
               <div class="section-subblock">
-                <h4>Activities</h4>
+                <h4>กิจกรรม</h4>
                 ${section.activity_refs.length === 0
-                  ? '<p class="empty-copy">No activities in this section.</p>'
+                  ? '<p class="empty-copy">ส่วนนี้ไม่มีกิจกรรม</p>'
                   : section.activity_refs.map((activityId) => {
                       const activity = activityById.get(activityId);
                       return `
                         <article class="activity-card compact">
                           <header>
                             <strong>${escapeHtml(activityId)}</strong>
-                            <span>${escapeHtml(activity?.type || 'unknown')}</span>
+                            <span>${escapeHtml(ACTIVITY_TYPE_LABELS[activity?.type] || activity?.type || 'ไม่ทราบประเภท')}</span>
                           </header>
                           <div class="activity-meta">
                             ${renderTagList([activity?.clo_mapping?.primary, ...(activity?.clo_mapping?.secondary || [])].filter(Boolean))}
@@ -117,17 +147,17 @@ function renderMaterials(materials) {
   return `
     <section class="panel">
       <div class="panel-header">
-        <h2>Supplementary Materials</h2>
-        <span class="panel-meta">${escapeHtml(`${materials.length} items`)}</span>
+        <h2>สื่อประกอบเพิ่มเติม</h2>
+        <span class="panel-meta">${escapeHtml(`${materials.length} รายการ`)}</span>
       </div>
       <div class="material-grid">
         ${materials.length === 0
-          ? '<p class="empty-copy">No supplementary materials matched this week.</p>'
+          ? '<p class="empty-copy">สัปดาห์นี้ยังไม่มีสื่อประกอบที่ตรงหัวข้อ</p>'
           : materials.map((item) => `
               <article class="material-card">
                 <header>
                   <strong>${escapeHtml(item.title)}</strong>
-                  <span>${escapeHtml(item.type)}</span>
+                  <span>${escapeHtml(BLOCK_TYPE_LABELS[item.type] || item.type)}</span>
                 </header>
                 <p>${escapeHtml(item.description)}</p>
                 ${renderTagList([item.topic, ...(item.tags || [])])}
@@ -142,20 +172,20 @@ function renderSbraPayloads(payloads) {
   return `
     <section class="panel">
       <div class="panel-header">
-        <h2>SBRA Payloads</h2>
-        <span class="panel-meta">${escapeHtml(`${payloads.length} payloads`)}</span>
+        <h2>ชุดข้อมูล SBRA</h2>
+        <span class="panel-meta">${escapeHtml(`${payloads.length} ชุด`)}</span>
       </div>
       <div class="sbra-grid">
         ${payloads.length === 0
-          ? '<p class="empty-copy">No SBRA payloads for this week.</p>'
+          ? '<p class="empty-copy">สัปดาห์นี้ไม่มีกิจกรรม SBRA</p>'
           : payloads.map((payload) => `
               <article class="sbra-card">
                 <header>
                   <strong>${escapeHtml(payload.activity_id)}</strong>
-                  <span>${escapeHtml(payload.blueprint?.blueprint_id || 'no-blueprint')}</span>
+                  <span>${escapeHtml(payload.blueprint?.blueprint_id || 'ยังไม่มี blueprint')}</span>
                 </header>
                 <h3>${escapeHtml(payload.name)}</h3>
-                <p>${escapeHtml(payload.blueprint?.problem || 'No blueprint problem attached.')}</p>
+                <p>${escapeHtml(payload.blueprint?.problem || 'ยังไม่ได้แนบโจทย์จาก blueprint')}</p>
                 <div class="sbra-meta">
                   ${renderTagList([
                     payload.clo_mapping?.primary,
@@ -172,10 +202,11 @@ function renderSbraPayloads(payloads) {
 
 function renderWeekBundlePage(bundle, runtimeSummary = {}) {
   const moduleRoot = bundle.interactive_module;
-  const title = `${moduleRoot.course_id} Week ${moduleRoot.week} - ${moduleRoot.title}`;
+  const title = `${moduleRoot.course_id} สัปดาห์ที่ ${moduleRoot.week} - ${moduleRoot.title}`;
+  const secondaryClos = (moduleRoot.clo_focus.secondary || []).join(', ') || 'ไม่มี';
 
   return `<!DOCTYPE html>
-<html lang="en">
+<html lang="th">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -396,11 +427,11 @@ function renderWeekBundlePage(bundle, runtimeSummary = {}) {
     <main class="page">
       <section class="hero">
         <h1>${escapeHtml(moduleRoot.title)}</h1>
-        <p>${escapeHtml(`Module ${moduleRoot.module_id} for course ${moduleRoot.course_id}`)}</p>
+        <p>${escapeHtml(`โมดูล ${moduleRoot.module_id} ของรายวิชา ${moduleRoot.course_id}`)}</p>
         <div class="hero-meta">
-          <span class="hero-chip">${escapeHtml(`Week ${moduleRoot.week}`)}</span>
-          <span class="hero-chip">${escapeHtml(`Primary CLO: ${moduleRoot.clo_focus.primary}`)}</span>
-          <span class="hero-chip">${escapeHtml(`Secondary CLOs: ${(moduleRoot.clo_focus.secondary || []).join(', ') || 'None'}`)}</span>
+          <span class="hero-chip">${escapeHtml(`สัปดาห์ที่ ${moduleRoot.week}`)}</span>
+          <span class="hero-chip">${escapeHtml(`CLO หลัก: ${moduleRoot.clo_focus.primary}`)}</span>
+          <span class="hero-chip">${escapeHtml(`CLO รอง: ${secondaryClos}`)}</span>
         </div>
       </section>
 

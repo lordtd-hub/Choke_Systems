@@ -24,6 +24,47 @@ function writeJsonFile(filePath, payload) {
   fs.writeFileSync(filePath, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
 }
 
+function formatRuntimeStatus(value) {
+  const labels = {
+    not_started: 'ยังไม่เริ่ม',
+    in_progress: 'กำลังดำเนินการ',
+    completed: 'เสร็จสิ้น'
+  };
+
+  return labels[value] || value || 'ไม่มีข้อมูล';
+}
+
+function renderThaiWorkflowSummary(summary) {
+  const lines = [
+    '# สรุปผลการสร้างงานสัปดาห์ตัวอย่าง',
+    '',
+    `- รายวิชา: ${summary.context.course_id}`,
+    `- โมดูล: ${summary.context.module_id}`,
+    `- สัปดาห์ที่: ${summary.context.week}`,
+    `- โฟลเดอร์ output: ${summary.output_directory}`,
+    `- โฟลเดอร์จัดเก็บข้อมูลการทำงาน: ${summary.saved_artifact_directory}`,
+    '',
+    '## ไฟล์สำคัญ',
+    '',
+    `- ข้อมูลชุดบทเรียน: ${summary.files.week_bundle_json}`,
+    `- หน้าแสดงผลบทเรียน: ${summary.files.week_bundle_html}`,
+    `- รายงาน CQI: ${summary.files.cqi_report_markdown}`,
+    `- ข้อมูลสถานะการเรียน: ${summary.files.runtime_state_json}`,
+    `- ผลการประเมิน: ${summary.files.assessment_results_json}`,
+    `- เหตุการณ์วิเคราะห์การเรียนรู้: ${summary.files.analytics_events_json}`,
+    `- รายงาน CQI แบบ JSON: ${summary.files.cqi_report_json}`,
+    '',
+    '## สรุปความก้าวหน้า',
+    '',
+    `- สถานะ: ${formatRuntimeStatus(summary.runtime_summary.status)}`,
+    `- ความคืบหน้า: ${summary.runtime_summary.progress_percent}%`,
+    `- ส่วนที่ต้องทำเสร็จแล้ว: ${summary.runtime_summary.required_sections_completed}/${summary.runtime_summary.required_sections_total}`,
+    `- กิจกรรมที่ต้องทำเสร็จแล้ว: ${summary.runtime_summary.required_activities_completed}/${summary.runtime_summary.required_activities_total}`
+  ];
+
+  return `${lines.join('\n')}\n`;
+}
+
 function runDemoWeekWorkflow({
   coursePath,
   weeklyPlanPath,
@@ -59,6 +100,7 @@ function runDemoWeekWorkflow({
   const bundleJsonPath = path.join(weekOutputDir, 'week-bundle.json');
   const frontendHtmlPath = path.join(weekOutputDir, 'week-bundle.html');
   const cqiMarkdownPath = path.join(weekOutputDir, 'cqi-report.md');
+  const summaryMarkdownPath = path.join(weekOutputDir, 'workflow-summary.md');
   const summaryJsonPath = path.join(weekOutputDir, 'workflow-summary.json');
 
   writeJsonFile(bundleJsonPath, artifacts.bundle);
@@ -81,6 +123,7 @@ function runDemoWeekWorkflow({
       week_bundle_json: bundleJsonPath,
       week_bundle_html: frontendHtmlPath,
       cqi_report_markdown: cqiMarkdownPath,
+      workflow_summary_markdown: summaryMarkdownPath,
       runtime_state_json: persisted.runtime_state,
       assessment_results_json: persisted.assessment_results,
       analytics_events_json: persisted.analytics_events,
@@ -89,6 +132,7 @@ function runDemoWeekWorkflow({
     runtime_summary: artifacts.runtimeSummary
   };
 
+  writeTextFile(summaryMarkdownPath, renderThaiWorkflowSummary(summary));
   writeJsonFile(summaryJsonPath, summary);
   return summary;
 }

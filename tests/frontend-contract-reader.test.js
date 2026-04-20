@@ -33,8 +33,8 @@ const { blueprintsByActivityId } = validateRegistryAndBlueprints(DEFAULT_REGISTR
   const html = renderWeekBundlePage(bundle, runtimeSummary);
 
   assert.match(html, /Continuity and Algebraic Techniques for Limits/);
-  assert.match(html, /Module SMAC001_w03 for course SMAC001/);
-  assert.match(html, /Progress/);
+  assert.match(html, /โมดูล SMAC001_w03 ของรายวิชา SMAC001/);
+  assert.match(html, /ความก้าวหน้า/);
   assert.match(html, /25%/);
   assert.match(html, /SBRA Worksheet: Continuity Check/);
   assert.match(html, /Limit Intuition Note/);
@@ -50,7 +50,7 @@ const { blueprintsByActivityId } = validateRegistryAndBlueprints(DEFAULT_REGISTR
   const bundle = buildWeekBundle(course, weeklyPlan, 1, manifest, blueprintsByActivityId);
   const html = renderWeekBundlePage(bundle, getRuntimeSummary(createRuntimeState(bundle, { now: '2026-04-19T10:00:00.000Z' })));
 
-  assert.match(html, /No SBRA payloads for this week/);
+  assert.match(html, /สัปดาห์นี้ไม่มีกิจกรรม SBRA/);
   assert.match(html, /Diagnostic Check: Function Readiness/);
 }
 

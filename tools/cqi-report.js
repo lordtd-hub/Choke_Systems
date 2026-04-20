@@ -95,45 +95,81 @@ function buildCqiReport({ course, bundle, runtimeState, assessmentResults = [], 
 }
 
 function formatPercent(value) {
-  return value === null || value === undefined ? 'n/a' : `${value}%`;
+  return value === null || value === undefined ? 'ไม่มีข้อมูล' : `${value}%`;
+}
+
+function formatAttainment(value) {
+  if (value === null || value === undefined) {
+    return 'ไม่มีข้อมูล';
+  }
+
+  return value ? 'บรรลุ' : 'ยังไม่บรรลุ';
+}
+
+function formatStatus(value) {
+  const labels = {
+    monitor: 'ติดตามต่อเนื่อง',
+    action_needed: 'ต้องติดตามและปรับปรุง'
+  };
+
+  return labels[value] || value || 'ไม่มีข้อมูล';
+}
+
+function formatIssue(value) {
+  const labels = {
+    missing_direct_score_evidence: 'ยังไม่มีหลักฐานคะแนนโดยตรง',
+    below_pass_threshold: 'คะแนนเฉลี่ยต่ำกว่าเกณฑ์ผ่าน',
+    missing_completion_evidence: 'ยังไม่มีหลักฐานการทำกิจกรรมสำเร็จ',
+    missing_reflection_evidence: 'ยังไม่มีหลักฐานการสะท้อนคิด'
+  };
+
+  return labels[value] || value;
+}
+
+function formatRecommendedAction(cloId, status) {
+  if (status === 'monitor') {
+    return 'ติดตามรูปแบบการสอนและหลักฐานการเรียนรู้ต่อเนื่อง';
+  }
+
+  return `ทบทวนกลยุทธ์การสอน หลักฐานการประเมิน และการช่วยเหลือรายสัปดาห์สำหรับ ${cloId}`;
 }
 
 function renderCqiReportMarkdown(report) {
   const lines = [
-    '# CQI Summary Report',
+    '# รายงานสรุป CQI',
     '',
-    `- Course: ${report.context.course_id}`,
-    `- Module: ${report.context.module_id}`,
-    `- Week: ${report.context.week}`,
-    `- Generated at: ${report.context.generated_at || 'n/a'}`,
+    `- รายวิชา: ${report.context.course_id}`,
+    `- โมดูล: ${report.context.module_id}`,
+    `- สัปดาห์ที่: ${report.context.week}`,
+    `- เวลาที่สร้างรายงาน: ${report.context.generated_at || 'ไม่มีข้อมูล'}`,
     '',
-    '## Overview',
+    '## ภาพรวม',
     '',
-    `- Total CLOs reviewed: ${report.overview.total_clos}`,
-    `- CLOs attained: ${report.overview.attained_clos}`,
-    `- Attainment rate: ${formatPercent(report.overview.attainment_rate_percent)}`,
-    `- CLOs requiring action: ${report.overview.clos_requiring_action}`,
-    `- Completion evidence events: ${report.overview.completion_event_count}`,
-    `- Score evidence events: ${report.overview.score_event_count}`,
-    `- Reflection evidence events: ${report.overview.reflection_event_count}`,
+    `- จำนวน CLO ที่ทบทวน: ${report.overview.total_clos}`,
+    `- จำนวน CLO ที่บรรลุ: ${report.overview.attained_clos}`,
+    `- อัตราการบรรลุ: ${formatPercent(report.overview.attainment_rate_percent)}`,
+    `- จำนวน CLO ที่ควรติดตามต่อ: ${report.overview.clos_requiring_action}`,
+    `- จำนวนเหตุการณ์หลักฐานการเรียนรู้แบบสำเร็จ: ${report.overview.completion_event_count}`,
+    `- จำนวนเหตุการณ์หลักฐานคะแนน: ${report.overview.score_event_count}`,
+    `- จำนวนเหตุการณ์สะท้อนคิด: ${report.overview.reflection_event_count}`,
     '',
-    '## CLO Detail',
+    '## รายละเอียดราย CLO',
     ''
   ];
 
   report.clo_reports.forEach((cloReport) => {
     lines.push(`### ${cloReport.clo_id}`);
     lines.push('');
-    lines.push(`- Status: ${cloReport.status}`);
-    lines.push(`- Average score: ${formatPercent(cloReport.average_score_percent)}`);
-    lines.push(`- Pass threshold: ${formatPercent(cloReport.pass_threshold_percent)}`);
-    lines.push(`- Attained: ${cloReport.attained === null ? 'n/a' : String(cloReport.attained)}`);
-    lines.push(`- Completion events: ${cloReport.completion_event_count}`);
-    lines.push(`- Score events: ${cloReport.score_event_count}`);
-    lines.push(`- Reflection events: ${cloReport.reflection_event_count}`);
-    lines.push(`- Issues: ${cloReport.issues.length === 0 ? 'none' : cloReport.issues.join(', ')}`);
-    lines.push(`- Related sources: ${cloReport.related_source_ids.length === 0 ? 'none' : cloReport.related_source_ids.join(', ')}`);
-    lines.push(`- Recommended action: ${cloReport.recommended_action}`);
+    lines.push(`- สถานะ: ${formatStatus(cloReport.status)}`);
+    lines.push(`- คะแนนเฉลี่ย: ${formatPercent(cloReport.average_score_percent)}`);
+    lines.push(`- เกณฑ์ผ่าน: ${formatPercent(cloReport.pass_threshold_percent)}`);
+    lines.push(`- ผลการบรรลุ: ${formatAttainment(cloReport.attained)}`);
+    lines.push(`- จำนวนเหตุการณ์สำเร็จ: ${cloReport.completion_event_count}`);
+    lines.push(`- จำนวนเหตุการณ์คะแนน: ${cloReport.score_event_count}`);
+    lines.push(`- จำนวนเหตุการณ์สะท้อนคิด: ${cloReport.reflection_event_count}`);
+    lines.push(`- ประเด็นที่พบ: ${cloReport.issues.length === 0 ? 'ไม่มี' : cloReport.issues.map((issue) => formatIssue(issue)).join(', ')}`);
+    lines.push(`- แหล่งอ้างอิงที่เกี่ยวข้อง: ${cloReport.related_source_ids.length === 0 ? 'ไม่มี' : cloReport.related_source_ids.join(', ')}`);
+    lines.push(`- ข้อเสนอแนะ: ${formatRecommendedAction(cloReport.clo_id, cloReport.status)}`);
     lines.push('');
   });
 
