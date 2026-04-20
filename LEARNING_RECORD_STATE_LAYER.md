@@ -258,6 +258,8 @@ After `P5-PLAN-004`, the repo now has:
 - named seams between record contracts, repositories, mutations, and projections
 - a concrete bridge from current prototype modules into a future product state layer
 
+The repository ports and service interfaces for that layer are now documented in [LEARNING_RECORD_PORTS_AND_SERVICES.md](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/LEARNING_RECORD_PORTS_AND_SERVICES.md).
+
 ## Next Planning Step
 
-The next task should define repository ports and service interfaces for the `Learning Record Store` state layer without choosing database or API implementation details.
+The next task should define the persistent application state layer implementation plan for the `Learning Record Store` without choosing a database or API implementation.

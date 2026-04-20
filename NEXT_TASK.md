@@ -4,19 +4,19 @@
 
 - `Phase`: `P5-PRODUCT`
 - `Process`: `PROC-DOC`
-- `Task ID`: `P5-PLAN-005`
+- `Task ID`: `P5-PLAN-006`
 
 ## Task
 
-Define repository ports and service interfaces for the `Learning Record Store` without choosing database or API implementation details.
+Define the persistent application state layer implementation plan for the `Learning Record Store` without choosing database or API implementation details.
 
 ## Scope
 
 In scope:
 
-- define repository ports for canonical records
-- define service interfaces for mutation and projection access
-- define which existing prototype modules map to those interfaces
+- define the safest implementation sequence for the state layer
+- define the first concrete build slice inside that layer
+- define what must remain unchanged while that slice is implemented
 - update control docs if needed so the task is unambiguous
 
 Out of scope:
@@ -29,11 +29,11 @@ Out of scope:
 
 ## Done Criteria
 
-- repository ports are explicit
-- service interfaces are explicit
+- implementation sequence is explicit
+- first build slice is explicit
 - control docs are consistent with the new phase lock
 - work is committed and pushed
 
 ## Why This Task
 
-This is the smallest next step after defining the state layer shape, and it keeps the repository from jumping into implementation before repository and service seams are written down.
+This is the smallest next step after defining repository and service seams, and it keeps the repository from jumping into implementation before the build sequence is written down.
