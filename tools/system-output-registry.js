@@ -60,6 +60,7 @@ function buildSystemOutputRegistry(options = {}) {
     const courseDashboard = describeFile(getCourseOutputFilePath(courseId, 'course-dashboard.html', outputRoot), outputRoot, 'แดชบอร์ดรายวิชา');
     const courseData = describeFile(getCourseOutputFilePath(courseId, 'course-dashboard-data.json', outputRoot), outputRoot, 'ข้อมูลรายวิชา JSON');
     const outputRegistry = describeFile(getCourseOutputFilePath(courseId, 'course-output-registry.json', outputRoot), outputRoot, 'ทะเบียน output รายวิชา');
+    const actionQueue = describeFile(getCourseOutputFilePath(courseId, 'course-action-queue.json', outputRoot), outputRoot, 'คิวงานถัดไปของรายวิชา');
     const buildHistory = describeFile(getCourseOutputFilePath(courseId, 'build-history.json', outputRoot), outputRoot, 'ประวัติการรันรายวิชา');
     const workflowSummary = describeFile(getCourseOutputFilePath(courseId, 'course-workflow-summary.md', outputRoot), outputRoot, 'สรุปการรันรายวิชา');
     const registryPayload = readJsonIfExists(outputRegistry.absolute_path);
@@ -73,6 +74,7 @@ function buildSystemOutputRegistry(options = {}) {
         course_dashboard_html: courseDashboard,
         course_dashboard_data_json: courseData,
         course_output_registry_json: outputRegistry,
+        course_action_queue_json: actionQueue,
         build_history_json: buildHistory,
         course_workflow_summary_markdown: workflowSummary
       }

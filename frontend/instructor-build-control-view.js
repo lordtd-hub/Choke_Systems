@@ -416,6 +416,7 @@ function renderInstructorBuildControlPage(controlData) {
           <li><a href="./build-control-data.json">ข้อมูลศูนย์ควบคุม JSON</a></li>
           <li><a href="./${escapeHtml(context.course_id || 'course')}/build-history.json">ประวัติการรันรายวิชา</a></li>
           <li><a href="./${escapeHtml(context.course_id || 'course')}/course-output-registry.json">ทะเบียน output รายวิชา</a></li>
+          <li><a href="./${escapeHtml(context.course_id || 'course')}/course-action-queue.json">คิวงานถัดไปของรายวิชา</a></li>
           <li><a href="./catalog-dashboard.html">แคตตาล็อกระบบ</a></li>
           <li><a href="./${escapeHtml(context.course_id || 'course')}/course-dashboard.html">แดชบอร์ดรายวิชา</a></li>
           <li><a href="./${escapeHtml(context.course_id || 'course')}/course-workflow-summary.md">สรุปการรันรายวิชา</a></li>

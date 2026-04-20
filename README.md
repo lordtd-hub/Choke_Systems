@@ -98,6 +98,7 @@ Main generated files:
 - `outputs/SMAC001/course-dashboard-data.json`
 - `outputs/SMAC001/course-dashboard.html`
 - `outputs/SMAC001/course-output-registry.json`
+- `outputs/SMAC001/course-action-queue.json`
 - `outputs/build-control-data.json`
 - `outputs/build-control.html`
 - `outputs/SMAC001/SMAC001_w03/week-03/dashboard-data.json`
@@ -119,6 +120,7 @@ That command builds weeks `1,2,3` for the sample course and refreshes:
 - `outputs/SMAC001/course-dashboard-data.json`
 - `outputs/SMAC001/course-dashboard.html`
 - `outputs/SMAC001/course-output-registry.json`
+- `outputs/SMAC001/course-action-queue.json`
 - `outputs/SMAC001/course-workflow-summary.json`
 - `outputs/SMAC001/course-workflow-summary.md`
 - `outputs/SMAC001/build-history.json`

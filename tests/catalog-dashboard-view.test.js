@@ -45,6 +45,7 @@ try {
   assert.match(html, /system-output-registry\.json/);
   assert.match(html, /course-dashboard\.html/);
   assert.match(html, /course-output-registry\.json/);
+  assert.match(html, /course-action-queue\.json/);
 }
 finally {
   fs.rmSync(tempRoot, { recursive: true, force: true });

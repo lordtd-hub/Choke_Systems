@@ -6,6 +6,7 @@ const YAML = require('yaml');
 const { DEFAULT_OUTPUT_ROOT, getCourseOutputFilePath } = require('./course-dashboard-data');
 const { getCatalogOutputFilePath } = require('./catalog-dashboard-data');
 const { getCourseBuildHistoryFilePath, loadCourseBuildHistory } = require('./build-history');
+const { buildCourseActionQueue, getCourseActionQueueFilePath } = require('./course-action-queue');
 const { buildCourseOutputRegistry, getCourseOutputRegistryFilePath } = require('./output-registry');
 
 function readYaml(filePath) {
@@ -89,6 +90,13 @@ function buildInstructorBuildControlData({
   const courseDashboardData = readJsonIfExists(getCourseOutputFilePath(courseId, 'course-dashboard-data.json', outputRoot));
   const catalogDashboardData = readJsonIfExists(getCatalogOutputFilePath('catalog-dashboard-data.json', outputRoot));
   const buildHistory = loadCourseBuildHistory(courseId, { outputRoot });
+  const actionQueue = buildCourseActionQueue({
+    coursePath: resolvedCoursePath,
+    weeklyPlanPath: resolvedWeeklyPlanPath,
+    outputRoot,
+    outputRegistry: registry,
+    buildHistory
+  });
   const outputHealth = buildOutputHealth(registry);
   const weekDirectory = buildWeekDirectory(registry);
 
@@ -121,10 +129,12 @@ function buildInstructorBuildControlData({
       catalog_dashboard_html: getCatalogOutputFilePath('catalog-dashboard.html', outputRoot),
       build_history_json: getCourseBuildHistoryFilePath(courseId, outputRoot),
       course_output_registry_json: getCourseOutputRegistryFilePath(courseId, outputRoot),
+      course_action_queue_json: getCourseActionQueueFilePath(courseId, outputRoot),
       course_workflow_summary_json: getCourseOutputFilePath(courseId, 'course-workflow-summary.json', outputRoot),
       course_workflow_summary_markdown: getCourseOutputFilePath(courseId, 'course-workflow-summary.md', outputRoot)
     },
     recent_runs: buildHistory.runs.slice(0, 5),
+    recommended_actions: actionQueue.actions,
     output_health: outputHealth,
     week_directory: weekDirectory,
     output_registry_overview: registry.overview,

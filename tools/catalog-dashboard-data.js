@@ -73,6 +73,7 @@ function buildCatalogDashboardData(options = {}) {
         course_dashboard_html: getCourseOutputFilePath(courseDashboard.context.course_id, 'course-dashboard.html', outputRoot),
         course_dashboard_data_json: getCourseOutputFilePath(courseDashboard.context.course_id, 'course-dashboard-data.json', outputRoot),
         course_output_registry_json: getCourseOutputFilePath(courseDashboard.context.course_id, 'course-output-registry.json', outputRoot),
+        course_action_queue_json: getCourseOutputFilePath(courseDashboard.context.course_id, 'course-action-queue.json', outputRoot),
         build_history_json: getCourseOutputFilePath(courseDashboard.context.course_id, 'build-history.json', outputRoot)
       }
     }));

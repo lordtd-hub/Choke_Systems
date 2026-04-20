@@ -40,6 +40,7 @@ function renderCourseCard(courseItem) {
         <a href="${escapeHtml(buildCourseRelativePath(courseItem.context.course_id, 'course-dashboard.html'))}">หน้าแดชบอร์ดรายวิชา</a>
         <a href="${escapeHtml(buildCourseRelativePath(courseItem.context.course_id, 'course-dashboard-data.json'))}">ข้อมูลรายวิชา JSON</a>
         <a href="${escapeHtml(buildCourseRelativePath(courseItem.context.course_id, 'course-output-registry.json'))}">ทะเบียน output รายวิชา</a>
+        <a href="${escapeHtml(buildCourseRelativePath(courseItem.context.course_id, 'course-action-queue.json'))}">คิวงานถัดไปของรายวิชา</a>
       </div>
     </article>
   `;

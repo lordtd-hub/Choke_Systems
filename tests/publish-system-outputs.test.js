@@ -35,6 +35,7 @@ try {
   assert.equal(fs.existsSync(published.catalog_dashboard_data_json), true);
   assert.equal(fs.existsSync(published.catalog_dashboard_html), true);
   assert.equal(fs.existsSync(published.course_output_registry_json), true);
+  assert.equal(fs.existsSync(published.course_action_queue_json), true);
   assert.equal(fs.existsSync(published.build_control_data_json), true);
   assert.equal(fs.existsSync(published.build_control_html), true);
   assert.equal(fs.existsSync(published.system_output_registry_json), true);

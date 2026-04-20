@@ -31,6 +31,7 @@ try {
   assert.equal(registry.courses.length, 1);
   assert.equal(registry.courses[0].course_id, 'SMAC001');
   assert.equal(registry.courses[0].files.course_output_registry_json.exists, true);
+  assert.equal(registry.courses[0].files.course_action_queue_json.exists, true);
   assert.equal(registry.courses[0].output_overview.complete_week_count, 3);
   assert.equal(fs.existsSync(registryPath), true);
 }
