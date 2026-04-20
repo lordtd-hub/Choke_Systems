@@ -8,20 +8,20 @@ This file locks the current architecture phase so implementation does not drift.
 
 - `Phase`: `P5-PRODUCT`
 - `Process`: `PROC-STATE`
-- `Position`: `second package implementation`
+- `Position`: `third package implementation`
 
 ## What This Phase Means
 
 The repository has finished the current output/control hardening pass and the first product-layer planning pass.
 
-The current work is now the second bounded implementation slice for the `Learning Record Store`:
+The current work is now the third bounded implementation slice for the `Learning Record Store`:
 
-- implement mutation services over repository ports
-- keep canonical write ordering inside services
-- preserve the first package repository seams as the stable base
+- implement query services over canonical repository ports
+- implement projection assembly services and normalized projection inputs
+- preserve the first and second package seams as the stable base
 - preserve the existing output/control backbone as the stable prototype base
 
-This phase is about extending the state layer carefully without opening database, API, auth, query/projection, or frontend product work yet.
+This phase is about extending the read side of the state layer carefully without opening dashboard rewiring, CQI rewiring, database, API, auth, or frontend product work yet.
 
 ## Why The Phase Changed
 
@@ -57,6 +57,8 @@ The implementation-readiness decision for that boundary is now documented in [LE
 
 The first implementation package for that boundary is now implemented in the repository under [`state/`](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/state).
 
+The second implementation package for that boundary is now implemented in the repository under [`state/services/`](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/state/services).
+
 ## Allowed Work
 
 - `state-identity` implementation
@@ -64,6 +66,8 @@ The first implementation package for that boundary is now implemented in the rep
 - file-backed repository port implementation
 - mutation-service implementation over repository ports
 - service-level command and write-order tests
+- query-service implementation over repository ports
+- projection assembly service implementation and projection-input modules
 - bug fixes that protect the existing output/control backbone
 - tests or doc updates needed to keep the current backbone trustworthy
 
@@ -74,12 +78,12 @@ The first implementation package for that boundary is now implemented in the rep
 - do not build the production API layer yet
 - do not build a full learner/product app shell yet
 - do not reopen `P4-OUTPUT` with new feature work unless a concrete blocker appears
-- do not implement query/projection services or projection rewiring in the second package
+- do not rewire existing dashboard builders or CQI rendering in the third package
 
 ## Immediate Focus
 
-The next locked task in this phase should implement the second package for the chosen `Learning Record Store` state layer:
+The next locked task in this phase should implement the third package for the chosen `Learning Record Store` state layer:
 
 - keep the chosen boundary explicit
-- build only mutation services and service-command helpers over the current repository ports
+- build only query services, projection assembly services, and normalized projection inputs
 - keep the current prototype outputs as the baseline to preserve

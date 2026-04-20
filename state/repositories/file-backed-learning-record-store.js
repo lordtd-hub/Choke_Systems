@@ -191,7 +191,6 @@ class FileBackedAttemptRecordRepository extends AttemptRecordRepository {
     const activity = findActivity(nextPayload, normalized.activity_id);
     activity.attempts = Array.isArray(activity.attempts) ? activity.attempts : [];
     activity.attempts.push(toRuntimeActivityAttempt(normalized));
-    activity.latest_attempt_id = normalized.attempt_id;
 
     saveRuntimeState(nextPayload, { storageRoot: this.storageRoot });
     return normalized;

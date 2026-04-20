@@ -110,7 +110,8 @@ Tasks:
 - `done` define the fourth implementation package for rewiring dashboard and CQI builders onto query/projection services
 - `done` review whether planning is complete enough to begin implementing the first package
 - `done` implement the first package for `state-identity`, `state-records`, and file-backed repository ports
-- `todo` implement the second package for mutation services over repository ports
+- `done` implement the second package for mutation services over repository ports
+- `todo` implement the third package for query and projection services over canonical records
 - `todo` design persistent application state layer
 - `todo` design authenticated multi-user system
 - `todo` design production API/service layer
