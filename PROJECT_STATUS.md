@@ -89,17 +89,18 @@ Completed layers:
 - implementation-readiness review for the `Learning Record Store`
 - first implementation package for the `Learning Record Store`
 - second implementation package for the `Learning Record Store`
+- third implementation package for the `Learning Record Store`
 
 In progress:
 
-- third implementation package for the `Learning Record Store`
-- control-doc alignment for the locked `P5-IMPL-003` task
+- fourth implementation package for the `Learning Record Store`
+- control-doc alignment for the locked `P5-IMPL-004` task
 
 Next focus:
 
-- implement query services over repository ports
-- implement projection assembly services and normalized projection inputs
-- keep dashboard rewiring, CQI rewiring, database, API, and auth out of scope during the third package
+- rewire teacher week dashboard data through query/projection services
+- rewire course dashboard data and CQI inputs through query/projection services
+- keep output contracts, build-control outputs, database, API, and auth out of scope during the fourth package
 
 ## Status Against Main Plan
 

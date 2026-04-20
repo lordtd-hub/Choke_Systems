@@ -8,20 +8,20 @@ This file locks the current architecture phase so implementation does not drift.
 
 - `Phase`: `P5-PRODUCT`
 - `Process`: `PROC-STATE`
-- `Position`: `third package implementation`
+- `Position`: `fourth package implementation`
 
 ## What This Phase Means
 
 The repository has finished the current output/control hardening pass and the first product-layer planning pass.
 
-The current work is now the third bounded implementation slice for the `Learning Record Store`:
+The current work is now the fourth bounded implementation slice for the `Learning Record Store`:
 
-- implement query services over canonical repository ports
-- implement projection assembly services and normalized projection inputs
-- preserve the first and second package seams as the stable base
+- rewire teacher-week, course, and CQI builders onto the new query/projection seams
+- preserve the first three package seams as the stable base
+- preserve current published output contracts while changing internal read paths
 - preserve the existing output/control backbone as the stable prototype base
 
-This phase is about extending the read side of the state layer carefully without opening dashboard rewiring, CQI rewiring, database, API, auth, or frontend product work yet.
+This phase is about finishing the first internal read-path migration carefully without opening database, API, auth, or frontend product work yet.
 
 ## Why The Phase Changed
 
@@ -59,6 +59,8 @@ The first implementation package for that boundary is now implemented in the rep
 
 The second implementation package for that boundary is now implemented in the repository under [`state/services/`](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/state/services).
 
+The third implementation package for that boundary is now implemented in the repository under [`state/services/`](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/state/services) and [`state/projections/`](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/state/projections).
+
 ## Allowed Work
 
 - `state-identity` implementation
@@ -68,6 +70,7 @@ The second implementation package for that boundary is now implemented in the re
 - service-level command and write-order tests
 - query-service implementation over repository ports
 - projection assembly service implementation and projection-input modules
+- dashboard/CQI rewiring onto query/projection services
 - bug fixes that protect the existing output/control backbone
 - tests or doc updates needed to keep the current backbone trustworthy
 
@@ -78,12 +81,13 @@ The second implementation package for that boundary is now implemented in the re
 - do not build the production API layer yet
 - do not build a full learner/product app shell yet
 - do not reopen `P4-OUTPUT` with new feature work unless a concrete blocker appears
-- do not rewire existing dashboard builders or CQI rendering in the third package
+- do not change published output contracts while rewiring teacher/course/CQI builders in the fourth package
+- do not broaden the fourth package into build-control or catalog rewiring unless a direct dependency forces it
 
 ## Immediate Focus
 
-The next locked task in this phase should implement the third package for the chosen `Learning Record Store` state layer:
+The next locked task in this phase should implement the fourth package for the chosen `Learning Record Store` state layer:
 
 - keep the chosen boundary explicit
-- build only query services, projection assembly services, and normalized projection inputs
+- build only the teacher dashboard, course dashboard, and CQI rewiring onto the existing query/projection services
 - keep the current prototype outputs as the baseline to preserve
