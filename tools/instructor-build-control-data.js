@@ -6,6 +6,7 @@ const YAML = require('yaml');
 const { DEFAULT_OUTPUT_ROOT, getCourseOutputFilePath } = require('./course-dashboard-data');
 const { getCatalogOutputFilePath } = require('./catalog-dashboard-data');
 const { getCourseBuildHistoryFilePath, loadCourseBuildHistory } = require('./build-history');
+const { getWeekOutputFilePath } = require('./teacher-dashboard-data');
 
 function readYaml(filePath) {
   return YAML.parse(fs.readFileSync(filePath, 'utf8'));
@@ -72,6 +73,70 @@ function buildOutputHealth(courseId, weekNumbers, outputRoot) {
   };
 }
 
+function buildWeekDirectory(courseId, weeklyPlan, outputRoot) {
+  const weeklyUnits = weeklyPlan?.weekly_plan?.weekly_units || [];
+
+  return weeklyUnits
+    .map((unit) => {
+      const week = Number(unit.week);
+      if (!Number.isInteger(week) || week <= 0) {
+        return null;
+      }
+
+      const context = {
+        course_id: courseId,
+        module_id: `${courseId}_w${String(week).padStart(2, '0')}`,
+        week
+      };
+      const files = [
+        {
+          id: 'dashboard_html',
+          label: 'แดชบอร์ดประจำสัปดาห์',
+          absolute_path: getWeekOutputFilePath(context, 'dashboard.html', outputRoot)
+        },
+        {
+          id: 'week_bundle_html',
+          label: 'หน้าเรียนประจำสัปดาห์',
+          absolute_path: getWeekOutputFilePath(context, 'week-bundle.html', outputRoot)
+        },
+        {
+          id: 'cqi_report_markdown',
+          label: 'รายงาน CQI',
+          absolute_path: getWeekOutputFilePath(context, 'cqi-report.md', outputRoot)
+        },
+        {
+          id: 'workflow_summary_markdown',
+          label: 'สรุป workflow',
+          absolute_path: getWeekOutputFilePath(context, 'workflow-summary.md', outputRoot)
+        }
+      ].map((fileItem) => ({
+        ...fileItem,
+        exists: fs.existsSync(fileItem.absolute_path),
+        relative_path: `./${path.relative(outputRoot, fileItem.absolute_path).split(path.sep).join('/')}`
+      }));
+
+      const availableFiles = files.filter((fileItem) => fileItem.exists);
+      let status = 'missing';
+
+      if (availableFiles.length === files.length) {
+        status = 'complete';
+      } else if (availableFiles.length > 0) {
+        status = 'partial';
+      }
+
+      return {
+        week,
+        title: unit.title || `Week ${week}`,
+        module_id: context.module_id,
+        status,
+        available_file_count: availableFiles.length,
+        total_file_count: files.length,
+        files
+      };
+    })
+    .filter(Boolean);
+}
+
 function buildInstructorBuildControlData({
   coursePath,
   weeklyPlanPath,
@@ -92,6 +157,7 @@ function buildInstructorBuildControlData({
   const catalogDashboardData = readJsonIfExists(getCatalogOutputFilePath('catalog-dashboard-data.json', outputRoot));
   const buildHistory = loadCourseBuildHistory(courseId, { outputRoot });
   const outputHealth = buildOutputHealth(courseId, weekNumbers, outputRoot);
+  const weekDirectory = buildWeekDirectory(courseId, weeklyPlan, outputRoot);
 
   return {
     control_type: 'instructor_build_control_v1',
@@ -126,6 +192,7 @@ function buildInstructorBuildControlData({
     },
     recent_runs: buildHistory.runs.slice(0, 5),
     output_health: outputHealth,
+    week_directory: weekDirectory,
     output_snapshots: {
       course_dashboard_overview: courseDashboardData?.overview || null,
       catalog_dashboard_overview: catalogDashboardData?.overview || null

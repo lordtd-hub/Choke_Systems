@@ -99,6 +99,49 @@ function renderOutputHealth(outputHealth) {
   `;
 }
 
+function renderWeekDirectory(weekDirectory) {
+  if (!weekDirectory || weekDirectory.length === 0) {
+    return '<p class="empty-copy">ยังไม่มีข้อมูลไดเรกทอรี output รายสัปดาห์</p>';
+  }
+
+  const statusConfig = {
+    complete: { label: 'ไฟล์ครบ', tone: 'accent' },
+    partial: { label: 'มีบางไฟล์', tone: 'warm' },
+    missing: { label: 'ยังไม่ถูกสร้าง', tone: 'default' }
+  };
+
+  return `
+    <div class="week-directory-grid">
+      ${weekDirectory.map((item) => {
+        const status = statusConfig[item.status] || statusConfig.missing;
+        const availableFiles = item.files.filter((fileItem) => fileItem.exists);
+
+        return `
+          <article class="week-card">
+            <div class="week-card-top">
+              <div>
+                <span class="week-card-label">${escapeHtml(`สัปดาห์ที่ ${item.week}`)}</span>
+                <h3>${escapeHtml(item.title)}</h3>
+              </div>
+              <span class="status-pill status-pill-${escapeHtml(status.tone)}">${escapeHtml(status.label)}</span>
+            </div>
+            <p class="week-card-copy">${escapeHtml(`โมดูล ${item.module_id} มีไฟล์พร้อมใช้งาน ${item.available_file_count}/${item.total_file_count}`)}</p>
+            ${availableFiles.length === 0
+              ? '<p class="empty-copy">ยังไม่มีไฟล์ให้เปิดจากสัปดาห์นี้</p>'
+              : `
+                <ul class="link-list">
+                  ${availableFiles.map((fileItem) => `
+                    <li><a href="${escapeHtml(fileItem.relative_path)}">${escapeHtml(fileItem.label)}</a></li>
+                  `).join('')}
+                </ul>
+              `}
+          </article>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
+
 function renderInstructorBuildControlPage(controlData) {
   const context = controlData.context || {};
   const courseOverview = controlData.output_snapshots?.course_dashboard_overview || {};
@@ -166,6 +209,11 @@ function renderInstructorBuildControlPage(controlData) {
       .metric-grid, .preset-grid {
         display: grid;
         gap: 14px;
+      }
+      .week-directory-grid {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       }
       .metric-grid {
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -249,6 +297,51 @@ function renderInstructorBuildControlPage(controlData) {
         margin: 0;
         color: var(--muted);
       }
+      .week-card {
+        border-radius: 20px;
+        padding: 18px;
+        background: #fffaf2;
+        border: 1px solid var(--line);
+      }
+      .week-card-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: flex-start;
+      }
+      .week-card-label {
+        display: block;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+      .week-card h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        line-height: 1.5;
+      }
+      .week-card-copy {
+        margin: 14px 0 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .status-pill {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 6px 12px;
+        font-size: 0.88rem;
+        white-space: nowrap;
+        border: 1px solid var(--line);
+        background: #f3eee4;
+      }
+      .status-pill-accent {
+        background: var(--accent-soft);
+        border-color: rgba(15, 118, 110, 0.18);
+      }
+      .status-pill-warm {
+        background: var(--warm-soft);
+        border-color: rgba(154, 103, 0, 0.18);
+      }
       a {
         color: var(--accent);
         text-decoration: none;
@@ -310,6 +403,11 @@ function renderInstructorBuildControlPage(controlData) {
       <section class="panel">
         <h2>สถานะความครบของ output</h2>
         ${renderOutputHealth(controlData.output_health)}
+      </section>
+
+      <section class="panel">
+        <h2>ไดเรกทอรี output รายสัปดาห์</h2>
+        ${renderWeekDirectory(controlData.week_directory)}
       </section>
 
       <section class="panel">
