@@ -377,6 +377,8 @@ After `P5-PLAN-005`, the repo now has:
 - explicit service interfaces for mutation and projection access
 - a clear seam between storage, business flow, and read assembly
 
+The implementation sequence for that layer is now documented in [LEARNING_RECORD_IMPLEMENTATION_PLAN.md](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/LEARNING_RECORD_IMPLEMENTATION_PLAN.md).
+
 ## Next Planning Step
 
-The next task should define the persistent application state layer implementation plan for the `Learning Record Store` without choosing a database or API implementation.
+The next task should define the first implementation task package for `state-identity`, `state-records`, and file-backed repository ports without choosing a database or API implementation.
