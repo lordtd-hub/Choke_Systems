@@ -81,15 +81,16 @@ Completed layers:
 - persistent application state layer shape for the `Learning Record Store`
 - repository ports and service interfaces for the `Learning Record Store`
 - implementation sequence for the `Learning Record Store`
+- first implementation package for the `Learning Record Store`
 
 In progress:
 
-- first state-layer implementation package planning
-- documentation alignment for the locked `P5-PLAN-007` task
+- second state-layer implementation package planning
+- documentation alignment for the locked `P5-PLAN-008` task
 
 Next focus:
 
-- define the first implementation package for `state-identity`, `state-records`, and file-backed repository ports
+- define the second implementation package for mutation services over repository ports
 - keep output/control work limited to bug fixes or dependency alignment
 - avoid jumping into database/auth/API implementation without a written plan
 

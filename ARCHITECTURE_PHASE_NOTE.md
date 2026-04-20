@@ -42,6 +42,8 @@ The repository ports and service interfaces for that boundary are now documented
 
 The implementation sequence for that boundary is now documented in [LEARNING_RECORD_IMPLEMENTATION_PLAN.md](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/LEARNING_RECORD_IMPLEMENTATION_PLAN.md).
 
+The first implementation package for that boundary is now documented in [LEARNING_RECORD_FIRST_PACKAGE.md](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/LEARNING_RECORD_FIRST_PACKAGE.md).
+
 ## Allowed Work
 
 - product-transition planning docs
@@ -60,8 +62,8 @@ The implementation sequence for that boundary is now documented in [LEARNING_REC
 
 ## Immediate Focus
 
-The next locked task in this phase should define the first implementation task package for the chosen `Learning Record Store` state layer without starting implementation:
+The next locked task in this phase should define the second implementation package for the chosen `Learning Record Store` state layer without starting implementation:
 
 - keep the chosen boundary explicit
-- define the first narrow implementation package
+- define the next narrow implementation package
 - keep the current prototype outputs as the baseline to preserve

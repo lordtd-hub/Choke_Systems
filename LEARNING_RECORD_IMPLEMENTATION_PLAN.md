@@ -232,6 +232,8 @@ After `P5-PLAN-006`, the repo now has:
 - a safe first build slice
 - a preservation list that protects the current prototype while implementation begins
 
+The first implementation package for that sequence is now documented in [LEARNING_RECORD_FIRST_PACKAGE.md](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/LEARNING_RECORD_FIRST_PACKAGE.md).
+
 ## Next Planning Step
 
-The next task should define the first implementation task package for `state-identity`, `state-records`, and file-backed repository ports without expanding into database or API implementation.
+The next task should define the second implementation package for mutation services over the new repository ports without expanding into database or API implementation.
