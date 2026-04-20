@@ -103,6 +103,21 @@ Main generated files:
 - `outputs/SMAC001/SMAC001_w03/week-03/week-bundle.html`
 - `outputs/SMAC001/SMAC001_w03/week-03/cqi-report.md`
 
+If you want a fuller course build in one run, use:
+
+```bash
+npm run run:demo:course
+```
+
+That command builds weeks `1,2,3` for the sample course and refreshes:
+
+- `outputs/catalog-dashboard-data.json`
+- `outputs/catalog-dashboard.html`
+- `outputs/SMAC001/course-dashboard-data.json`
+- `outputs/SMAC001/course-dashboard.html`
+- `outputs/SMAC001/course-workflow-summary.json`
+- `outputs/SMAC001/course-workflow-summary.md`
+
 ## Project Notes
 
 - Architecture and delegation rules live in [AGENTS.md](AGENTS.md).

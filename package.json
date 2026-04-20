@@ -8,13 +8,14 @@
     "npm": ">=10"
   },
   "scripts": {
-    "verify:machine": "npm run validate:contracts && npm run test:bundle && npm run test:analytics && npm run test:cqi-report && npm run test:dashboard-data && npm run test:course-dashboard-data && npm run test:course-dashboard-view && npm run test:catalog-dashboard-data && npm run test:catalog-dashboard-view && npm run test:dashboard",
+    "verify:machine": "npm run validate:contracts && npm run test:bundle && npm run test:analytics && npm run test:cqi-report && npm run test:dashboard-data && npm run test:course-dashboard-data && npm run test:course-dashboard-view && npm run test:catalog-dashboard-data && npm run test:catalog-dashboard-view && npm run test:course-workflow && npm run test:dashboard",
     "validate:contracts": "node tools/validate-contracts.js calculus1_course.yaml calculus1_weekly_plan.yaml",
     "generate:module:week1": "node tools/build-interactive-module.js calculus1_course.yaml calculus1_weekly_plan.yaml 1",
     "validate:materials": "node tools/material-library.js",
     "validate:sbra": "node tools/sbra-blueprints.js",
     "build:bundle:week1": "node tools/build-week-bundle.js calculus1_course.yaml calculus1_weekly_plan.yaml 1",
     "run:demo:week3": "node tools/run-demo-week-workflow.js calculus1_course.yaml calculus1_weekly_plan.yaml 3",
+    "run:demo:course": "node tools/run-demo-course-workflow.js calculus1_course.yaml calculus1_weekly_plan.yaml 1,2,3",
     "render:frontend:week3": "node tools/render-week-bundle-html.js calculus1_course.yaml calculus1_weekly_plan.yaml 3",
     "render:cqi:week3": "node tools/render-demo-cqi-report.js calculus1_course.yaml calculus1_weekly_plan.yaml 3",
     "test:contracts": "node tests/contract-validation.test.js",
@@ -29,6 +30,7 @@
     "test:course-dashboard-view": "node tests/course-dashboard-view.test.js",
     "test:catalog-dashboard-data": "node tests/catalog-dashboard-data.test.js",
     "test:catalog-dashboard-view": "node tests/catalog-dashboard-view.test.js",
+    "test:course-workflow": "node tests/course-workflow.test.js",
     "test:dashboard": "node tests/teacher-dashboard.test.js",
     "test:demo-workflow": "node tests/demo-workflow.test.js",
     "test:frontend": "node tests/frontend-contract-reader.test.js",
