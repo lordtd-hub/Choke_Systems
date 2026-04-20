@@ -3,24 +3,28 @@
 ## Current Locked Task
 
 - `Phase`: `P5-PRODUCT`
-- `Process`: `PROC-DOC`
-- `Task ID`: `P5-REVIEW-001`
+- `Process`: `PROC-STATE`
+- `Task ID`: `P5-IMPL-001`
 
 ## Task
 
-Review whether planning is complete enough to begin implementing the first package for the `Learning Record Store`.
+Implement the first package for the `Learning Record Store`.
 
 ## Scope
 
 In scope:
 
-- compare completed planning docs against the first package needs
-- identify any remaining planning blockers before implementation starts
-- make the next step explicit: start implementation or stay in planning
-- update control docs if needed so the task is unambiguous
+- implement `state-identity`
+- implement canonical record modules
+- implement repository port definitions
+- implement one file-backed adapter over the current persistence layer
+- add seam-level tests for the first package
 
 Out of scope:
 
+- mutation services
+- query/projection services
+- projection rewiring
 - database implementation
 - API implementation
 - auth/user implementation
@@ -29,11 +33,13 @@ Out of scope:
 
 ## Done Criteria
 
-- planning-readiness decision is explicit
-- remaining blocker or implementation go-ahead is explicit
-- control docs are consistent with the new phase lock
+- `state-identity` modules exist
+- canonical record modules exist
+- repository ports and one file-backed adapter exist
+- seam-level tests exist
+- `npm run verify:machine` passes
 - work is committed and pushed
 
 ## Why This Task
 
-This is the smallest next step after defining the fourth slice, and it keeps the repository from starting implementation without an explicit readiness check.
+The readiness review is complete, and this is the smallest implementation slice that introduces the state layer without changing output contracts or opening database/API/auth work.

@@ -18,7 +18,7 @@ Status values:
 Current working area:
 
 - `Phase`: `P5-PRODUCT`
-- `Process`: `PROC-DOC`
+- `Process`: `PROC-STATE`
 
 Rule:
 
@@ -108,7 +108,8 @@ Tasks:
 - `done` define the second implementation package for mutation services over repository ports
 - `done` define the third implementation package for query and projection services over canonical records
 - `done` define the fourth implementation package for rewiring dashboard and CQI builders onto query/projection services
-- `todo` review whether planning is complete enough to begin implementing the first package
+- `done` review whether planning is complete enough to begin implementing the first package
+- `todo` implement the first package for `state-identity`, `state-records`, and file-backed repository ports
 - `todo` design persistent application state layer
 - `todo` design authenticated multi-user system
 - `todo` design production API/service layer

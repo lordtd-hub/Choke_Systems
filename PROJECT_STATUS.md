@@ -28,15 +28,16 @@ Use these codes in progress reporting so work can be tracked without ambiguity.
 - `PROC-CTRL`: instructor/control workflow
 - `PROC-FE`: frontend rendering
 - `PROC-DOC`: documentation alignment
+- `PROC-STATE`: persistent state layer implementation
 
 ### Current Default Position
 
 At the current repo state, the repository has moved into:
 
 - `Phase`: `P5-PRODUCT`
-- `Process`: `PROC-DOC`
+- `Process`: `PROC-STATE`
 
-This means the output/control backbone is stable enough that the next work should be product-transition planning rather than more output/control feature expansion.
+This means the output/control backbone is stable enough that the next work should be the first persistent state implementation slice rather than more output/control feature expansion.
 
 Status meanings:
 
@@ -59,8 +60,8 @@ It is currently:
 Current phase:
 
 - `Phase`: `P5-PRODUCT`
-- `Process`: `PROC-DOC`
-- `Position`: `transition planning`
+- `Process`: `PROC-STATE`
+- `Position`: `first package implementation`
 
 Completed layers:
 
@@ -85,17 +86,18 @@ Completed layers:
 - second implementation package for the `Learning Record Store`
 - third implementation package for the `Learning Record Store`
 - fourth implementation package for the `Learning Record Store`
+- implementation-readiness review for the `Learning Record Store`
 
 In progress:
 
-- implementation-readiness review
-- documentation alignment for the locked `P5-REVIEW-001` task
+- first implementation package for the `Learning Record Store`
+- control-doc alignment for the locked `P5-IMPL-001` task
 
 Next focus:
 
-- decide whether planning is complete enough to begin implementing the first package safely
-- keep output/control work limited to bug fixes or dependency alignment
-- avoid jumping into database/auth/API implementation without a written plan
+- implement `state-identity`
+- implement canonical record modules and file-backed repository ports
+- keep database, API, auth, and projection rewiring out of scope during the first package
 
 ## Status Against Main Plan
 
