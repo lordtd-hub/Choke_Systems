@@ -35,9 +35,9 @@ Use these codes in progress reporting so work can be tracked without ambiguity.
 At the current repo state, the repository has moved into:
 
 - `Phase`: `P5-PRODUCT`
-- `Process`: `PROC-STATE`
+- `Process`: `PROC-DOC`
 
-This means the output/control backbone is stable enough that the next work should be the first persistent state implementation slice rather than more output/control feature expansion.
+This means the first `Learning Record Store` seam build is complete and the next work should be one controlled planning step for the future storage-adapter swap.
 
 Status meanings:
 
@@ -60,8 +60,8 @@ It is currently:
 Current phase:
 
 - `Phase`: `P5-PRODUCT`
-- `Process`: `PROC-STATE`
-- `Position`: `first package implementation`
+- `Process`: `PROC-DOC`
+- `Position`: `storage-adapter planning`
 
 Completed layers:
 
@@ -91,17 +91,18 @@ Completed layers:
 - second implementation package for the `Learning Record Store`
 - third implementation package for the `Learning Record Store`
 - fourth implementation package for the `Learning Record Store`
+- migration review for the `Learning Record Store`
 
 In progress:
 
-- post-rewire review for the `Learning Record Store`
-- control-doc alignment for the locked `P5-REVIEW-002` task
+- storage-adapter planning for the `Learning Record Store`
+- control-doc alignment for the locked `P5-PLAN-011` task
 
 Next focus:
 
-- review whether the first `Learning Record Store` migration is complete enough to move beyond the four-package seam build
-- decide the next controlled product step without reopening output/control work
-- keep database, API, auth, and app-shell implementation out of scope during the review
+- define the swap-ready repository implementation boundary behind the current repository ports
+- keep the current file-backed adapter as the preserved baseline
+- keep database, API, auth, and app-shell implementation out of scope during this planning step
 
 ## Status Against Main Plan
 

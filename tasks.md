@@ -18,7 +18,7 @@ Status values:
 Current working area:
 
 - `Phase`: `P5-PRODUCT`
-- `Process`: `PROC-STATE`
+- `Process`: `PROC-DOC`
 
 Rule:
 
@@ -113,7 +113,8 @@ Tasks:
 - `done` implement the second package for mutation services over repository ports
 - `done` implement the third package for query and projection services over canonical records
 - `done` implement the fourth package for rewiring dashboard and CQI builders onto query/projection services
-- `todo` review whether the first `Learning Record Store` migration is complete enough to move to the next controlled product step
+- `done` review whether the first `Learning Record Store` migration is complete enough to move to the next controlled product step
+- `todo` define the swap-ready repository implementation boundary for product persistence
 - `todo` design persistent application state layer
 - `todo` design authenticated multi-user system
 - `todo` design production API/service layer

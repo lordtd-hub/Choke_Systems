@@ -8,20 +8,20 @@ This file locks the current architecture phase so implementation does not drift.
 
 - `Phase`: `P5-PRODUCT`
 - `Process`: `PROC-DOC`
-- `Position`: `post-rewire review`
+- `Position`: `storage-adapter planning`
 
 ## What This Phase Means
 
 The repository has finished the current output/control hardening pass and the first product-layer planning pass.
 
-The current work is now a narrow review after the first four bounded implementation slices for the `Learning Record Store`:
+The current work is now one narrow planning step after the first four bounded implementation slices for the `Learning Record Store`:
 
-- confirm the first seam-migration pass is complete enough to move on safely
-- decide the next controlled product step
+- define the swap-ready repository implementation boundary for future product persistence
 - preserve the finished state-layer seams and current published output contracts
+- keep the current file-backed adapter as the preserved reference implementation
 - preserve the existing output/control backbone as the stable prototype base
 
-This phase is about stopping after the fourth package, checking completeness, and choosing the next controlled move without opening database, API, auth, or frontend product work yet.
+This phase is about planning the next persistence step carefully without opening database, API, auth, or frontend product work yet.
 
 ## Why The Phase Changed
 
@@ -63,6 +63,8 @@ The third implementation package for that boundary is now implemented in the rep
 
 The fourth implementation package for that boundary is now implemented in the repository through the current dashboard/CQI builders in [`tools/teacher-dashboard-data.js`](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/tools/teacher-dashboard-data.js), [`tools/course-dashboard-data.js`](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/tools/course-dashboard-data.js), and [`tools/cqi-report.js`](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/tools/cqi-report.js).
 
+The migration review for that boundary is now documented in [LEARNING_RECORD_MIGRATION_REVIEW.md](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/LEARNING_RECORD_MIGRATION_REVIEW.md).
+
 ## Allowed Work
 
 - `state-identity` implementation
@@ -73,7 +75,7 @@ The fourth implementation package for that boundary is now implemented in the re
 - query-service implementation over repository ports
 - projection assembly service implementation and projection-input modules
 - dashboard/CQI rewiring onto query/projection services
-- review and doc updates needed to choose the next controlled product step
+- planning and doc updates needed to define the future storage-adapter swap boundary
 - bug fixes that protect the existing output/control backbone
 - tests or doc updates needed to keep the current backbone trustworthy
 
@@ -85,13 +87,13 @@ The fourth implementation package for that boundary is now implemented in the re
 - do not build a full learner/product app shell yet
 - do not reopen `P4-OUTPUT` with new feature work unless a concrete blocker appears
 - do not reopen package-four rewiring with new feature work unless a concrete regression is found
-- do not broaden the review into database, API, auth, or app-shell implementation
+- do not broaden this planning step into database, API, auth, or app-shell implementation
 
 ## Immediate Focus
 
-The next locked task in this phase should review whether the first `Learning Record Store` migration is complete enough to move to the next controlled product step:
+The next locked task in this phase should define the swap-ready repository implementation boundary for product persistence:
 
 - keep the chosen boundary explicit
-- compare the four implemented packages against the current phase goal
-- identify the smallest safe next step after the seam build
+- keep the file-backed adapter as the preserved baseline
+- define what can change and what must stay stable when a future storage adapter is introduced
 - keep the current prototype outputs as the baseline to preserve
