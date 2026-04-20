@@ -5,7 +5,9 @@ const path = require('node:path');
 const YAML = require('yaml');
 const { getCourseOutputFilePath } = require('./course-dashboard-data');
 const { getCatalogOutputFilePath } = require('./catalog-dashboard-data');
+const { buildInstructorBuildControlData, getInstructorControlOutputFilePath } = require('./instructor-build-control-data');
 const { runDemoWeekWorkflow } = require('./run-demo-week-workflow');
+const { renderInstructorBuildControlPage } = require('../frontend/instructor-build-control-view');
 
 function readYaml(filePath) {
   return YAML.parse(fs.readFileSync(filePath, 'utf8'));
@@ -121,6 +123,16 @@ function runDemoCourseWorkflow({
 
   writeJsonFile(courseSummaryJsonPath, summary);
   writeTextFile(courseSummaryMarkdownPath, renderThaiCourseWorkflowSummary(summary));
+
+  const buildControlDataPath = getInstructorControlOutputFilePath('build-control-data.json', outputRoot);
+  const buildControlHtmlPath = getInstructorControlOutputFilePath('build-control.html', outputRoot);
+  const buildControlData = buildInstructorBuildControlData({
+    coursePath: resolvedCoursePath,
+    weeklyPlanPath: resolvedWeeklyPlanPath,
+    outputRoot
+  });
+  writeJsonFile(buildControlDataPath, buildControlData);
+  writeTextFile(buildControlHtmlPath, renderInstructorBuildControlPage(buildControlData));
 
   return summary;
 }
