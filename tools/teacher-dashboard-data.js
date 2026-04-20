@@ -83,6 +83,7 @@ function buildTeacherDashboardData(context, options = {}) {
     },
     files: {
       dashboard_html: getWeekOutputFilePath(normalized, 'dashboard.html', outputRoot),
+      dashboard_data_json: getWeekOutputFilePath(normalized, 'dashboard-data.json', outputRoot),
       week_bundle_html: getWeekOutputFilePath(normalized, 'week-bundle.html', outputRoot),
       week_bundle_json: getWeekOutputFilePath(normalized, 'week-bundle.json', outputRoot),
       cqi_report_markdown: getWeekOutputFilePath(normalized, 'cqi-report.md', outputRoot),

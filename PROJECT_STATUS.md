@@ -133,6 +133,8 @@ Implemented:
 - CLO summaries
 - CQI signal generation
 - CQI report rendering in [tools/cqi-report.js](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/tools/cqi-report.js)
+- week-level teacher dashboard read-model in [tools/teacher-dashboard-data.js](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/tools/teacher-dashboard-data.js)
+- course-level dashboard aggregation read-model in [tools/course-dashboard-data.js](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/tools/course-dashboard-data.js)
 
 Missing for full completion:
 
