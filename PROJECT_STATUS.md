@@ -31,12 +31,12 @@ Use these codes in progress reporting so work can be tracked without ambiguity.
 
 ### Current Default Position
 
-At the current repo state, most recent implementation work is in:
+At the current repo state, the repository has moved into:
 
-- `Phase`: `P4-OUTPUT`
-- `Process`: `PROC-PUB` / `PROC-RM` / `PROC-CTRL`
+- `Phase`: `P5-PRODUCT`
+- `Process`: `PROC-DOC`
 
-This means the repository is currently strengthening backend output publication and read-model layers before moving into a fuller product/application phase.
+This means the output/control backbone is stable enough that the next work should be product-transition planning rather than more output/control feature expansion.
 
 Status meanings:
 
@@ -58,9 +58,9 @@ It is currently:
 
 Current phase:
 
-- `Phase`: `P4-OUTPUT`
-- `Process`: `PROC-PUB` / `PROC-RM` / `PROC-CTRL`
-- `Position`: `late prototype`
+- `Phase`: `P5-PRODUCT`
+- `Process`: `PROC-DOC`
+- `Position`: `transition planning`
 
 Completed layers:
 
@@ -74,17 +74,18 @@ Completed layers:
 - course and system output registries
 - backend-generated action queue and control status summary
 - control page rendering of backend-recommended actions
+- `P4-OUTPUT` exit review and phase-close decision
 
 In progress:
 
-- documentation alignment for the current output/control layer
-- phase review for whether `P4-OUTPUT` exit criteria are now mostly satisfied
+- first `P5-PRODUCT` transition-planning slice
+- documentation alignment for the new phase lock and next task
 
 Next focus:
 
-- keep the output/control docs aligned with the actual backend artifacts
-- review whether the output/control backbone is stable enough to leave `P4-OUTPUT`
-- avoid jumping early into a full product/app layer without an explicit phase decision
+- define the first product-layer boundary before implementation starts
+- keep output/control work limited to bug fixes or dependency alignment
+- avoid jumping into database/auth/API implementation without a written plan
 
 ## Status Against Main Plan
 

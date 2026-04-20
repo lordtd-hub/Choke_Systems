@@ -6,56 +6,50 @@ This file locks the current architecture phase so implementation does not drift.
 
 ## Current Phase
 
-- `Phase`: `P4-OUTPUT`
-- `Process`: `PROC-PUB` / `PROC-RM` / `PROC-CTRL`
-- `Position`: `late prototype`
+- `Phase`: `P5-PRODUCT`
+- `Process`: `PROC-DOC`
+- `Position`: `transition planning`
 
 ## What This Phase Means
 
-The repository is currently strengthening the backend output/control foundation:
+The repository has finished the current output/control hardening pass and is now defining the first product-layer planning slice:
 
-- publish outputs consistently
-- generate stable read models
-- expose system/course/control registries
-- make the next action visible from backend data
+- define the first persistent application state boundary
+- define what the service/API layer must own next
+- preserve the existing output/control backbone as the stable prototype base
 
-This phase is about making the prototype operationally clear and internally stable.
+This phase is about planning the product transition carefully before implementation starts.
 
-## Allowed Work
+## Why The Phase Changed
 
-- output publishing improvements
-- control-layer backend artifacts
-- read-model improvements
-- dashboard/control HTML that consumes backend data
-- documentation that reduces drift
-- tests that lock output/control behavior
-
-## Do Not Do Yet
-
-- do not start production API design
-- do not start authenticated user/account system
-- do not build a full product app shell
-- do not add database-first architecture unless the phase is explicitly changed
-- do not shift effort into learner-product polish while control/output backend is still incomplete
-
-## Exit Criteria For Next Phase
-
-Move out of `P4-OUTPUT` only when most of these are true:
+`P4-OUTPUT` exit criteria were reviewed and are satisfied strongly enough to move on:
 
 - output publishing path is centralized and stable
 - control layer shows current state and recommended next actions
 - course/system registries are present and trusted
 - docs clearly show current phase and next work
-- backend output/control foundation no longer changes every small step
+- backend output/control foundation no longer needs a new feature every small step
 
-## Next Phase Target
+## Allowed Work
 
-Target next phase after exit:
+- product-transition planning docs
+- persistent state boundary planning
+- service/API boundary planning
+- bug fixes that protect the existing output/control backbone
+- tests or doc updates needed to keep the current backbone trustworthy
 
-- `Phase`: `P5-PRODUCT`
+## Do Not Do Yet
 
-Expected focus there:
+- do not implement database storage yet
+- do not implement authenticated user/account flows yet
+- do not build the production API layer yet
+- do not build a full learner/product app shell yet
+- do not reopen `P4-OUTPUT` with new feature work unless a concrete blocker appears
 
-- persistent application state
-- service/API boundaries
-- real multi-user/product architecture
+## Immediate Focus
+
+The next locked task in this phase should define the first `P5-PRODUCT` planning slice without starting implementation:
+
+- choose the first product boundary to design
+- state what is in scope and out of scope
+- keep the current prototype outputs as the baseline to preserve

@@ -17,8 +17,8 @@ Status values:
 
 Current working area:
 
-- `Phase`: `P4-OUTPUT`
-- `Process`: `PROC-CTRL` / `PROC-RM` / `PROC-PUB`
+- `Phase`: `P5-PRODUCT`
+- `Process`: `PROC-DOC`
 
 Rule:
 
@@ -70,7 +70,7 @@ Dependencies:
 
 ### P4-OUTPUT
 
-Status: `doing`
+Status: `done`
 
 Tasks:
 
@@ -84,7 +84,7 @@ Tasks:
 - `done` render recommended actions from backend queue on the control page
 - `done` add one normalized top-level control summary for current phase/status/next action
 - `done` tighten output/control docs so they reflect current backend artifacts only
-- `todo` review `P4-OUTPUT` exit criteria and decide whether the phase should remain open or move to `P5-PRODUCT`
+- `done` review `P4-OUTPUT` exit criteria and decide whether the phase should remain open or move to `P5-PRODUCT`
 
 Dependencies:
 
@@ -94,10 +94,11 @@ Dependencies:
 
 ### P5-PRODUCT
 
-Status: `todo`
+Status: `doing`
 
 Tasks:
 
+- `todo` define the first product-transition planning slice for persistent application state
 - `todo` design persistent application state layer
 - `todo` design authenticated multi-user system
 - `todo` design production API/service layer
@@ -113,5 +114,5 @@ When choosing the next task:
 
 1. obey `NEXT_TASK.md` first
 2. stay inside the current phase unless `ARCHITECTURE_PHASE_NOTE.md` says exit criteria are met
-3. prefer the smallest task that strengthens the current backend/control foundation
-4. do not jump to `P5-PRODUCT` work while `P4-OUTPUT` is still marked `doing`
+3. prefer the smallest task that strengthens the current phase boundary
+4. do not jump into `P5-PRODUCT` implementation without a written transition-planning task
