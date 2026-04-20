@@ -80,6 +80,7 @@ npm run test:cqi-report
 
 - Architecture and delegation rules live in [AGENTS.md](AGENTS.md).
 - Implementation architecture is summarized in [ARCHITECTURE.md](ARCHITECTURE.md).
+- Current plan progress is summarized in [PROJECT_STATUS.md](PROJECT_STATUS.md).
 - The implementation roadmap lives in [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md).
 - Source-of-truth sample specs are:
   - `calculus1_course.yaml`
