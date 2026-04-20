@@ -36,6 +36,8 @@ The canonical entity and repository contract for that boundary is now documented
 
 The mutation flow for that boundary is now documented in [LEARNING_RECORD_MUTATION_FLOW.md](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/LEARNING_RECORD_MUTATION_FLOW.md).
 
+The persistent application state layer shape for that boundary is now documented in [LEARNING_RECORD_STATE_LAYER.md](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/LEARNING_RECORD_STATE_LAYER.md).
+
 ## Allowed Work
 
 - product-transition planning docs
@@ -54,8 +56,8 @@ The mutation flow for that boundary is now documented in [LEARNING_RECORD_MUTATI
 
 ## Immediate Focus
 
-The next locked task in this phase should define the persistent application state layer shape for the chosen `Learning Record Store` without starting implementation:
+The next locked task in this phase should define repository ports and service interfaces for the chosen `Learning Record Store` without starting implementation:
 
 - keep the chosen boundary explicit
-- define state-layer shape and module seams
+- define repository and service seams
 - keep the current prototype outputs as the baseline to preserve

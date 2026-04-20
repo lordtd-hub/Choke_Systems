@@ -289,6 +289,8 @@ After `P5-PLAN-003`, the repo now has:
 - explicit mutable-versus-append-only rules
 - explicit projection inputs for current and future product views
 
+The persistent application state layer shape for that boundary is now documented in [LEARNING_RECORD_STATE_LAYER.md](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/LEARNING_RECORD_STATE_LAYER.md).
+
 ## Next Planning Step
 
-The next task should define the persistent application state layer shape for the `Learning Record Store` without choosing a database or API implementation.
+The next task should define repository ports and service interfaces for the `Learning Record Store` state layer without choosing a database or API implementation.

@@ -78,15 +78,16 @@ Completed layers:
 - first `P5-PRODUCT` planning slice for the `Learning Record Store` boundary
 - canonical entity and repository contract for the `Learning Record Store`
 - mutation flow and projection inputs for the `Learning Record Store`
+- persistent application state layer shape for the `Learning Record Store`
 
 In progress:
 
-- persistent application state layer planning
-- documentation alignment for the locked `P5-PLAN-004` task
+- repository-port and service-interface planning
+- documentation alignment for the locked `P5-PLAN-005` task
 
 Next focus:
 
-- define the persistent application state layer shape for the `Learning Record Store`
+- define repository ports and service interfaces for the `Learning Record Store`
 - keep output/control work limited to bug fixes or dependency alignment
 - avoid jumping into database/auth/API implementation without a written plan
 

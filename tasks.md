@@ -101,7 +101,8 @@ Tasks:
 - `done` define the first product-transition planning slice for persistent application state
 - `done` define canonical state entities and repository boundary for the `Learning Record Store`
 - `done` define mutation flow, write ordering, and projection inputs for the `Learning Record Store`
-- `todo` define the persistent application state layer shape for the `Learning Record Store`
+- `done` define the persistent application state layer shape for the `Learning Record Store`
+- `todo` define repository ports and service interfaces for the `Learning Record Store`
 - `todo` design persistent application state layer
 - `todo` design authenticated multi-user system
 - `todo` design production API/service layer
