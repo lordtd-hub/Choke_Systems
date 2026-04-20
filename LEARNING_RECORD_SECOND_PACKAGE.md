@@ -199,6 +199,8 @@ After `P5-PLAN-008`, the repo now has:
 - one explicit service/module list for mutation coordination
 - one explicit acceptance checklist for the second build slice
 
+The third implementation package for that sequence is now documented in [LEARNING_RECORD_THIRD_PACKAGE.md](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/LEARNING_RECORD_THIRD_PACKAGE.md).
+
 ## Next Planning Step
 
-The next task should define the third implementation package for query and projection services over canonical records without expanding into database or API implementation.
+The next task should define the fourth implementation package for rewiring current dashboard and CQI builders onto query/projection services without expanding into database or API implementation.

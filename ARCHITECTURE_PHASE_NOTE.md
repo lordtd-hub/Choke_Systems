@@ -46,6 +46,8 @@ The first implementation package for that boundary is now documented in [LEARNIN
 
 The second implementation package for that boundary is now documented in [LEARNING_RECORD_SECOND_PACKAGE.md](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/LEARNING_RECORD_SECOND_PACKAGE.md).
 
+The third implementation package for that boundary is now documented in [LEARNING_RECORD_THIRD_PACKAGE.md](/Users/sittichoke/Desktop/Choke_Systems/Choke_Systems/LEARNING_RECORD_THIRD_PACKAGE.md).
+
 ## Allowed Work
 
 - product-transition planning docs
@@ -64,8 +66,8 @@ The second implementation package for that boundary is now documented in [LEARNI
 
 ## Immediate Focus
 
-The next locked task in this phase should define the third implementation package for the chosen `Learning Record Store` state layer without starting implementation:
+The next locked task in this phase should define the fourth implementation package for the chosen `Learning Record Store` state layer without starting implementation:
 
 - keep the chosen boundary explicit
-- define the next service/read-model package
+- define the first rewiring package
 - keep the current prototype outputs as the baseline to preserve
